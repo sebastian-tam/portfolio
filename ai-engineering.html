@@ -9,14 +9,14 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --navy:   #134D30;
-      --blue:   #22C55E;
+      --blue:   #F97316;
       --teal:   #34D399;
       --bg:     #F5F4F1;
       --white:  #FFFFFF;
       --text:   #1E293B;
       --muted:  #64748B;
       --border: #E2E8F0;
-      --blue-light: #F0FDF4;
+      --blue-light: #FFF7ED;
       --teal-light: #ECFDF5;
       --green-light: #F0FDF4;
       --green: #16A34A;
@@ -247,7 +247,7 @@
       border: none; cursor: pointer;
     }
     .live-demo-btn:hover {
-      background: #15803D;
+      background: #C2410C;
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(37,99,235,0.35);
     }
@@ -321,7 +321,7 @@
     <!-- ============================================================ -->
     <div class="project-card">
       <div class="project-header">
-        <div class="project-icon">🚕</div>
+        <div class="project-icon"><svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 01-2-2V9l2-5h14l2 5v6a2 2 0 01-2 2h-2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></div>
         <div class="project-meta">
           <span class="project-tag">⭐ Featured Project</span>
           <h2>Zippe's Competitor — Dynamic Pricing Intelligence</h2>
@@ -367,7 +367,7 @@
         <!-- CHALLENGE -->
         <details>
           <summary>
-            <span class="summary-icon">🎯</span>
+            <span class="summary-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
             The Challenge
             <svg class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
           </summary>
@@ -381,7 +381,7 @@
         <!-- ARCHITECTURE -->
         <details>
           <summary>
-            <span class="summary-icon">🏗️</span>
+            <span class="summary-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></span>
             The Architecture — 4 Automated Agents
             <svg class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
           </summary>
@@ -438,7 +438,7 @@
         <!-- FOUR MODELS -->
         <details>
           <summary>
-            <span class="summary-icon">🤖</span>
+            <span class="summary-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M12 2v4M15 2v4M9 18v4M12 18v4M15 18v4M2 9h4M2 12h4M2 15h4M18 9h4M18 12h4M18 15h4"/></svg></span>
             Four Pricing Models — Baseline to ML
             <svg class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
           </summary>
@@ -463,7 +463,7 @@
                 <div class="model-mape" style="color:var(--amber);">MAPE: 13–18%</div>
               </div>
               <div class="model-card" style="border-color:#BBF7D0;background:var(--green-light);">
-                <span class="model-label" style="background:var(--green-light);color:var(--green);">Model D ✅ LIVE</span>
+                <span class="model-label" style="background:var(--green-light);color:var(--green);">Model D <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:4px;"><polyline points="20 6 9 17 4 12"/></svg> LIVE</span>
                 <div class="model-title">XGBoost Ratio-Target — ML</div>
                 <div class="model-desc">Predicts <code>price / council_ratio_est</code> (clipped 0.3–5.0); 24 features; hourly retrain on rolling 24h window. <strong>Live since 28 May 2026.</strong></div>
                 <div class="model-mape" style="color:var(--green);">Retrain MAPE: 8–10% (stable)</div>
@@ -475,7 +475,7 @@
         <!-- FEATURE IMPORTANCE -->
         <details>
           <summary>
-            <span class="summary-icon">📊</span>
+            <span class="summary-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span>
             XGBoost Feature Importance (24 Features)
             <svg class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
           </summary>
@@ -543,7 +543,7 @@
         <!-- MAPE BY BAND -->
         <details>
           <summary>
-            <span class="summary-icon">🎯</span>
+            <span class="summary-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span>
             Model Accuracy by Distance Band — 29,584 Live Readings
             <svg class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
           </summary>
@@ -612,7 +612,7 @@
         <!-- SURGE PATTERN -->
         <details>
           <summary>
-            <span class="summary-icon">⚡</span>
+            <span class="summary-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
             Demand Surge Pattern — 1,156,521 Observations
             <svg class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
           </summary>
@@ -659,7 +659,7 @@
         <!-- COMPETITOR VS COUNCIL -->
         <details>
           <summary>
-            <span class="summary-icon">⚖️</span>
+            <span class="summary-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 8l9-5 9 5M5 11l-2 6h4l-2-6zM19 11l-2 6h4l-2-6z"/></svg></span>
             Competitor vs Bath Council Tariff — Off-Peak Price Comparison
             <svg class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
           </summary>
@@ -725,13 +725,13 @@
         <!-- RESULTS -->
         <details open>
           <summary>
-            <span class="summary-icon">📈</span>
+            <span class="summary-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></span>
             Key Results & System Milestones
             <svg class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="toggle-content">
             <div class="result-highlight">
-              <div class="result-title">✅ Key Findings (as of 4 June 2026)</div>
+              <div class="result-title"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Key Findings (as of 4 June 2026)</div>
               <ul>
                 <li>Accumulated <strong>4,110,514 fare observations</strong> across 1,960 routes and 1,855 POIs in 15 days of continuous operation</li>
                 <li>XGBoost ratio-target model achieves <strong>8–10% MAPE</strong> at stable retrain state — competitive across all time slots and distance bands</li>
@@ -754,7 +754,7 @@
     <!-- ============================================================ -->
     <div class="project-card">
       <div class="project-header">
-        <div class="project-icon" style="background: var(--teal-light);">🧠</div>
+        <div class="project-icon" style="background: var(--teal-light);"><svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><line x1="12" y1="7" x2="12" y2="12"/><line x1="12" y1="12" x2="6" y2="17"/><line x1="12" y1="12" x2="18" y2="17"/></svg></div>
         <div class="project-meta">
           <span class="project-tag" style="color:var(--teal); background:var(--teal-light);">AI Agentic System</span>
           <h2>RAG-based AI Agentic Enterprise System</h2>
@@ -770,7 +770,7 @@
 
         <details>
           <summary>
-            <span class="summary-icon">🔍</span>
+            <span class="summary-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
             System Overview & Architecture
             <svg class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
           </summary>
@@ -791,29 +791,29 @@
 
         <details>
           <summary>
-            <span class="summary-icon">🧩</span>
+            <span class="summary-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span>
             Four Core Modules
             <svg class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="toggle-content">
             <div class="rag-grid">
               <div class="rag-module">
-                <div class="mod-icon">📊</div>
+                <div class="mod-icon"><svg width="33" height="33" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
                 <div class="mod-title">Market Pricing Research</div>
                 <div class="mod-desc">Automated ingestion and synthesis of competitor pricing data, enabling instant market position queries across all council zones.</div>
               </div>
               <div class="rag-module">
-                <div class="mod-icon">🎨</div>
+                <div class="mod-icon"><svg width="33" height="33" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
                 <div class="mod-title">Marketing Creatives Management</div>
                 <div class="mod-desc">Indexed library of all marketing assets with semantic search — enabling instant retrieval of relevant creatives by campaign type, region, or channel.</div>
               </div>
               <div class="rag-module">
-                <div class="mod-icon">🔬</div>
+                <div class="mod-icon"><svg width="33" height="33" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
                 <div class="mod-title">QA & UAT Support</div>
                 <div class="mod-desc">AI-assisted quality assurance and user acceptance testing — accelerating release cycles and reducing manual QA overhead across inhouse and client projects.</div>
               </div>
               <div class="rag-module">
-                <div class="mod-icon">👤</div>
+                <div class="mod-icon"><svg width="33" height="33" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
                 <div class="mod-title">Driver CRM & DBS Compliance</div>
                 <div class="mod-desc">RAG over driver compliance documents, DBS records, and CRM data — automating checks and reducing manual compliance review time significantly.</div>
               </div>
@@ -823,13 +823,13 @@
 
         <details>
           <summary>
-            <span class="summary-icon">🎯</span>
+            <span class="summary-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></span>
             Business Impact
             <svg class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="toggle-content">
             <div class="result-highlight">
-              <div class="result-title">✅ Outcomes</div>
+              <div class="result-title"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Outcomes</div>
               <ul>
                 <li>Eliminated manual research bottlenecks across four departments — pricing, marketing, QA, and compliance</li>
                 <li>All data remains fully on-premises — zero third-party exposure, meeting DBS compliance requirements</li>
