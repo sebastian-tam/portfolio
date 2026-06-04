@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Startups & Growth | Sebastian Tam</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:   #134D30;
+      --blue:   #22C55E;
+      --teal:   #34D399;
+      --purple: #7C3AED;
+      --green:  #16A34A;
+      --bg:     #F5F4F1;
+      --white:  #FFFFFF;
+      --text:   #1E293B;
+      --muted:  #64748B;
+      --border: #E2E8F0;
+      --blue-light:   #F0FDF4;
+      --purple-light: #F5F3FF;
+      --teal-light:   #ECFDF5;
+      --amber-light:  #FFFBEB;
+      --amber:        #D97706;
+      --slate-light:  #F1F5F9;
+    }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); }
+
+    nav {
+      background: var(--white); border-bottom: 1px solid var(--border);
+      padding: 0 40px; display: flex; align-items: center; justify-content: space-between;
+      height: 64px; position: sticky; top: 0; z-index: 100;
+    }
+    .nav-logo { font-weight: 700; font-size: 16px; color: var(--navy); text-decoration: none; }
+    .nav-links { display: flex; gap: 8px; list-style: none; }
+    .nav-links a {
+      text-decoration: none; font-size: 13px; font-weight: 500; color: var(--muted);
+      padding: 6px 12px; border-radius: 6px; transition: all 0.15s;
+    }
+    .nav-links a:hover { background: var(--bg); color: var(--navy); }
+    .nav-links a.active { background: var(--blue-light); color: var(--blue); }
+
+    .page-hero {
+      background: linear-gradient(135deg, #1E6040 0%, #134D30 100%);
+      padding: 64px 40px 56px;
+    }
+    .breadcrumb { font-size: 13px; color: rgba(255,255,255,0.45); margin-bottom: 16px; }
+    .breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
+    .breadcrumb a:hover { color: rgba(255,255,255,0.8); }
+    .page-hero h1 {
+      font-size: clamp(28px, 4vw, 46px); font-weight: 800; color: var(--white);
+      letter-spacing: -1px; line-height: 1.1; margin-bottom: 12px;
+    }
+    .page-hero-sub { font-size: 16px; color: rgba(255,255,255,0.55); max-width: 520px; line-height: 1.6; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 24px; }
+    .tag {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 6px; padding: 4px 12px; font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.7);
+    }
+
+    .content { max-width: 900px; margin: 0 auto; padding: 64px 40px 80px; }
+
+    /* TIMELINE */
+    .timeline { position: relative; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 28px; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--blue), var(--teal), var(--purple), var(--amber));
+    }
+    .timeline-item { position: relative; padding-left: 72px; margin-bottom: 48px; }
+    .timeline-dot {
+      position: absolute; left: 16px; top: 28px;
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; z-index: 1;
+    }
+
+    /* ROLE CARDS */
+    .role-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 16px; overflow: hidden;
+    }
+    .role-header {
+      padding: 28px 32px 20px;
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 20px; flex-wrap: wrap;
+    }
+    .role-tag {
+      display: inline-block;
+      font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+      border-radius: 4px; padding: 3px 8px; margin-bottom: 8px;
+    }
+    .role-card h2 { font-size: 22px; font-weight: 700; color: var(--navy); letter-spacing: -0.4px; line-height: 1.2; margin-bottom: 4px; }
+    .role-company { font-size: 15px; color: var(--muted); }
+    .role-company a { color: var(--blue); text-decoration: none; }
+    .role-company a:hover { text-decoration: underline; }
+    .role-period {
+      font-size: 13px; font-weight: 500;
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 8px; padding: 6px 14px; color: var(--muted);
+      white-space: nowrap; align-self: flex-start;
+    }
+    .role-location {
+      font-size: 12px; color: var(--muted); margin-top: 4px;
+      display: flex; align-items: center; gap: 4px;
+    }
+    .role-divider { height: 1px; background: var(--border); margin: 0 32px; }
+
+    /* CALLOUT */
+    .callout {
+      margin: 24px 32px;
+      padding: 20px 24px;
+      border-radius: 10px;
+      display: flex; gap: 14px; align-items: flex-start;
+    }
+    .callout-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+    .callout-text { font-size: 15px; line-height: 1.65; font-weight: 500; }
+    .callout.blue { background: var(--blue-light); }
+    .callout.blue .callout-text { color: #166534; }
+    .callout.purple { background: var(--purple-light); }
+    .callout.purple .callout-text { color: #5B21B6; }
+    .callout.teal { background: var(--teal-light); }
+    .callout.teal .callout-text { color: #047857; }
+    .callout.slate { background: var(--slate-light); }
+    .callout.slate .callout-text { color: var(--navy); }
+
+    /* METRICS */
+    .metric-chips { display: flex; gap: 12px; flex-wrap: wrap; padding: 0 32px 20px; }
+    .metric-chip {
+      display: flex; flex-direction: column;
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 10px; padding: 14px 18px; min-width: 120px;
+    }
+    .chip-value { font-size: 22px; font-weight: 800; color: var(--navy); letter-spacing: -0.5px; line-height: 1; }
+    .chip-label { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+    /* BULLETS */
+    .role-bullets { padding: 4px 32px 28px; }
+    .role-bullets ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .role-bullets li {
+      font-size: 14px; color: var(--text); line-height: 1.6;
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .role-bullets li::before { content: '→'; color: var(--blue); font-weight: 600; flex-shrink: 0; margin-top: 1px; }
+    .role-bullets strong { color: var(--navy); }
+    .role-bullets .sub-label { font-weight: 600; color: var(--navy); }
+
+    .ipo-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #FEF3C7; border: 1px solid #FDE68A;
+      border-radius: 100px; padding: 4px 12px;
+      font-size: 12px; font-weight: 600; color: var(--amber);
+    }
+
+    .role-bullets a, .callout-text a {
+      color: var(--blue); text-decoration: none; font-weight: inherit;
+    }
+    .role-bullets a:hover, .callout-text a:hover { text-decoration: underline; }
+
+    footer {
+      text-align: center; padding: 32px;
+      font-size: 13px; color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .page-hero { padding: 40px 24px; }
+      .content { padding: 40px 24px; }
+      .timeline::before { display: none; }
+      .timeline-item { padding-left: 0; }
+      .timeline-dot { display: none; }
+      .role-header { padding: 20px; flex-direction: column; }
+      .callout { margin: 16px 20px; }
+      .metric-chips { padding: 0 20px 16px; }
+      .role-bullets { padding: 0 20px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Sebastian Tam &ndash; Portfolio</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="ai-engineering.html">AI & Engineering</a></li>
+      <li><a href="startups-growth.html" class="active">Startups & Growth</a></li>
+      <li><a href="skills-matrix.html">Skills</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero">
+    <div style="max-width:900px;margin:0 auto;">
+      <div class="breadcrumb"><a href="index.html">Home</a> / Startups & Growth</div>
+      <h1>Scaling from Zero to IPO</h1>
+      <p class="page-hero-sub">Decades of Go-to-Market Growth Hacking across Asia and the UK — from ground-floor to stock exchange listings and $15M+ in annual revenue.</p>
+      <div class="hero-tags">
+        <span class="tag">Series A → TSE IPO</span>
+        <span class="tag">$15M+ Revenue</span>
+        <span class="tag">23 UK Councils</span>
+        <span class="tag">HK · Taiwan · China</span>
+        <span class="tag">iOS / Android</span>
+        <span class="tag">B2B SaaS · eCommerce</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="timeline">
+
+      <!-- 1. ZIPPE GROUP -->
+      <div class="timeline-item">
+        <div class="timeline-dot" style="background:#F0FDF4;">🚕</div>
+        <div class="role-card">
+          <div class="role-header">
+            <div>
+              <span class="role-tag" style="color:var(--blue);background:var(--blue-light);">Current Role</span>
+              <h2>Head of Growth and Performance Marketing</h2>
+              <div class="role-company"><a href="https://www.zippe.co.uk" target="_blank">Zippe Group</a></div>
+              <div class="role-location">📍 Bath, United Kingdom</div>
+            </div>
+            <div class="role-period">Aug 2025 – Present</div>
+          </div>
+          <div class="role-divider"></div>
+          <div class="callout teal">
+            <div class="callout-icon">🚗</div>
+            <div class="callout-text">Zippe is an Uber-like ride-sharing startup that prioritises safety, reliability, and ethical practices in every journey across the UK. Led market development and growth from Bath to <strong>23 councils nationwide</strong>.</div>
+          </div>
+          <div class="metric-chips">
+            <div class="metric-chip">
+              <div class="chip-value" style="color:var(--teal);">23</div>
+              <div class="chip-label">UK Councils Expanded</div>
+            </div>
+            <div class="metric-chip">
+              <div class="chip-value">iOS + Android</div>
+              <div class="chip-label">Platform Coverage</div>
+            </div>
+          </div>
+          <div class="role-bullets">
+            <ul>
+              <li>Led market development and growth for mobile apps targeted to drivers and riders in the UK, starting from Bath and expanding to 23 councils</li>
+              <li>Developed and implemented a local <strong>RAG-based AI system</strong> covering Market Pricing Research, Marketing Creatives Management, and driver CRM &amp; DBS Compliance Support</li>
+              <li>Drove user acquisition and retention for both driver and rider audiences across iOS and Android, utilising mobile attribution platforms including <strong>AppsFlyer</strong> and <strong>HubSpot</strong></li>
+              <li>Managed full performance marketing stack across paid social, programmatic, and organic channels</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. RTM (DIRECTOR / SELF-EMPLOYED) -->
+      <div class="timeline-item">
+        <div class="timeline-dot" style="background:#F1F5F9;">💼</div>
+        <div class="role-card">
+          <div class="role-header">
+            <div>
+              <span class="role-tag" style="color:var(--muted);background:var(--slate-light);">Consultancy</span>
+              <h2>Director</h2>
+              <div class="role-company">RTM — Self-Employed Digital Marketing Consultancy</div>
+              <div class="role-location">📍 United Kingdom</div>
+            </div>
+            <div class="role-period">Oct 2021 – Aug 2025</div>
+          </div>
+          <div class="role-divider"></div>
+          <div class="callout slate">
+            <div class="callout-icon">🌐</div>
+            <div class="callout-text">Delivered digital marketing strategy and execution for multiple clients on a contract basis spanning <strong>B2B, SaaS &amp; e-commerce sectors</strong> between Europe &amp; Asia.</div>
+          </div>
+          <div class="role-bullets">
+            <ul>
+              <li>Provided end-to-end digital marketing strategy, campaign management, and analytics for a portfolio of B2B and e-commerce clients</li>
+              <li>Covered SEO/SEM, paid social, content marketing, CRM, and programmatic across European and Asian markets</li>
+              <li>Utilised HubSpot, Hootsuite, Google Analytics 4, Meta Ads, and Salesforce across client engagements</li>
+              <li>Kept skills current by achieving <strong>20+ professional certifications</strong> from <a href="https://www.credential.net/profile/sebastiantam/wallet#gs.7f52n7" target="_blank">Google</a>, <a href="https://www.credly.com/badges/01e5b16f-bd8e-4fa0-b656-d3ace9939f3a/public_url" target="_blank">Meta</a>, <a href="https://app-eu1.hubspot.com/academy/achievements/qbzd7tw6/en/1/yu-chung-sebastian-tam/hubspot-marketing-software" target="_blank">HubSpot</a>, <a href="https://www.credential.net/5432eda2-c289-492f-aeac-91c7102365c1#gs.7f900o" target="_blank">Hootsuite</a> and <a href="https://www.credly.com/badges/4e41a38c-fd0f-46d3-8518-7f260f916f0a/public_url" target="_blank">Shopify</a> within 2 months</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. ANYMIND GROUP -->
+      <div class="timeline-item">
+        <div class="timeline-dot" style="background:#F5F3FF;">📱</div>
+        <div class="role-card">
+          <div class="role-header">
+            <div>
+              <span class="role-tag" style="color:var(--purple);background:var(--purple-light);">$1M in Year 1</span>
+              <h2>Head of Digital Marketing</h2>
+              <div class="role-company"><a href="https://anymindgroup.com" target="_blank">AnyMind Group</a></div>
+              <div class="role-location">📍 Hong Kong</div>
+            </div>
+            <div class="role-period">Aug 2017 – Sep 2021</div>
+          </div>
+          <div class="role-divider"></div>
+          <div class="callout purple">
+            <div class="callout-icon">🚀</div>
+            <div class="callout-text">AnyMind is a technology platform for brands and marketers across <strong>13 markets and 17 offices</strong> worldwide. Built the HK digital marketing practice from scratch — <strong>USD $1M revenue in 11 months</strong> with 50+ customers and a team of 14.</div>
+          </div>
+          <div class="metric-chips">
+            <div class="metric-chip">
+              <div class="chip-value" style="color:var(--purple);">$1M</div>
+              <div class="chip-label">Revenue in 11 months</div>
+            </div>
+            <div class="metric-chip">
+              <div class="chip-value">50+</div>
+              <div class="chip-label">Customers</div>
+            </div>
+            <div class="metric-chip">
+              <div class="chip-value">14</div>
+              <div class="chip-label">Team Members</div>
+            </div>
+            <div class="metric-chip">
+              <div class="chip-value">+32%</div>
+              <div class="chip-label">Organic Traffic</div>
+            </div>
+            <div class="metric-chip">
+              <div class="chip-value">+360%</div>
+              <div class="chip-label">Conversions</div>
+            </div>
+            <div class="metric-chip">
+              <div class="chip-value">+680%</div>
+              <div class="chip-label">Online Revenue</div>
+            </div>
+          </div>
+          <div class="role-bullets">
+            <ul>
+              <li><span class="sub-label">P&amp;L:</span> Responsible for P&amp;L and business operations for AnyMind HK. Achieved <strong>$1M USD revenue in 11 months</strong> from office setup from scratch, with 50+ customers and a growing team of 14</li>
+              <li><span class="sub-label">SEO/SEM:</span> Helped a Japanese luggage brand optimise SEO/SEM across <strong>10 regional websites</strong> using HubSpot, hreflang tags, pillar pages, cluster content and multi-language management — achieving <strong>+32% organic traffic, +360% conversions, +680% online revenues</strong> in one year</li>
+              <li><span class="sub-label">Social Media:</span> Managed a Micro-KOL campaign for a global beverage brand across 4 countries (Japan, HK, Taiwan, Vietnam). Deployed thousands of Micro-KOLs on FB &amp; IG — achieving <strong>+38% followers, +95% engagement (CLS), +300% forward rate</strong> in a 2-week campaign</li>
+              <li>Operated across Asia-Pacific markets including Hong Kong, Taiwan, Japan and Southeast Asia</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. METAPS -->
+      <div class="timeline-item">
+        <div class="timeline-dot" style="background:#FEF3C7;">🏆</div>
+        <div class="role-card">
+          <div class="role-header">
+            <div>
+              <span class="role-tag" style="color:var(--amber);background:#FEF3C7;">TSE IPO — 2015</span>
+              <h2>Director, Alliance</h2>
+              <div class="role-company"><a href="https://metaps.com/en/" target="_blank">Metaps</a></div>
+              <div class="role-location">📍 Hong Kong · Taiwan · China</div>
+            </div>
+            <div class="role-period">Mar 2012 – Oct 2016</div>
+          </div>
+          <div class="role-divider"></div>
+          <div class="callout" style="background:#FEF3C7;border:none;margin:24px 32px;">
+            <div class="callout-icon">🎌</div>
+            <div class="callout-text" style="color:#92400E;">Metaps is a Japan-HQ B2B SaaS company specialised in Mobile App Marketing &amp; Monetization on Android &amp; iOS. Grew Greater China from <strong>zero to USD $15M+</strong> in 3 years. Contributed to Metaps' successful <strong>Tokyo Stock Exchange IPO in 2015</strong>.</div>
+          </div>
+          <div class="metric-chips">
+            <div class="metric-chip">
+              <div class="chip-value" style="color:var(--amber);">$15M+</div>
+              <div class="chip-label">Revenue from Zero (3 years)</div>
+            </div>
+            <div class="metric-chip">
+              <div class="chip-value">
+                <span class="ipo-badge">🎌 TSE IPO 2015</span>
+              </div>
+              <div class="chip-label">Tokyo Stock Exchange</div>
+            </div>
+            <div class="metric-chip">
+              <div class="chip-value">150%+</div>
+              <div class="chip-label">Avg D7 ROAS</div>
+            </div>
+            <div class="metric-chip">
+              <div class="chip-value">Top 3</div>
+              <div class="chip-label">App Store Rankings Achieved</div>
+            </div>
+          </div>
+          <div class="role-bullets">
+            <ul>
+              <li><span class="sub-label">Series A to IPO:</span> Achieved revenue growth in Greater China from zero (Mar 2012) to <strong>USD $15M+ in 3 years</strong> — contributing directly to Metaps' successful Tokyo Stock Exchange listing in 2015</li>
+              <li><span class="sub-label">Mobile App Marketing:</span> Helped hundreds of mobile games/app developers launch in Asia and globally — achieved average <strong>D7 ROAS of 150%+</strong> and helped dozens of apps reach <strong>Top 3 Gross App Ranking</strong> in global and regional markets</li>
+              <li><span class="sub-label">Office Setup &amp; Operations:</span> Responsible for Greater China office setup and management — 3 remote offices across HK, Taiwan and China with a team of 6</li>
+              <li><span class="sub-label">Inbound/Outbound Marketing &amp; CRM:</span> Implemented <strong>HubSpot</strong> and <strong>Hootsuite</strong> for company-wide marketing and social media management — covering B2B content creation, automation, events and collateral</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    © 2026 Sebastian Tam &nbsp;·&nbsp; <a href="index.html" style="color:var(--blue);text-decoration:none;">Back to Home</a>
+  </footer>
+
+</body>
+</html>

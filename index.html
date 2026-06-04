@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sebastian Tam | Growth Leader & AI Architect</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:   #134D30;
+      --blue:   #22C55E;
+      --teal:   #34D399;
+      --sky:    #6EE7B7;
+      --bg:     #F5F4F1;
+      --white:  #FFFFFF;
+      --text:   #1E293B;
+      --muted:  #64748B;
+      --border: #E2E8F0;
+      --card:   #FFFFFF;
+      --blue-light: #F0FDF4;
+      --teal-light: #ECFDF5;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-logo {
+      font-weight: 700;
+      font-size: 17px;
+      color: var(--navy);
+      text-decoration: none;
+      letter-spacing: -0.3px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--muted);
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: all 0.15s;
+    }
+    .nav-links a:hover { background: var(--bg); color: var(--navy); }
+    .nav-links a.active { background: var(--blue-light); color: var(--blue); }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #1E6040 60%, #1A8A42 100%);
+      padding: 100px 40px 90px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.8);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .hero h1 {
+      font-size: clamp(40px, 5vw, 68px);
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+    .hero-title-accent {
+      color: #F97316;
+    }
+    .hero-subtitle {
+      font-size: clamp(22px, 3vw, 34px);
+      font-weight: 700;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 36px;
+      letter-spacing: -0.5px;
+    }
+    .hero-pitch {
+      max-width: 760px;
+      margin: 0 auto 48px;
+      font-size: clamp(20px, 2.5vw, 26px);
+      font-weight: 700;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.95);
+      text-align: center;
+      letter-spacing: -0.3px;
+    }
+    .contact-row {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      color: rgba(255,255,255,0.75);
+      font-size: 16px;
+      font-weight: 500;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      padding: 8px 16px;
+      transition: all 0.2s;
+    }
+    .contact-link:hover {
+      background: rgba(255,255,255,0.15);
+      color: var(--white);
+      transform: translateY(-1px);
+    }
+
+    /* CARDS SECTION */
+    .cards-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 72px 40px;
+    }
+    .section-label {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--blue);
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: -0.5px;
+      margin-bottom: 40px;
+    }
+    .nav-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    .nav-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px 32px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+    .nav-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue), var(--teal));
+      transform: scaleX(0);
+      transition: transform 0.2s;
+    }
+    .nav-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(15,23,42,0.1); }
+    .nav-card:hover::after { transform: scaleX(1); }
+    .card-icon { font-size: 36px; line-height: 1; }
+    .card-num { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); }
+    .card-title { font-size: 24px; font-weight: 700; color: var(--navy); letter-spacing: -0.3px; line-height: 1.2; }
+    .card-desc { font-size: 16px; color: var(--muted); line-height: 1.6; }
+    .card-cta { display: inline-flex; align-items: center; gap: 4px; font-size: 15px; font-weight: 600; color: var(--blue); margin-top: 8px; }
+    .card-cta .arrow { transition: transform 0.2s; }
+    .nav-card:hover .card-cta .arrow { transform: translateX(4px); }
+
+    /* STATS BAR */
+    .stats-bar {
+      background: var(--navy);
+      padding: 48px 40px;
+    }
+    .stats-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 32px;
+      text-align: center;
+    }
+    .stat-number {
+      font-size: 38px;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-number span { color: #A7F3D0; }
+    .stat-label { font-size: 15px; color: rgba(255,255,255,0.5); font-weight: 400; }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 32px;
+      font-size: 15px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    .hero-pitch a {
+      color: #93C5FD; text-decoration: none; font-weight: 500;
+    }
+    .hero-pitch a:hover { text-decoration: underline; }
+
+    @media (max-width: 640px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero { padding: 60px 24px 60px; }
+      .hero-pitch { padding: 20px; }
+      .cards-section { padding: 48px 24px; }
+      .stats-bar { padding: 40px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Sebastian Tam &ndash; Portfolio</a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="ai-engineering.html">AI & Engineering</a></li>
+      <li><a href="startups-growth.html">Startups & Growth</a></li>
+      <li><a href="skills-matrix.html">Skills</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <h1>Sebastian Tam</h1>
+    <p class="hero-subtitle"><span class="hero-title-accent">Growth Leader &amp; AI Architect</span></p>
+    <div class="hero-pitch">
+      Scaling startups to IPO and building proprietary RAG-based AI systems to drive market dominance. From a Tokyo Stock Exchange listing to 4.1M live fare observations — I build the systems and teams that win.
+    </div>
+    <div class="contact-row">
+      <a href="https://www.linkedin.com/in/samtam8888/" target="_blank" class="contact-link">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn Profile
+      </a>
+      <a href="mailto:sebastian.tam@gmail.com" class="contact-link">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        sebastian.tam@gmail.com
+      </a>
+    </div>
+  </section>
+
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div>
+        <div class="stat-number"><span>$15M</span>+</div>
+        <div class="stat-label">Greater China Revenue at Metaps</div>
+      </div>
+      <div>
+        <div class="stat-number"><span>$1M</span></div>
+        <div class="stat-label">Revenue in Year 1 — AnyMind HK</div>
+      </div>
+      <div>
+        <div class="stat-number"><span>23</span></div>
+        <div class="stat-label">UK Councils at Zippe</div>
+      </div>
+      <div>
+        <div class="stat-number"><span>50</span>+</div>
+        <div class="stat-label">Ultra-Marathons Completed</div>
+      </div>
+      <div>
+        <div class="stat-number"><span>20</span>+</div>
+        <div class="stat-label">Certifications in Under 2 Months</div>
+      </div>
+    </div>
+  </div>
+
+  <section class="cards-section">
+    <div class="section-label">Portfolio</div>
+    <div class="section-title">Explore My Work</div>
+    <div class="nav-cards">
+
+      <a href="ai-engineering.html" class="nav-card">
+        <div class="card-icon">🤖</div>
+        <div class="card-num">01 — Technical</div>
+        <div class="card-title">AI & Engineering Case Studies</div>
+        <div class="card-desc">Proprietary ML pricing intelligence, RAG-based AI agentic systems for enterprise pricing, QA &amp; CRM — built end-to-end.</div>
+        <div class="card-cta">View Projects <span class="arrow">→</span></div>
+      </a>
+
+      <a href="startups-growth.html" class="nav-card">
+        <div class="card-icon">📈</div>
+        <div class="card-num">02 — Leadership</div>
+        <div class="card-title">Startups & Growth Leadership</div>
+        <div class="card-desc">Tokyo Stock Exchange IPO. $15M+ from zero in 3 years. $1M in Year 1 with 50 clients and a team of 14. Across Asia and the UK.</div>
+        <div class="card-cta">View Experience <span class="arrow">→</span></div>
+      </a>
+
+      <a href="about.html" class="nav-card">
+        <div class="card-icon">🏃‍♂️</div>
+        <div class="card-num">03 — About Me</div>
+        <div class="card-title">The Ultra-Marathoner</div>
+        <div class="card-desc">50+ ultra-marathons across deserts and mountains over 20 years. The endurance mindset behind every business decision.</div>
+        <div class="card-cta">Read My Story <span class="arrow">→</span></div>
+      </a>
+
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Sebastian Tam &nbsp;·&nbsp; Growth Leader &amp; AI Architect &nbsp;·&nbsp; Berkshire, United Kingdom
+  </footer>
+
+</body>
+</html>

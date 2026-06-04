@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skills Matrix | Sebastian Tam</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:   #134D30;
+      --blue:   #22C55E;
+      --teal:   #34D399;
+      --purple: #7C3AED;
+      --green:  #16A34A;
+      --amber:  #D97706;
+      --bg:     #F5F4F1;
+      --white:  #FFFFFF;
+      --text:   #1E293B;
+      --muted:  #64748B;
+      --border: #E2E8F0;
+      --blue-light:   #F0FDF4;
+      --teal-light:   #ECFDF5;
+      --purple-light: #F5F3FF;
+      --green-light:  #F0FDF4;
+      --amber-light:  #FFFBEB;
+    }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); }
+
+    nav {
+      background: var(--white); border-bottom: 1px solid var(--border);
+      padding: 0 40px; display: flex; align-items: center; justify-content: space-between;
+      height: 64px; position: sticky; top: 0; z-index: 100;
+    }
+    .nav-logo { font-weight: 700; font-size: 16px; color: var(--navy); text-decoration: none; }
+    .nav-links { display: flex; gap: 8px; list-style: none; }
+    .nav-links a {
+      text-decoration: none; font-size: 13px; font-weight: 500; color: var(--muted);
+      padding: 6px 12px; border-radius: 6px; transition: all 0.15s;
+    }
+    .nav-links a:hover { background: var(--bg); color: var(--navy); }
+    .nav-links a.active { background: var(--blue-light); color: var(--blue); }
+
+    .page-hero {
+      background: linear-gradient(135deg, #134D30 0%, #1E6040 100%);
+      padding: 64px 40px 56px;
+    }
+    .breadcrumb { font-size: 13px; color: rgba(255,255,255,0.45); margin-bottom: 16px; }
+    .breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
+    .breadcrumb a:hover { color: rgba(255,255,255,0.8); }
+    .page-hero h1 {
+      font-size: clamp(28px, 4vw, 46px); font-weight: 800; color: var(--white);
+      letter-spacing: -1px; line-height: 1.1; margin-bottom: 12px;
+    }
+    .page-hero-sub { font-size: 16px; color: rgba(255,255,255,0.55); max-width: 520px; line-height: 1.6; }
+
+    .content { max-width: 1000px; margin: 0 auto; padding: 64px 40px 80px; }
+
+    .section-label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--blue); margin-bottom: 8px; }
+    .section-title { font-size: 26px; font-weight: 700; color: var(--navy); letter-spacing: -0.4px; margin-bottom: 32px; }
+
+    /* TWO COLUMN */
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 56px; }
+
+    .skills-panel { background: var(--white); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+    .panel-header {
+      padding: 24px 28px 20px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 14px;
+    }
+    .panel-header-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+    .panel-header h2 { font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+    .panel-header p { font-size: 13px; color: var(--muted); }
+
+    .skill-list { padding: 16px 20px; display: flex; flex-direction: column; gap: 2px; }
+    .skill-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 12px; border-radius: 8px; transition: background 0.15s;
+    }
+    .skill-item:hover { background: var(--bg); }
+    .skill-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .skill-name { font-size: 14px; font-weight: 500; color: var(--navy); flex: 1; }
+    .skill-level {
+      font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+      padding: 2px 8px; border-radius: 100px;
+    }
+    .level-expert   { background: var(--blue-light); color: var(--blue); }
+    .level-advanced { background: var(--teal-light); color: #047857; }
+    .level-proficient { background: var(--purple-light); color: var(--purple); }
+
+    /* TECH PILL CLOUD */
+    .pill-section { padding: 0 20px 20px; }
+    .pill-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 10px; }
+    .pill-cloud { display: flex; flex-wrap: wrap; gap: 6px; }
+    .pill {
+      font-size: 12px; font-weight: 500;
+      border-radius: 6px; padding: 4px 10px;
+      border: 1px solid;
+    }
+    .pill-blue   { background: var(--blue-light); color: var(--blue); border-color: #BBF7D0; }
+    .pill-teal   { background: var(--teal-light); color: #047857; border-color: #6EE7B7; }
+    .pill-purple { background: var(--purple-light); color: var(--purple); border-color: #DDD6FE; }
+    .pill-green  { background: var(--green-light); color: var(--green); border-color: #BBF7D0; }
+    .pill-amber  { background: var(--amber-light); color: var(--amber); border-color: #FDE68A; }
+    .pill-slate  { background: #F1F5F9; color: #475569; border-color: #CBD5E1; }
+
+    /* SKILL BAR */
+    .skill-bar-row { display: flex; align-items: center; gap: 12px; padding: 8px 12px; border-radius: 8px; transition: background 0.15s; }
+    .skill-bar-row:hover { background: var(--bg); }
+    .skill-bar-name { font-size: 13px; font-weight: 500; color: var(--navy); width: 130px; flex-shrink: 0; }
+    .skill-bar-track { flex: 1; height: 6px; background: var(--border); border-radius: 100px; overflow: hidden; }
+    .skill-bar-fill { height: 100%; border-radius: 100px; }
+
+    /* CERTIFICATIONS */
+    .certs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+    .cert-card {
+      background: var(--white); border: 1px solid var(--border); border-radius: 10px;
+      padding: 16px 18px; display: flex; gap: 12px; align-items: flex-start;
+      transition: all 0.15s;
+    }
+    .cert-card:hover { box-shadow: 0 4px 16px rgba(15,23,42,0.08); transform: translateY(-2px); }
+    .cert-icon { font-size: 22px; flex-shrink: 0; }
+    .cert-name { font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 3px; }
+    .cert-org { font-size: 12px; color: var(--muted); }
+    .cert-org a { color: var(--blue); text-decoration: none; }
+    .cert-org a:hover { text-decoration: underline; }
+    .cert-featured { background: linear-gradient(135deg, #F0FDF4 0%, #ECFDF5 100%); border-color: #BBF7D0; }
+    .cert-featured .cert-name { color: var(--blue); }
+    .edu-school a { color: var(--blue); text-decoration: none; font-weight: 500; }
+    .edu-school a:hover { text-decoration: underline; }
+
+    /* LANGUAGES */
+    .lang-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 48px; }
+    .lang-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 12px; padding: 20px; text-align: center;
+    }
+    .lang-flag { font-size: 28px; margin-bottom: 8px; }
+    .lang-name { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .lang-level-tag {
+      display: inline-block; font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.5px; border-radius: 100px; padding: 3px 10px;
+    }
+
+    /* EDUCATION */
+    .edu-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 12px; padding: 24px 28px;
+      display: flex; gap: 20px; align-items: center;
+    }
+    .edu-icon { font-size: 36px; flex-shrink: 0; }
+    .edu-degree { font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .edu-school { font-size: 14px; color: var(--blue); font-weight: 500; margin-bottom: 2px; }
+    .edu-location { font-size: 13px; color: var(--muted); }
+
+    .count-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--navy); color: var(--white);
+      border-radius: 100px; padding: 6px 16px;
+      font-size: 13px; font-weight: 600; margin-bottom: 20px;
+    }
+
+    footer {
+      text-align: center; padding: 32px;
+      font-size: 13px; color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .page-hero { padding: 40px 24px; }
+      .content { padding: 40px 24px; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .lang-grid { grid-template-columns: repeat(3, 1fr); }
+      .skill-bar-name { width: 100px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Sebastian Tam &ndash; Portfolio</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="ai-engineering.html">AI & Engineering</a></li>
+      <li><a href="startups-growth.html">Startups & Growth</a></li>
+      <li><a href="skills-matrix.html" class="active">Skills</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero">
+    <div style="max-width:1000px;margin:0 auto;">
+      <div class="breadcrumb"><a href="index.html">Home</a> / Skills Matrix</div>
+      <h1>Full-Stack Expertise</h1>
+      <p class="page-hero-sub">Deep AI/engineering capabilities combined with proven growth execution. Python to Meta Ads, XGBoost to LangChain, OWASP to HubSpot — rare combination at the executive level.</p>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <div class="section-label">Core Stack</div>
+    <div class="section-title">AI & Engineering · Growth & Marketing</div>
+
+    <div class="skills-grid">
+
+      <!-- AI & ENGINEERING -->
+      <div class="skills-panel">
+        <div class="panel-header">
+          <div class="panel-header-icon" style="background:var(--blue-light);">🤖</div>
+          <div>
+            <h2>AI & Engineering</h2>
+            <p>ML, data pipelines, AI systems &amp; security</p>
+          </div>
+        </div>
+
+        <div class="skill-list">
+          <div class="skill-item">
+            <div class="skill-dot" style="background:var(--blue);"></div>
+            <div class="skill-name">Python & FastAPI</div>
+            <span class="skill-level level-expert">Expert</span>
+          </div>
+          <div class="skill-item">
+            <div class="skill-dot" style="background:var(--blue);"></div>
+            <div class="skill-name">Machine Learning & XGBoost</div>
+            <span class="skill-level level-expert">Expert</span>
+          </div>
+          <div class="skill-item">
+            <div class="skill-dot" style="background:var(--teal);"></div>
+            <div class="skill-name">RAG, LlamaIndex & LangChain</div>
+            <span class="skill-level level-advanced">Advanced</span>
+          </div>
+          <div class="skill-item">
+            <div class="skill-dot" style="background:var(--teal);"></div>
+            <div class="skill-name">AnythingLLM & Ollama</div>
+            <span class="skill-level level-advanced">Advanced</span>
+          </div>
+          <div class="skill-item">
+            <div class="skill-dot" style="background:var(--teal);"></div>
+            <div class="skill-name">LangGraph</div>
+            <span class="skill-level level-advanced">Advanced</span>
+          </div>
+          <div class="skill-item">
+            <div class="skill-dot" style="background:var(--blue);"></div>
+            <div class="skill-name">Prompt Engineering</div>
+            <span class="skill-level level-expert">Expert</span>
+          </div>
+          <div class="skill-item">
+            <div class="skill-dot" style="background:var(--purple);"></div>
+            <div class="skill-name">Hallucination Reduction</div>
+            <span class="skill-level level-advanced">Advanced</span>
+          </div>
+          <div class="skill-item">
+            <div class="skill-dot" style="background:var(--purple);"></div>
+            <div class="skill-name">Embeddings & Chunking</div>
+            <span class="skill-level level-advanced">Advanced</span>
+          </div>
+          <div class="skill-item">
+            <div class="skill-dot" style="background:var(--purple);"></div>
+            <div class="skill-name">OWASP & Prompt Injection Prevention</div>
+            <span class="skill-level level-proficient">Proficient</span>
+          </div>
+          <div class="skill-item">
+            <div class="skill-dot" style="background:var(--teal);"></div>
+            <div class="skill-name">Gemma 4</div>
+            <span class="skill-level level-advanced">Advanced</span>
+          </div>
+        </div>
+
+        <div class="pill-section">
+          <div class="pill-title">Platforms & Tools</div>
+          <div class="pill-cloud">
+            <span class="pill pill-blue">SaaS</span>
+            <span class="pill pill-blue">Salesforce</span>
+            <span class="pill pill-slate">Docker</span>
+            <span class="pill pill-teal">GitHub</span>
+            <span class="pill pill-purple">Google Analytics 4</span>
+          </div>
+        </div>
+
+        <div style="padding: 0 20px 20px;">
+          <div class="pill-title" style="margin-bottom:10px;">Proficiency</div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-name">Python / ML</div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:90%;background:var(--blue);"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-name">RAG / LLM Systems</div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%;background:var(--teal);"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-name">Prompt Engineering</div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:88%;background:var(--blue);"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-name">AI Security (OWASP)</div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:78%;background:var(--purple);"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GROWTH & MARKETING -->
+      <div class="skills-panel">
+        <div class="panel-header">
+          <div class="panel-header-icon" style="background:var(--purple-light);">📈</div>
+          <div>
+            <h2>Growth & Marketing</h2>
+            <p>Paid, organic, mobile &amp; analytics</p>
+          </div>
+        </div>
+
+        <div class="skill-list">
+          <div class="skill-item">
+            <div class="skill-dot" style="background:var(--blue);"></div>
+            <div class="skill-name">Meta Ads Manager</div>
+            <span class="skill-level level-expert">Expert</span>
+          </div>
+          <div class="skill-item">
+            <div class="skill-dot" style="background:var(--blue);"></div>
+            <div class="skill-name">Google Analytics 4</div>
+            <span class="skill-level level-expert">Expert</span>
+          </div>
+          <div class="skill-item">
+            <div class="skill-dot" style="background:var(--blue);"></div>
+            <div class="skill-name">AppsFlyer (Mobile Attribution)</div>
+            <span class="skill-level level-expert">Expert</span>
+          </div>
+          <div class="skill-item">
+            <div class="skill-dot" style="background:var(--teal);"></div>
+            <div class="skill-name">App Store Optimisation (ASO)</div>
+            <span class="skill-level level-advanced">Advanced</span>
+          </div>
+          <div class="skill-item">
+            <div class="skill-dot" style="background:var(--teal);"></div>
+            <div class="skill-name">HubSpot CRM & Marketing</div>
+            <span class="skill-level level-advanced">Advanced</span>
+          </div>
+          <div class="skill-item">
+            <div class="skill-dot" style="background:var(--teal);"></div>
+            <div class="skill-name">SEO / SEM & Content Marketing</div>
+            <span class="skill-level level-advanced">Advanced</span>
+          </div>
+          <div class="skill-item">
+            <div class="skill-dot" style="background:var(--teal);"></div>
+            <div class="skill-name">Shopify</div>
+            <span class="skill-level level-advanced">Advanced</span>
+          </div>
+          <div class="skill-item">
+            <div class="skill-dot" style="background:var(--teal);"></div>
+            <div class="skill-name">Hootsuite</div>
+            <span class="skill-level level-advanced">Advanced</span>
+          </div>
+          <div class="skill-item">
+            <div class="skill-dot" style="background:var(--purple);"></div>
+            <div class="skill-name">Programmatic B2B & PPC</div>
+            <span class="skill-level level-proficient">Proficient</span>
+          </div>
+          <div class="skill-item">
+            <div class="skill-dot" style="background:var(--purple);"></div>
+            <div class="skill-name">SEMrush</div>
+            <span class="skill-level level-proficient">Proficient</span>
+          </div>
+        </div>
+
+        <div class="pill-section">
+          <div class="pill-title">Additional Skills</div>
+          <div class="pill-cloud">
+            <span class="pill pill-purple">Brand Marketing</span>
+            <span class="pill pill-purple">Strategic Partnership</span>
+            <span class="pill pill-teal">Ecommerce</span>
+            <span class="pill pill-blue">B2B Marketing</span>
+            <span class="pill pill-slate">Negotiation</span>
+            <span class="pill pill-slate">Team Leadership</span>
+            <span class="pill pill-slate">Strategic Planning</span>
+          </div>
+        </div>
+
+        <div style="padding: 0 20px 20px;">
+          <div class="pill-title" style="margin-bottom:10px;">Proficiency</div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-name">Paid Social / SEM</div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:94%;background:var(--purple);"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-name">Mobile Attribution</div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:90%;background:var(--blue);"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-name">ASO</div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%;background:var(--teal);"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-name">CRM & HubSpot</div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%;background:var(--purple);"></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CERTIFICATIONS -->
+    <div style="margin-bottom: 56px;">
+      <div class="section-label">Credentials</div>
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:8px;flex-wrap:wrap;">
+        <div class="section-title" style="margin-bottom:0;">Professional Certifications</div>
+        <div class="count-badge">🎓 20+ in under 2 months</div>
+      </div>
+      <p style="font-size:14px;color:var(--muted);margin-bottom:24px;">Refreshed all digital skills qualifications with the latest technology vendors within 2 months.</p>
+
+      <div class="certs-grid">
+        <div class="cert-card cert-featured">
+          <div class="cert-icon">📘</div>
+          <div>
+            <div class="cert-name">Meta Certified Media Buying Professional</div>
+            <div class="cert-org"><a href="https://www.credly.com/badges/01e5b16f-bd8e-4fa0-b656-d3ace9939f3a/public_url" target="_blank">Meta Blueprint</a></div>
+          </div>
+        </div>
+        <div class="cert-card cert-featured">
+          <div class="cert-icon">🔵</div>
+          <div>
+            <div class="cert-name">Google Digital Marketing Certificates (×9)</div>
+            <div class="cert-org"><a href="https://www.credential.net/profile/sebastiantam/wallet#gs.7f52n7" target="_blank">Google Digital Academy (Skillshop)</a></div>
+          </div>
+        </div>
+        <div class="cert-card cert-featured">
+          <div class="cert-icon">📊</div>
+          <div>
+            <div class="cert-name">Google Advanced Data Analytics Professional Certificate</div>
+            <div class="cert-org"><a href="https://www.credly.com/badges/59cddb31-3010-4b28-9d20-3a51380ad7b0/public_url" target="_blank">Google Academy (Coursera)</a></div>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-icon">🟠</div>
+          <div>
+            <div class="cert-name">HubSpot Marketing Software Certified</div>
+            <div class="cert-org"><a href="https://app-eu1.hubspot.com/academy/achievements/qbzd7tw6/en/1/yu-chung-sebastian-tam/hubspot-marketing-software" target="_blank">HubSpot Academy</a></div>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-icon">🦉</div>
+          <div>
+            <div class="cert-name">Hootsuite Platform Certification</div>
+            <div class="cert-org"><a href="https://www.credential.net/5432eda2-c289-492f-aeac-91c7102365c1#gs.7f900o" target="_blank">Hootsuite Academy</a></div>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-icon">🛒</div>
+          <div>
+            <div class="cert-name">Shopify Certifications</div>
+            <div class="cert-org"><a href="https://www.credly.com/badges/4e41a38c-fd0f-46d3-8518-7f260f916f0a/public_url" target="_blank">Shopify Learn</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LANGUAGES -->
+    <div style="margin-bottom: 56px;">
+      <div class="section-label">Languages</div>
+      <div class="section-title">Communication</div>
+      <div class="lang-grid">
+        <div class="lang-card">
+          <div class="lang-flag">🇬🇧</div>
+          <div class="lang-name">English</div>
+          <span class="lang-level-tag" style="background:var(--blue-light);color:var(--blue);">Proficient</span>
+        </div>
+        <div class="lang-card">
+          <div class="lang-flag">🇭🇰</div>
+          <div class="lang-name">Cantonese</div>
+          <span class="lang-level-tag" style="background:var(--green-light);color:var(--green);">Native</span>
+        </div>
+        <div class="lang-card">
+          <div class="lang-flag">🇨🇳</div>
+          <div class="lang-name">Mandarin</div>
+          <span class="lang-level-tag" style="background:var(--green-light);color:var(--green);">Native</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDUCATION -->
+    <div>
+      <div class="section-label">Education</div>
+      <div class="section-title">Academic Background</div>
+      <div class="edu-card">
+        <div class="edu-icon">🎓</div>
+        <div>
+          <div class="edu-degree">BA (Hons) International Business Studies</div>
+          <div class="edu-school">City University of Hong Kong</div>
+          <div class="edu-location">📍 Hong Kong</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    © 2026 Sebastian Tam &nbsp;·&nbsp; <a href="index.html" style="color:var(--blue);text-decoration:none;">Back to Home</a>
+  </footer>
+
+</body>
+</html>

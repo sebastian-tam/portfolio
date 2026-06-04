@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | Sebastian Tam</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:   #134D30;
+      --blue:   #22C55E;
+      --teal:   #34D399;
+      --orange: #EA580C;
+      --bg:     #F5F4F1;
+      --white:  #FFFFFF;
+      --text:   #1E293B;
+      --muted:  #64748B;
+      --border: #E2E8F0;
+      --blue-light:   #F0FDF4;
+      --orange-light: #FFF7ED;
+    }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); }
+
+    nav {
+      background: var(--white); border-bottom: 1px solid var(--border);
+      padding: 0 40px; display: flex; align-items: center; justify-content: space-between;
+      height: 64px; position: sticky; top: 0; z-index: 100;
+    }
+    .nav-logo { font-weight: 700; font-size: 16px; color: var(--navy); text-decoration: none; }
+    .nav-links { display: flex; gap: 8px; list-style: none; }
+    .nav-links a {
+      text-decoration: none; font-size: 13px; font-weight: 500; color: var(--muted);
+      padding: 6px 12px; border-radius: 6px; transition: all 0.15s;
+    }
+    .nav-links a:hover { background: var(--bg); color: var(--navy); }
+    .nav-links a.active { background: var(--blue-light); color: var(--blue); }
+
+    /* HERO — full bleed atmospheric */
+    .page-hero {
+      background: linear-gradient(135deg, #134D30 0%, #1A5535 50%, #1A6B40 100%);
+      padding: 80px 40px 72px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg-text {
+      position: absolute;
+      right: -20px; top: 50%;
+      transform: translateY(-50%);
+      font-size: 200px;
+      font-weight: 900;
+      color: rgba(255,255,255,0.03);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+    .breadcrumb { font-size: 13px; color: rgba(255,255,255,0.45); margin-bottom: 16px; }
+    .breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
+    .breadcrumb a:hover { color: rgba(255,255,255,0.8); }
+    .page-hero h1 {
+      font-size: clamp(30px, 5vw, 52px); font-weight: 800; color: var(--white);
+      letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 12px;
+    }
+    .hero-accent { color: #F97316; }
+    .page-hero-sub { font-size: 16px; color: rgba(255,255,255,0.55); max-width: 540px; line-height: 1.7; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 28px; }
+    .tag {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 6px; padding: 5px 14px;
+      font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.75);
+    }
+
+    .content { max-width: 900px; margin: 0 auto; padding: 64px 40px 80px; }
+
+    .section-label {
+      font-size: 12px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1.5px; color: var(--orange); margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: 28px; font-weight: 700; color: var(--navy);
+      letter-spacing: -0.5px; margin-bottom: 28px;
+    }
+
+    /* STORY CARD */
+    .story-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+      margin-bottom: 40px;
+    }
+    .story-card p {
+      font-size: 16px;
+      line-height: 1.85;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+    .story-card p:last-child { margin-bottom: 0; }
+    .story-card strong { color: var(--navy); font-weight: 600; }
+    .story-card em { color: var(--orange); font-style: normal; font-weight: 600; }
+
+    /* RUNNING STATS */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .stat-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 20px;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .stat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(15,23,42,0.08); }
+    .stat-icon { font-size: 28px; margin-bottom: 8px; }
+    .stat-value {
+      font-size: 30px; font-weight: 800; color: var(--navy);
+      letter-spacing: -1px; line-height: 1; margin-bottom: 4px;
+    }
+    .stat-value.orange { color: var(--orange); }
+    .stat-label { font-size: 12px; color: var(--muted); }
+
+    /* CONNECTION CARD */
+    .connection-card {
+      background: linear-gradient(135deg, #FFF7ED 0%, #FFF0E6 100%);
+      border: 1px solid #FED7AA;
+      border-radius: 16px;
+      padding: 36px 40px;
+      margin-bottom: 40px;
+    }
+    .connection-card h3 {
+      font-size: 20px; font-weight: 700; color: var(--navy);
+      margin-bottom: 20px; letter-spacing: -0.3px;
+    }
+    .connection-items { display: flex; flex-direction: column; gap: 16px; }
+    .connection-item { display: flex; gap: 16px; align-items: flex-start; }
+    .ci-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: rgba(234,88,12,0.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+    }
+    .ci-title { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 3px; }
+    .ci-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+    /* RACE LIST */
+    .race-section {}
+    .race-title-row {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+    }
+    .race-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+    .race-item {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      display: flex; gap: 10px; align-items: center;
+      font-size: 13px; font-weight: 500; color: var(--text);
+      transition: all 0.15s;
+    }
+    .race-item:hover { background: var(--orange-light); border-color: #FED7AA; }
+    .race-item .race-emoji { font-size: 16px; }
+
+    /* PHILOSOPHY QUOTE */
+    .philosophy {
+      background: var(--navy);
+      border-radius: 16px;
+      padding: 40px;
+      text-align: center;
+    }
+    .philosophy blockquote {
+      font-size: 20px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.7;
+      font-style: italic;
+      max-width: 600px;
+      margin: 0 auto 20px;
+    }
+    .philosophy blockquote strong {
+      font-weight: 700;
+      font-style: normal;
+      color: #F97316;
+    }
+    .philosophy cite {
+      font-size: 13px; color: rgba(255,255,255,0.4);
+      font-style: normal;
+    }
+
+    footer {
+      text-align: center; padding: 32px;
+      font-size: 13px; color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .page-hero { padding: 40px 24px; }
+      .hero-bg-text { display: none; }
+      .content { padding: 40px 24px; }
+      .story-card { padding: 28px 24px; }
+      .connection-card { padding: 28px 24px; }
+      .philosophy { padding: 32px 24px; }
+      .philosophy blockquote { font-size: 17px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Sebastian Tam &ndash; Portfolio</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="ai-engineering.html">AI & Engineering</a></li>
+      <li><a href="startups-growth.html">Startups & Growth</a></li>
+      <li><a href="skills-matrix.html">Skills</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero">
+    <div class="hero-bg-text">🏔️</div>
+    <div style="max-width:900px;margin:0 auto;position:relative;z-index:1;">
+      <div class="breadcrumb"><a href="index.html">Home</a> / About</div>
+      <h1>Endurance, in Business<br><span class="hero-accent">and Life.</span></h1>
+      <p class="page-hero-sub">The same qualities that carry you through 100 miles of desert — grit, patience, and unwavering forward motion — are the ones that scale a startup from zero to IPO.</p>
+      <div class="hero-tags">
+        <span class="tag">🏃 50+ Ultras & Marathons</span>
+        <span class="tag">🏔️ 20 Years Running</span>
+        <span class="tag">🌍 Deserts & Mountains</span>
+        <span class="tag">🚀 Series A to IPO</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- RUNNING STATS -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">🏃‍♂️</div>
+        <div class="stat-value orange">50+</div>
+        <div class="stat-label">Ultras & Marathons</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📅</div>
+        <div class="stat-value">20</div>
+        <div class="stat-label">Years of Running</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🏜️</div>
+        <div class="stat-value orange">Desert</div>
+        <div class="stat-label">Extreme terrain covered</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⛰️</div>
+        <div class="stat-value orange">Mountain</div>
+        <div class="stat-label">High altitude races</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🌍</div>
+        <div class="stat-value">Global</div>
+        <div class="stat-label">Races across continents</div>
+      </div>
+    </div>
+
+    <!-- THE STORY -->
+    <div class="section-label">My Story</div>
+    <div class="section-title">The Ultra-Marathoner</div>
+
+    <div class="story-card">
+      <p>
+        For over <strong>20 years</strong>, I have participated in more than <strong>50 ultra-marathons and marathons</strong> across some of the world's most unforgiving landscapes — scorching deserts, high-altitude mountain trails, and technical terrain that demands every ounce of mental and physical reserve you possess.
+      </p>
+      <p>
+        Ultra-running is not simply sport. It is a school of thought. When you are <em>40 miles into a 100-mile race</em> and your legs have stopped responding to rational commands, the only thing that keeps you moving is a deeply held conviction that the work done before the race — the unglamorous, unseen preparation — will carry you through. That conviction, earned mile by mile over two decades, has become the lens through which I approach every business challenge I take on.
+      </p>
+      <p>
+        From the deserts of the Middle East to the mountain ranges of Europe and Asia, these races have taught me that the difference between finishing and quitting is almost never physical. It is almost always a question of <strong>how clearly you can see your goal</strong> when everything is telling you to stop.
+      </p>
+    </div>
+
+    <div style="margin-bottom:48px;">
+      <a href="https://www.google.com/maps/d/u/0/edit?hl=en&mid=17CuNWCEQ_SS6r5Y6AL_wjcxke5_uRzg&ll=51.58667709852858%2C-0.24652317436524296&z=12"
+         target="_blank"
+         style="display:inline-flex;align-items:center;gap:10px;
+                background:#EA580C;color:#ffffff;
+                font-family:'Inter',sans-serif;font-size:15px;font-weight:600;
+                text-decoration:none;border-radius:10px;
+                padding:14px 28px;transition:all 0.2s;"
+         onmouseover="this.style.background='#C2410C';this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 24px rgba(234,88,12,0.35)'"
+         onmouseout="this.style.background='#EA580C';this.style.transform='translateY(0)';this.style.boxShadow='none'">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+          <circle cx="12" cy="9" r="2.5"/>
+        </svg>
+        View My Race Map
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- THE CONNECTION -->
+    <div class="connection-card">
+      <h3>🔗 The Business Philosophy</h3>
+      <div class="connection-items">
+
+        <div class="connection-item">
+          <div class="ci-icon">🎯</div>
+          <div>
+            <div class="ci-title">Long-Term Pacing</div>
+            <div class="ci-desc">Ultra-running teaches you to pace for the finish, not the mile marker. In startups, this translates to building sustainable revenue systems — not chasing short-term spikes that destroy long-term margins.</div>
+          </div>
+        </div>
+
+        <div class="connection-item">
+          <div class="ci-icon">💪</div>
+          <div>
+            <div class="ci-title">Grit Through the Plateau</div>
+            <div class="ci-desc">Every growth curve has a plateau that feels like failure. Every ultra has a point at mile 60 that feels like the end. The skill is recognising the difference between a signal to adjust and a signal to keep going.</div>
+          </div>
+        </div>
+
+        <div class="connection-item">
+          <div class="ci-icon">📊</div>
+          <div>
+            <div class="ci-title">Data-Driven Execution</div>
+            <div class="ci-desc">The best ultra-runners obsess over split times, elevation data, and nutrition metrics. I bring the same quantitative rigour to growth — measuring everything from ML fare prediction MAPE to conversion funnel drop-offs.</div>
+          </div>
+        </div>
+
+        <div class="connection-item">
+          <div class="ci-icon">🚀</div>
+          <div>
+            <div class="ci-title">Series A to IPO Runway</div>
+            <div class="ci-desc">Taking a company from early-stage to IPO is not a sprint. It requires the same sequential, disciplined commitment as training across 20 years of ultra-events — each one building the foundation for what comes next.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PHILOSOPHY QUOTE -->
+    <div class="philosophy">
+      <blockquote>
+        "The finish line is never the hardest part. The hardest part is showing up the next morning, after the race is over, and <strong>doing the work that no one sees</strong>. That's where growth — in running and in business — is actually built."
+      </blockquote>
+      <cite>— Sebastian Tam</cite>
+    </div>
+
+  </div>
+
+  <footer>
+    © 2026 Sebastian Tam &nbsp;·&nbsp; Berkshire, United Kingdom &nbsp;·&nbsp; <a href="index.html" style="color:var(--blue);text-decoration:none;">Back to Home</a>
+  </footer>
+
+</body>
+</html>
