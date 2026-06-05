@@ -256,6 +256,27 @@
       background: #4ADE80; animation: pulse 2s infinite;
       flex-shrink: 0;
     }
+    .live-demo-btn.checking { opacity: 0.7; pointer-events: none; cursor: wait; }
+
+    /* VPN toast */
+    #vpn-toast {
+      display: none;
+      align-items: flex-start; gap: 12px;
+      margin-top: 12px;
+      padding: 14px 18px;
+      background: #FFF7ED;
+      border: 1px solid #FED7AA;
+      border-left: 4px solid #F97316;
+      border-radius: 8px;
+      font-size: 14px; color: #92400E; line-height: 1.5;
+      max-width: 420px;
+      animation: slideDown 0.25s ease;
+    }
+    #vpn-toast svg { flex-shrink: 0; margin-top: 1px; }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
 
     .toggle-content a, .project-meta a.ext-link {
       color: var(--blue); text-decoration: none;
@@ -333,11 +354,15 @@
           <h2>Zippe's Competitor — Dynamic Pricing Intelligence</h2>
           <p>Reverse-engineered a key ride-hailing competitor's fare pricing across Bath, UK using a self-hosted ML pipeline — with no public API and zero external dependencies.</p>
           <div class="status-pill"><span class="status-dot"></span> Active — Continuous collection &amp; model refinement</div>
-          <a href="http://192.168.1.211:8502/" target="_blank" class="live-demo-btn">
+          <button onclick="checkDashboard(this)" class="live-demo-btn">
             <span class="btn-dot"></span>
             View Live Dashboard
             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
-          </a>
+          </button>
+          <div id="vpn-toast">
+            <svg width="18" height="18" fill="none" stroke="#F97316" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            <span><strong>VPN needed to connect to Live Dashboard.</strong><br>Please connect to VPN first, then try again.</span>
+          </div>
         </div>
       </div>
 
@@ -856,6 +881,34 @@
   <footer>
     © 2026 Sebastian Tam &nbsp;·&nbsp; Growth Leader &amp; AI Architect &nbsp;·&nbsp; Berkshire, United Kingdom &nbsp;·&nbsp; <a href="index.html" style="color:var(--blue);text-decoration:none;">Back to Home</a>
   </footer>
+
+  <script>
+    const DASHBOARD_URL = 'http://192.168.1.211:8502/';
+
+    async function checkDashboard(btn) {
+      btn.classList.add('checking');
+      btn.querySelector('span.btn-dot').style.background = '#FCD34D';
+
+      const toast = document.getElementById('vpn-toast');
+      toast.style.display = 'none';
+
+      try {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), 3000);
+        await fetch(DASHBOARD_URL, { mode: 'no-cors', signal: controller.signal });
+        clearTimeout(timer);
+        window.open(DASHBOARD_URL, '_blank');   // reachable — open it
+      } catch (err) {
+        // not reachable — show VPN message
+        toast.style.display = 'flex';
+        clearTimeout(toast._hideTimer);
+        toast._hideTimer = setTimeout(() => { toast.style.display = 'none'; }, 8000);
+      } finally {
+        btn.classList.remove('checking');
+        btn.querySelector('span.btn-dot').style.background = '#4ADE80';
+      }
+    }
+  </script>
 
 </body>
 </html>
