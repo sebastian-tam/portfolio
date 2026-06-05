@@ -22,16 +22,7 @@
       --slate-light:#F1F5F9;
       --amber:      #D97706;
     }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      animation: fadeIn 0.5s ease-in;
-    }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes slideInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    .animate-on-scroll { opacity: 0; }
-    .animate-on-scroll.in-view { animation: slideInUp 0.6s ease-out forwards; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); }
 
     /* NAV */
     nav {
@@ -79,17 +70,7 @@
 
 
     /* ROLE CARD */
-    .role-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
-      transition: all 0.3s ease;
-    }
-    .role-card:hover {
-      box-shadow: 0 12px 32px rgba(15,23,42,0.1);
-      border-color: var(--green-light);
-    }
+    .role-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
 
     .role-header {
       padding: 28px 32px 20px;
@@ -298,7 +279,7 @@
                onerror="this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='block'">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M5 17H3a2 2 0 01-2-2V9l2-5h14l2 5v6a2 2 0 01-2 2h-2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
         </div>
-        <div class="role-card has-photos animate-on-scroll">
+        <div class="role-card has-photos">
           <div class="photo-lane">
             <img class="lane-logo" src="logo-zippe.png" alt="Zippe"
                  onerror="this.style.display='none'">
@@ -349,7 +330,7 @@
         <div class="timeline-dot icon-dot">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
         </div>
-        <div class="role-card has-photos animate-on-scroll">
+        <div class="role-card has-photos">
           <div class="photo-lane">
             <div style="width:54px;height:54px;border-radius:8px;background:var(--green-light);border:1px solid #BBF7D0;display:flex;align-items:center;justify-content:center;">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
@@ -391,7 +372,7 @@
                onerror="this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='block'">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:none"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
         </div>
-        <div class="role-card has-photos animate-on-scroll">
+        <div class="role-card has-photos">
           <!-- photo lane -->
           <div class="photo-lane">
             <img class="lane-logo" src="logo-anymind.png" alt="AnyMind"
@@ -468,7 +449,7 @@
                onerror="this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='block'">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
         </div>
-        <div class="role-card has-photos animate-on-scroll">
+        <div class="role-card has-photos">
           <!-- photo lane -->
           <div class="photo-lane">
             <img class="lane-logo" src="logo-metaps.svg" alt="Metaps"
@@ -582,18 +563,6 @@
         preview.style.display = 'none';
       });
     });
-
-    // Scroll animation observer
-    const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-    document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
   </script>
 
 </body>

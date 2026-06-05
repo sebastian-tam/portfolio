@@ -27,16 +27,7 @@
       --red: #DC2626;
       --red-light: #FEF2F2;
     }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      animation: fadeIn 0.5s ease-in;
-    }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes slideInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    .animate-on-scroll { opacity: 0; }
-    .animate-on-scroll.in-view { animation: slideInUp 0.6s ease-out forwards; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); }
 
     nav {
       background: var(--white); border-bottom: 1px solid var(--border);
@@ -74,16 +65,8 @@
 
     /* PROJECT CARD */
     .project-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
-      margin-bottom: 40px;
-      transition: all 0.3s ease;
-    }
-    .project-card:hover {
-      box-shadow: 0 12px 32px rgba(15,23,42,0.1);
-      border-color: var(--blue-light);
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 16px; overflow: hidden; margin-bottom: 40px;
     }
     .project-header {
       padding: 32px 36px 24px; border-bottom: 1px solid var(--border);
@@ -109,36 +92,6 @@
     }
     .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
-
-    /* BUTTONS */
-    .live-demo-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--blue);
-      color: var(--white);
-      border: none;
-      border-radius: 8px;
-      padding: 12px 22px;
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 4px 12px rgba(249,115,22,0.25);
-      margin-top: 12px;
-    }
-    .live-demo-btn:hover {
-      background: #E85E0D;
-      box-shadow: 0 8px 24px rgba(249,115,22,0.35);
-      transform: translateY(-2px);
-    }
-    .btn-dot {
-      width: 8px;
-      height: 8px;
-      background: #FEA65D;
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
 
     /* QUOTE */
     .quote-block {
@@ -393,7 +346,7 @@
     <!-- ============================================================ -->
     <!-- PROJECT 1 — COMPETITOR PRICING -->
     <!-- ============================================================ -->
-    <div class="project-card animate-on-scroll">
+    <div class="project-card">
       <div class="project-header">
         <div class="project-icon"><svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 01-2-2V9l2-5h14l2 5v6a2 2 0 01-2 2h-2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></div>
         <div class="project-meta">
@@ -830,7 +783,7 @@
     <!-- ============================================================ -->
     <!-- PROJECT 2 — RAG AI SYSTEM -->
     <!-- ============================================================ -->
-    <div class="project-card animate-on-scroll">
+    <div class="project-card">
       <div class="project-header">
         <div class="project-icon" style="background: var(--teal-light);"><svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><line x1="12" y1="7" x2="12" y2="12"/><line x1="12" y1="12" x2="6" y2="17"/><line x1="12" y1="12" x2="18" y2="17"/></svg></div>
         <div class="project-meta">
@@ -955,18 +908,6 @@
         btn.querySelector('span.btn-dot').style.background = '#4ADE80';
       }
     }
-
-    // Scroll animation observer
-    const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-    document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
   </script>
 
 </body>
