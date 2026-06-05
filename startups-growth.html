@@ -192,6 +192,65 @@
       .metric-chips { padding: 0 20px 16px; }
       .role-bullets { padding: 0 20px 20px; }
     }
+
+    /* ── PHOTO MEMORY LANE ──────────────────────────────────────────────── */
+    .role-card.has-photos { display: flex; }
+    .photo-lane {
+      width: 110px; flex-shrink: 0;
+      background: #F0FDF4;
+      border-right: 1px solid var(--border);
+      border-radius: 16px 0 0 16px;
+      padding: 16px 8px;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+    }
+    .role-content { flex: 1; min-width: 0; }
+    .lane-label {
+      font-size: 9px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.2px; color: #166534;
+      margin-bottom: 2px; text-align: center;
+    }
+    .lane-logo {
+      width: 54px; height: 54px; object-fit: contain;
+      border-radius: 8px; background: var(--white);
+      border: 1px solid var(--border); padding: 5px;
+      margin-bottom: 4px;
+    }
+    .photo-thumb {
+      position: relative; width: 90px; flex-shrink: 0; cursor: pointer;
+    }
+    .photo-thumb > img {
+      width: 90px; height: 68px; object-fit: cover;
+      border-radius: 6px; display: block;
+      border: 2px solid transparent;
+      transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+    }
+    .photo-thumb:hover > img {
+      border-color: #166534;
+      transform: scale(1.04);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+    }
+    .photo-thumb.featured > img { border-color: #F97316; }
+    .photo-badge {
+      position: absolute; bottom: 4px; left: 0; right: 0;
+      text-align: center;
+      background: rgba(249,115,22,0.88);
+      color: #fff; font-size: 9px; font-weight: 700;
+      padding: 2px 0; border-radius: 0 0 5px 5px;
+      pointer-events: none;
+    }
+    /* preview popup — positioned by JS */
+    .photo-preview {
+      display: none; position: fixed; z-index: 2000;
+      width: 300px; border-radius: 10px; overflow: hidden;
+      box-shadow: 0 20px 56px rgba(0,0,0,0.32);
+      pointer-events: none;
+    }
+    .photo-preview img { width: 100%; display: block; }
+    .preview-caption {
+      padding: 8px 12px; font-size: 12px; font-weight: 500;
+      color: rgba(255,255,255,0.85); background: #134D30;
+    }
+
   </style>
 </head>
 <body>
@@ -313,7 +372,29 @@
                onerror="this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='block'">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:none"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
         </div>
-        <div class="role-card">
+        <div class="role-card has-photos">
+          <!-- photo lane -->
+          <div class="photo-lane">
+            <div class="lane-label">Memory Lane</div>
+            <img class="lane-logo" src="logo-anymind.png" alt="AnyMind"
+                 onerror="this.style.display='none'">
+            <div class="photo-thumb">
+              <img src="photos/AnyMind-Group-AllHands-2017Q4-23-1024x682.jpeg" alt="AnyMind All Hands 2017">
+              <div class="photo-preview">
+                <img src="photos/AnyMind-Group-AllHands-2017Q4-23-1024x682.jpeg" alt="AnyMind All Hands">
+                <div class="preview-caption">AnyMind All Hands Q4 2017</div>
+              </div>
+            </div>
+            <div class="photo-thumb">
+              <img src="photos/anymind_IMG_0546.jpeg" alt="AnyMind Team">
+              <div class="photo-preview">
+                <img src="photos/anymind_IMG_0546.jpeg" alt="AnyMind Team">
+                <div class="preview-caption">AnyMind Hong Kong Team</div>
+              </div>
+            </div>
+          </div>
+          <!-- card content -->
+          <div class="role-content">
           <div class="role-header">
             <div>
               <span class="role-tag">$1M in Year 1</span>
@@ -358,6 +439,7 @@
               <li><span class="sub-label">P&amp;L: </span>Responsible for P&amp;L and Business Operation for Anymind. Achieved a <strong>million USD revenue for HK office in 11 months</strong> with over 50 customers in total</li>
             </ul>
           </div>
+          </div><!-- /role-content -->
         </div>
       </div>
 
@@ -368,7 +450,44 @@
                onerror="this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='block'">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
         </div>
-        <div class="role-card">
+        <div class="role-card has-photos">
+          <!-- photo lane -->
+          <div class="photo-lane">
+            <div class="lane-label">Memory Lane</div>
+            <img class="lane-logo" src="logo-metaps.png" alt="Metaps"
+                 onerror="this.style.display='none'">
+            <div class="photo-thumb featured">
+              <img src="photos/metaps_ipo_IMG_0740.jpeg" alt="Metaps IPO 2015">
+              <div class="photo-badge">⭐ IPO 2015</div>
+              <div class="photo-preview">
+                <img src="photos/metaps_ipo_IMG_0740.jpeg" alt="Metaps IPO">
+                <div class="preview-caption">Tokyo Stock Exchange IPO — 2015</div>
+              </div>
+            </div>
+            <div class="photo-thumb">
+              <img src="photos/metaps_IMG_0042.jpeg" alt="Metaps Team">
+              <div class="photo-preview">
+                <img src="photos/metaps_IMG_0042.jpeg" alt="Metaps Team">
+                <div class="preview-caption">Metaps Greater China Team</div>
+              </div>
+            </div>
+            <div class="photo-thumb">
+              <img src="photos/metaps_IMG_0043.jpeg" alt="Metaps Office">
+              <div class="photo-preview">
+                <img src="photos/metaps_IMG_0043.jpeg" alt="Metaps Office">
+                <div class="preview-caption">Metaps Office</div>
+              </div>
+            </div>
+            <div class="photo-thumb">
+              <img src="photos/metaps_IMG_0049.jpeg" alt="Metaps">
+              <div class="photo-preview">
+                <img src="photos/metaps_IMG_0049.jpeg" alt="Metaps">
+                <div class="preview-caption">Metaps Greater China</div>
+              </div>
+            </div>
+          </div>
+          <!-- card content -->
+          <div class="role-content">
           <div class="role-header">
             <div>
               <span class="role-tag">TSE IPO — 2015</span>
@@ -416,6 +535,7 @@
               <li><span class="sub-label">Series A to IPO Runway: </span>Achieved revenue growth in Greater China region from zero (3/2012) to <strong>USD 15 Million+ in 3 years</strong> and successfully listed in Tokyo Stock Exchange in 2015</li>
             </ul>
           </div>
+          </div><!-- /role-content -->
         </div>
       </div>
 
@@ -425,6 +545,27 @@
   <footer>
     © 2026 Sebastian Tam &nbsp;·&nbsp; Growth Leader &amp; AI Architect &nbsp;·&nbsp; Berkshire, United Kingdom &nbsp;·&nbsp; <a href="index.html" style="color:var(--blue);text-decoration:none;">Back to Home</a>
   </footer>
+
+  <script>
+    document.querySelectorAll('.photo-thumb').forEach(function(thumb) {
+      var preview = thumb.querySelector('.photo-preview');
+      if (!preview) return;
+      thumb.addEventListener('mouseenter', function() {
+        var rect = thumb.getBoundingClientRect();
+        var pw = 300, margin = 14;
+        var left = rect.right + margin;
+        if (left + pw > window.innerWidth - 8) left = rect.left - pw - margin;
+        var top = rect.top - 40;
+        top = Math.max(8, Math.min(top, window.innerHeight - 260));
+        preview.style.left = left + 'px';
+        preview.style.top  = top  + 'px';
+        preview.style.display = 'block';
+      });
+      thumb.addEventListener('mouseleave', function() {
+        preview.style.display = 'none';
+      });
+    });
+  </script>
 
 </body>
 </html>
