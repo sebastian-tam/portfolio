@@ -593,42 +593,51 @@
 
   <script>
     // Initialize photo previews
-    var photoThumbs = document.querySelectorAll('.photo-thumb');
-    console.log('Found ' + photoThumbs.length + ' photo thumbnails');
+    window.addEventListener('DOMContentLoaded', function() {
+      var photoThumbs = document.querySelectorAll('.photo-thumb');
+      console.log('🖼️ Found ' + photoThumbs.length + ' photo thumbnails');
 
-    photoThumbs.forEach(function(thumb, idx) {
-      var preview = thumb.querySelector('.photo-preview');
+      photoThumbs.forEach(function(thumb, idx) {
+        var preview = thumb.querySelector('.photo-preview');
 
-      if (!preview) {
-        console.warn('No preview found for thumb #' + idx);
-        return;
-      }
+        if (!preview) {
+          console.warn('❌ No preview found for thumb #' + idx);
+          return;
+        }
 
-      // Clone and move preview to body so it's not clipped by overflow:hidden
-      var previewClone = preview.cloneNode(true);
-      document.body.appendChild(previewClone);
-      console.log('Added preview #' + idx + ' to body');
-
-      // Add hover listeners to thumbnail
-      thumb.addEventListener('mouseenter', function() {
-        console.log('Hover on thumbnail #' + idx);
-        var rect = thumb.getBoundingClientRect();
-        var pw = 300, margin = 14;
-        var left = rect.right + margin;
-        if (left + pw > window.innerWidth - 8) left = rect.left - pw - margin;
-        var top = rect.top - 40;
-        top = Math.max(8, Math.min(top, window.innerHeight - 260));
-
-        previewClone.style.left = left + 'px';
-        previewClone.style.top  = top  + 'px';
-        previewClone.style.display = 'block';
-      });
-
-      thumb.addEventListener('mouseleave', function() {
+        // Clone preview to body so it's not clipped by overflow:hidden
+        var previewClone = preview.cloneNode(true);
         previewClone.style.display = 'none';
+        previewClone.style.position = 'fixed';
+        previewClone.style.zIndex = '9999';
+        document.body.appendChild(previewClone);
+        console.log('✅ Preview #' + idx + ' added to body');
+
+        // Thumbnail hover logic
+        thumb.style.cursor = 'pointer';
+
+        thumb.addEventListener('mouseenter', function() {
+          var rect = thumb.getBoundingClientRect();
+          var pw = 300, margin = 14;
+          var left = rect.right + margin;
+          if (left + pw > window.innerWidth - 8) left = rect.left - pw - margin;
+          var top = rect.top - 40;
+          top = Math.max(8, Math.min(top, window.innerHeight - 260));
+
+          previewClone.style.left = left + 'px';
+          previewClone.style.top  = top  + 'px';
+          previewClone.style.display = 'block';
+          console.log('👉 Show preview #' + idx + ' at', left, top);
+        });
+
+        thumb.addEventListener('mouseleave', function() {
+          previewClone.style.display = 'none';
+          console.log('👈 Hide preview #' + idx);
+        });
       });
+
+      console.log('✨ Photo preview setup complete');
     });
-    console.log('✓ Photo preview initialization complete');
 
     // Scroll animation observer
     const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
