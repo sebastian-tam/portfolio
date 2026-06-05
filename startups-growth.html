@@ -577,37 +577,22 @@
   </footer>
 
   <script>
-    // Photo preview initialization
+    // Photo preview on hover
     function initPhotoPreviews() {
-      var thumbs = document.querySelectorAll('.photo-thumb');
-      console.log('Initializing ' + thumbs.length + ' photo previews');
-
-      if (thumbs.length === 0) {
-        console.error('❌ No photo-thumb elements found!');
-        return;
-      }
-
-      thumbs.forEach(function(thumb, idx) {
+      document.querySelectorAll('.photo-thumb').forEach(function(thumb) {
         var preview = thumb.querySelector('.photo-preview');
+        if (!preview) return;
 
-        if (!preview) {
-          console.warn('⚠️ Thumb ' + idx + ' has no preview');
-          return;
-        }
-
-        console.log('✓ Setting up preview ' + idx);
-
-        // Move preview to body level so it's not clipped
+        // Move preview to body level so it's not clipped by overflow:hidden
         document.body.appendChild(preview);
 
-        // Set up hover behavior
-        thumb.addEventListener('mouseenter', function(e) {
-          console.log('→ Hovering over photo ' + idx);
+        // Show preview on hover
+        thumb.addEventListener('mouseenter', function() {
           var rect = thumb.getBoundingClientRect();
           var left = rect.right + 15;
           var top = rect.top - 20;
 
-          // Flip left if near right edge
+          // Flip to left side if near right edge
           if (left + 320 > window.innerWidth - 10) {
             left = rect.left - 320 - 15;
           }
@@ -617,19 +602,16 @@
           preview.style.top = top + 'px';
           preview.style.display = 'block';
           preview.style.zIndex = '10000';
-          console.log('  Position:', left, top);
         });
 
-        thumb.addEventListener('mouseleave', function(e) {
-          console.log('← Left photo ' + idx);
+        // Hide preview on mouse leave
+        thumb.addEventListener('mouseleave', function() {
           preview.style.display = 'none';
         });
       });
-
-      console.log('✓ Photo preview setup complete');
     }
 
-    // Run when DOM is ready
+    // Initialize when DOM is ready
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', initPhotoPreviews);
     } else {
