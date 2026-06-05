@@ -581,6 +581,10 @@
     document.querySelectorAll('.photo-thumb').forEach(function(thumb) {
       var preview = thumb.querySelector('.photo-preview');
       if (!preview) return;
+
+      // Move preview to body so it's not clipped by overflow:hidden
+      document.body.appendChild(preview);
+
       thumb.addEventListener('mouseenter', function() {
         var rect = thumb.getBoundingClientRect();
         var pw = 300, margin = 14;
