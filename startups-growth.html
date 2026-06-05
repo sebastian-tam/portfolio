@@ -578,38 +578,47 @@
 
   <script>
     // Photo preview on hover
-    document.querySelectorAll('.photo-thumb').forEach(function(thumb) {
-      var preview = thumb.querySelector('.photo-preview');
-      if (!preview) return;
+    setTimeout(function() {
+      var thumbs = document.querySelectorAll('.photo-thumb');
+      console.log('Found thumbs:', thumbs.length);
 
-      // Move preview to body to escape overflow:hidden
-      document.body.appendChild(preview);
+      thumbs.forEach(function(thumb, idx) {
+        var preview = thumb.querySelector('.photo-preview');
+        console.log('Thumb ' + idx + ' preview:', preview);
 
-      thumb.addEventListener('mouseover', function() {
-        var rect = thumb.getBoundingClientRect();
-        var pw = 320, gap = 10;
-        var left = rect.right + gap;
-        var top = rect.top;
-
-        // Flip left if too close to right edge
-        if (left + pw > window.innerWidth - 10) {
-          left = rect.left - pw - gap;
+        if (!preview) {
+          console.log('No preview for thumb ' + idx);
+          return;
         }
 
-        // Keep in bounds vertically
-        if (top + 350 > window.innerHeight) {
-          top = window.innerHeight - 350;
-        }
+        // Move preview to body
+        document.body.appendChild(preview);
 
-        preview.style.left = left + 'px';
-        preview.style.top = top + 'px';
-        preview.style.display = 'block';
-      });
+        // Make cursor indicate clickable
+        thumb.style.cursor = 'pointer';
 
-      thumb.addEventListener('mouseout', function() {
-        preview.style.display = 'none';
+        // Hover listeners
+        thumb.onmouseover = function() {
+          var rect = thumb.getBoundingClientRect();
+          var left = rect.right + 15;
+          var top = rect.top - 20;
+
+          if (left + 320 > window.innerWidth) {
+            left = rect.left - 320 - 15;
+          }
+
+          preview.style.position = 'fixed';
+          preview.style.left = left + 'px';
+          preview.style.top = top + 'px';
+          preview.style.display = 'block';
+          preview.style.zIndex = '10000';
+        };
+
+        thumb.onmouseout = function() {
+          preview.style.display = 'none';
+        };
       });
-    });
+    }, 100);
 
     // Scroll animation observer
     const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
