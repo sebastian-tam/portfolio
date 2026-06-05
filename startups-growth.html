@@ -246,29 +246,43 @@
     }
     /* preview popup — positioned by JS */
     .photo-preview {
-      display: none;
-      position: fixed;
-      z-index: 2000;
-      width: 300px;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 20px 56px rgba(0,0,0,0.32);
-      pointer-events: none;
-      left: 0;
-      top: 0;
-      animation: previewFadeIn 0.2s ease-out;
+      display: none !important;
+      position: fixed !important;
+      z-index: 9999 !important;
+      width: 300px !important;
+      height: auto !important;
+      border-radius: 10px !important;
+      overflow: hidden !important;
+      box-shadow: 0 20px 56px rgba(0,0,0,0.32) !important;
+      pointer-events: none !important;
+      left: 0 !important;
+      top: 0 !important;
+      opacity: 0;
+      animation: previewFadeIn 0.25s ease-out forwards !important;
+      border: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
     }
     @keyframes previewFadeIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
+      from { opacity: 0; transform: scale(0.95) translateZ(0); }
+      to { opacity: 1; transform: scale(1) translateZ(0); }
     }
-    .photo-preview img { width: 100%; display: block; }
+    .photo-preview img {
+      width: 100% !important;
+      height: auto !important;
+      display: block !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+    }
     .preview-caption {
-      padding: 8px 12px;
-      font-size: 12px;
-      font-weight: 500;
-      color: rgba(255,255,255,0.85);
-      background: #134D30;
+      padding: 8px 12px !important;
+      font-size: 12px !important;
+      font-weight: 500 !important;
+      color: rgba(255,255,255,0.85) !important;
+      background: #134D30 !important;
+      margin: 0 !important;
+      border: none !important;
     }
 
   </style>
@@ -578,39 +592,43 @@
   </footer>
 
   <script>
-    document.querySelectorAll('.photo-thumb').forEach(function(thumb, idx) {
+    // Initialize photo previews
+    var photoThumbs = document.querySelectorAll('.photo-thumb');
+    console.log('Found ' + photoThumbs.length + ' photo thumbnails');
+
+    photoThumbs.forEach(function(thumb, idx) {
       var preview = thumb.querySelector('.photo-preview');
-      console.log('Photo thumb #' + idx + ':', thumb, 'Preview:', preview);
 
       if (!preview) {
         console.warn('No preview found for thumb #' + idx);
         return;
       }
 
-      // Move preview to body so it's not clipped by overflow:hidden
-      document.body.appendChild(preview);
-      console.log('Moved preview #' + idx + ' to body');
+      // Clone and move preview to body so it's not clipped by overflow:hidden
+      var previewClone = preview.cloneNode(true);
+      document.body.appendChild(previewClone);
+      console.log('Added preview #' + idx + ' to body');
 
-      thumb.addEventListener('mouseenter', function(e) {
-        console.log('Mouse enter on thumb #' + idx);
+      // Add hover listeners to thumbnail
+      thumb.addEventListener('mouseenter', function() {
+        console.log('Hover on thumbnail #' + idx);
         var rect = thumb.getBoundingClientRect();
         var pw = 300, margin = 14;
         var left = rect.right + margin;
         if (left + pw > window.innerWidth - 8) left = rect.left - pw - margin;
         var top = rect.top - 40;
         top = Math.max(8, Math.min(top, window.innerHeight - 260));
-        console.log('Setting preview position - left:', left, 'top:', top);
-        preview.style.left = left + 'px';
-        preview.style.top  = top  + 'px';
-        preview.style.display = 'block';
+
+        previewClone.style.left = left + 'px';
+        previewClone.style.top  = top  + 'px';
+        previewClone.style.display = 'block';
       });
 
-      thumb.addEventListener('mouseleave', function(e) {
-        console.log('Mouse leave on thumb #' + idx);
-        preview.style.display = 'none';
+      thumb.addEventListener('mouseleave', function() {
+        previewClone.style.display = 'none';
       });
     });
-    console.log('Photo preview setup complete');
+    console.log('✓ Photo preview initialization complete');
 
     // Scroll animation observer
     const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
