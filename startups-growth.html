@@ -578,28 +578,39 @@
   </footer>
 
   <script>
-    document.querySelectorAll('.photo-thumb').forEach(function(thumb) {
+    document.querySelectorAll('.photo-thumb').forEach(function(thumb, idx) {
       var preview = thumb.querySelector('.photo-preview');
-      if (!preview) return;
+      console.log('Photo thumb #' + idx + ':', thumb, 'Preview:', preview);
+
+      if (!preview) {
+        console.warn('No preview found for thumb #' + idx);
+        return;
+      }
 
       // Move preview to body so it's not clipped by overflow:hidden
       document.body.appendChild(preview);
+      console.log('Moved preview #' + idx + ' to body');
 
-      thumb.addEventListener('mouseenter', function() {
+      thumb.addEventListener('mouseenter', function(e) {
+        console.log('Mouse enter on thumb #' + idx);
         var rect = thumb.getBoundingClientRect();
         var pw = 300, margin = 14;
         var left = rect.right + margin;
         if (left + pw > window.innerWidth - 8) left = rect.left - pw - margin;
         var top = rect.top - 40;
         top = Math.max(8, Math.min(top, window.innerHeight - 260));
+        console.log('Setting preview position - left:', left, 'top:', top);
         preview.style.left = left + 'px';
         preview.style.top  = top  + 'px';
         preview.style.display = 'block';
       });
-      thumb.addEventListener('mouseleave', function() {
+
+      thumb.addEventListener('mouseleave', function(e) {
+        console.log('Mouse leave on thumb #' + idx);
         preview.style.display = 'none';
       });
     });
+    console.log('Photo preview setup complete');
 
     // Scroll animation observer
     const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
