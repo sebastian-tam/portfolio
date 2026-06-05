@@ -64,21 +64,10 @@
 
     /* TIMELINE */
     .timeline { position: relative; }
-    .timeline::before {
-      content: ''; position: absolute; left: 28px; top: 0; bottom: 0; width: 2px;
-      background: linear-gradient(180deg, #134D30, #166534, #22C55E, #4ADE80);
-    }
-    .timeline-item  { position: relative; padding-left: 80px; margin-bottom: 48px; }
-    .timeline-dot {
-      position: absolute; left: 5px; top: 22px;
-      width: 48px; height: 48px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      z-index: 1; background: var(--white);
-      border: 2px solid var(--border);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08); overflow: hidden;
-    }
-    .timeline-dot img { width: 70%; height: 70%; object-fit: contain; }
-    .timeline-dot.icon-dot { background: var(--green-light); border-color: #BBF7D0; }
+    .timeline::before { display: none; }
+    .timeline-item  { position: relative; padding-left: 0; margin-bottom: 40px; }
+    .timeline-dot { display: none; }
+
 
     /* ROLE CARD */
     .role-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
@@ -184,9 +173,7 @@
       .nav-links { display: none; }
       .page-hero { padding: 40px 24px; }
       .content { padding: 40px 20px; }
-      .timeline::before { display: none; }
       .timeline-item { padding-left: 0; }
-      .timeline-dot { display: none; }
       .role-header { padding: 20px; flex-direction: column; }
       .callout { margin: 14px 20px; }
       .metric-chips { padding: 0 20px 16px; }
