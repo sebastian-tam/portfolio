@@ -577,33 +577,38 @@
   </footer>
 
   <script>
-    // Photo preview on hover
-    setTimeout(function() {
+    // Photo preview initialization
+    function initPhotoPreviews() {
       var thumbs = document.querySelectorAll('.photo-thumb');
-      console.log('Found thumbs:', thumbs.length);
+      console.log('Initializing ' + thumbs.length + ' photo previews');
+
+      if (thumbs.length === 0) {
+        console.error('❌ No photo-thumb elements found!');
+        return;
+      }
 
       thumbs.forEach(function(thumb, idx) {
         var preview = thumb.querySelector('.photo-preview');
-        console.log('Thumb ' + idx + ' preview:', preview);
 
         if (!preview) {
-          console.log('No preview for thumb ' + idx);
+          console.warn('⚠️ Thumb ' + idx + ' has no preview');
           return;
         }
 
-        // Move preview to body
+        console.log('✓ Setting up preview ' + idx);
+
+        // Move preview to body level so it's not clipped
         document.body.appendChild(preview);
 
-        // Make cursor indicate clickable
-        thumb.style.cursor = 'pointer';
-
-        // Hover listeners
-        thumb.onmouseover = function() {
+        // Set up hover behavior
+        thumb.addEventListener('mouseenter', function(e) {
+          console.log('→ Hovering over photo ' + idx);
           var rect = thumb.getBoundingClientRect();
           var left = rect.right + 15;
           var top = rect.top - 20;
 
-          if (left + 320 > window.innerWidth) {
+          // Flip left if near right edge
+          if (left + 320 > window.innerWidth - 10) {
             left = rect.left - 320 - 15;
           }
 
@@ -612,13 +617,24 @@
           preview.style.top = top + 'px';
           preview.style.display = 'block';
           preview.style.zIndex = '10000';
-        };
+          console.log('  Position:', left, top);
+        });
 
-        thumb.onmouseout = function() {
+        thumb.addEventListener('mouseleave', function(e) {
+          console.log('← Left photo ' + idx);
           preview.style.display = 'none';
-        };
+        });
       });
-    }, 100);
+
+      console.log('✓ Photo preview setup complete');
+    }
+
+    // Run when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initPhotoPreviews);
+    } else {
+      initPhotoPreviews();
+    }
 
     // Scroll animation observer
     const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
