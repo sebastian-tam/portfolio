@@ -423,6 +423,14 @@
           <div class="photo-lane">
             <img class="lane-logo" src="logo-zippe.png" alt="Zippe"
                  onerror="this.style.display='none'">
+            <div class="photo-thumb case-study-thumbnail" data-case-study="ai-showcase" style="cursor: pointer;">
+              <img src="zippe/slide_01.jpg" alt="AI Showcase - Brand Z Pricing Intelligence">
+              <div class="photo-badge">AI Show Case</div>
+              <div class="photo-preview">
+                <img src="zippe/slide_01.jpg" alt="AI Showcase">
+                <div class="preview-caption">AI Show Case: Brand Z Pricing Intelligence</div>
+              </div>
+            </div>
           </div>
           <div class="role-content">
           <div class="role-header">
@@ -736,10 +744,25 @@
 
     // Case study popup
     function initCaseStudyPopup() {
+      // Generate AI showcase slides data
+      var aiShowcaseSlides = [];
+      for (var i = 1; i <= 10; i++) {
+        aiShowcaseSlides.push({
+          image: 'zippe/slide_' + String(i).padStart(2, '0') + '.jpg',
+          title: 'Brand Z Pricing Intelligence - Slide ' + i,
+          slideNum: i
+        });
+      }
+
       var caseStudies = {
         'anymind-kol': {
           image: 'case-study-anymind-kol.jpg',
           title: 'Global Beverage Brand - Micro-KOL Campaign'
+        },
+        'ai-showcase': {
+          slides: aiShowcaseSlides,
+          title: 'AI Show Case: Brand Z Pricing Intelligence',
+          isSlideshow: true
         }
       };
 
@@ -786,11 +809,34 @@
         // Store overlay reference on popup for later access
         popup._overlay = overlay;
 
-        popup.innerHTML = '<div class="case-study-controls">' +
-          '<button class="case-study-btn case-study-enlarge" title="Enlarge" onclick="return false;">⛶</button>' +
-          '<button class="case-study-btn case-study-close" title="Close">×</button>' +
-          '</div><img src="' + caseStudy.image + '" alt="' + caseStudy.title + '">';
+        // Determine if this is a slideshow
+        var isSlideshow = caseStudy.isSlideshow;
+        var currentSlideIndex = 0;
+
+        // Build popup content
+        var img = isSlideshow ? caseStudy.slides[0].image : caseStudy.image;
+        var controlsHTML = '<div class="case-study-controls">';
+
+        if (isSlideshow) {
+          controlsHTML += '<button class="case-study-btn case-study-prev" title="Previous Slide">‹</button>' +
+                          '<button class="case-study-btn case-study-slide-counter" title="Slide Info" style="width:auto;min-width:60px;cursor:default;">1/10</button>' +
+                          '<button class="case-study-btn case-study-next" title="Next Slide">›</button>';
+        } else {
+          controlsHTML += '<button class="case-study-btn case-study-enlarge" title="Enlarge" onclick="return false;">⛶</button>';
+        }
+
+        controlsHTML += '<button class="case-study-btn case-study-close" title="Close">×</button></div>';
+
+        popup.innerHTML = controlsHTML + '<img src="' + img + '" alt="' + caseStudy.title + '">';
         document.body.appendChild(popup);
+
+        // Store slideshow state
+        if (isSlideshow) {
+          popup._slideshow = {
+            slides: caseStudy.slides,
+            currentIndex: 0
+          };
+        }
 
         // Close popup function
         var closePopup = function() {
@@ -798,69 +844,114 @@
           overlay.remove();
         };
 
-        // Store reference for later
-        popup._enlargeHandler = function(e) {
-          console.log('ENLARGE CLICKED');
-          e.preventDefault();
-          e.stopPropagation();
+        // Update slide display function
+        var updateSlideDisplay = function(index) {
+          if (!isSlideshow || !popup._slideshow) return;
+
+          var slides = popup._slideshow.slides;
+          if (index < 0) index = slides.length - 1;
+          if (index >= slides.length) index = 0;
+
+          popup._slideshow.currentIndex = index;
 
           var img = popup.querySelector('img');
-          if (!img) return;
+          img.src = slides[index].image;
+          img.alt = slides[index].title;
 
-          // Hide original popup and overlay
-          popup.style.display = 'none';
-          popup._overlay.style.display = 'none';
-
-          // Create fullscreen overlay
-          var fullscreenOverlay = document.createElement('div');
-          fullscreenOverlay.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 9998; display: flex; align-items: center; justify-content: center;';
-
-          // Create fullscreen container
-          var fsContainer = document.createElement('div');
-          fsContainer.style.cssText = 'position: relative; width: 95vw; height: 95vh; background: white; border-radius: 8px; overflow: auto; z-index: 9999;';
-
-          // Clone the image
-          var fsImg = img.cloneNode(true);
-          fsImg.style.cssText = 'width: 100%; height: auto; display: block;';
-
-          // Add close button
-          var fsControls = document.createElement('div');
-          fsControls.style.cssText = 'position: absolute; top: 12px; right: 12px; z-index: 10000;';
-          fsControls.innerHTML = '<button id="fs-close" style="background: rgba(0,0,0,0.85); color: white; border: 2px solid rgba(255,255,255,0.4); border-radius: 50%; width: 48px; height: 48px; cursor: pointer; font-size: 22px; padding: 0; line-height: 1;">×</button>';
-
-          fsContainer.appendChild(fsImg);
-          fsContainer.appendChild(fsControls);
-          fullscreenOverlay.appendChild(fsContainer);
-          document.body.appendChild(fullscreenOverlay);
-
-          console.log('Fullscreen created');
-
-          // Close handlers
-          var closeFullscreen = function() {
-            fullscreenOverlay.remove();
-            popup.style.display = 'block';
-            popup._overlay.style.display = 'block';
-            console.log('Fullscreen closed');
-          };
-
-          fsControls.querySelector('#fs-close').onclick = closeFullscreen;
-          fullscreenOverlay.onclick = function(e2) {
-            if (e2.target === fullscreenOverlay) closeFullscreen();
-          };
-
-          var escapeHandler = function(e2) {
-            if (e2.key === 'Escape') {
-              closeFullscreen();
-              document.removeEventListener('keydown', escapeHandler);
-            }
-          };
-          document.addEventListener('keydown', escapeHandler);
+          var counter = popup.querySelector('.case-study-slide-counter');
+          if (counter) {
+            counter.textContent = (index + 1) + '/' + slides.length;
+          }
         };
 
-        // Attach handler directly
-        var enlargeBtn = popup.querySelector('.case-study-enlarge');
-        if (enlargeBtn) {
-          enlargeBtn.onclick = popup._enlargeHandler;
+        if (isSlideshow) {
+          // Slideshow navigation
+          var prevBtn = popup.querySelector('.case-study-prev');
+          var nextBtn = popup.querySelector('.case-study-next');
+
+          if (prevBtn) {
+            prevBtn.onclick = function(e) {
+              e.preventDefault();
+              e.stopPropagation();
+              updateSlideDisplay(popup._slideshow.currentIndex - 1);
+            };
+          }
+
+          if (nextBtn) {
+            nextBtn.onclick = function(e) {
+              e.preventDefault();
+              e.stopPropagation();
+              updateSlideDisplay(popup._slideshow.currentIndex + 1);
+            };
+          }
+
+          // Keyboard navigation
+          var keyHandler = function(e) {
+            if (document.getElementById('case-study-popup') !== popup) return;
+            if (e.key === 'ArrowLeft') {
+              updateSlideDisplay(popup._slideshow.currentIndex - 1);
+              e.preventDefault();
+            } else if (e.key === 'ArrowRight') {
+              updateSlideDisplay(popup._slideshow.currentIndex + 1);
+              e.preventDefault();
+            }
+          };
+          document.addEventListener('keydown', keyHandler);
+          popup._keyHandler = keyHandler;
+        } else {
+          // Enlarge button for single case study
+          popup._enlargeHandler = function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            var img = popup.querySelector('img');
+            if (!img) return;
+
+            popup.style.display = 'none';
+            popup._overlay.style.display = 'none';
+
+            var fullscreenOverlay = document.createElement('div');
+            fullscreenOverlay.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 9998; display: flex; align-items: center; justify-content: center;';
+
+            var fsContainer = document.createElement('div');
+            fsContainer.style.cssText = 'position: relative; width: 95vw; height: 95vh; background: white; border-radius: 8px; overflow: auto; z-index: 9999;';
+
+            var fsImg = img.cloneNode(true);
+            fsImg.style.cssText = 'width: 100%; height: auto; display: block;';
+
+            var fsControls = document.createElement('div');
+            fsControls.style.cssText = 'position: absolute; top: 12px; right: 12px; z-index: 10000;';
+            fsControls.innerHTML = '<button id="fs-close" style="background: rgba(0,0,0,0.85); color: white; border: 2px solid rgba(255,255,255,0.4); border-radius: 50%; width: 48px; height: 48px; cursor: pointer; font-size: 22px; padding: 0; line-height: 1;">×</button>';
+
+            fsContainer.appendChild(fsImg);
+            fsContainer.appendChild(fsControls);
+            fullscreenOverlay.appendChild(fsContainer);
+            document.body.appendChild(fullscreenOverlay);
+
+            var closeFullscreen = function() {
+              fullscreenOverlay.remove();
+              popup.style.display = 'block';
+              popup._overlay.style.display = 'block';
+            };
+
+            fsControls.querySelector('#fs-close').onclick = closeFullscreen;
+            fullscreenOverlay.onclick = function(e2) {
+              if (e2.target === fullscreenOverlay) closeFullscreen();
+            };
+
+            var escapeHandler = function(e2) {
+              if (e2.key === 'Escape') {
+                closeFullscreen();
+                document.removeEventListener('keydown', escapeHandler);
+              }
+            };
+            document.addEventListener('keydown', escapeHandler);
+          };
+
+          var enlargeBtn = popup.querySelector('.case-study-enlarge');
+          if (enlargeBtn) {
+            enlargeBtn.onclick = popup._enlargeHandler;
+          }
         }
 
         // Close button handler
@@ -872,6 +963,9 @@
           if (e.key === 'Escape') {
             closePopup();
             document.removeEventListener('keydown', closeOnEscape);
+            if (popup._keyHandler) {
+              document.removeEventListener('keydown', popup._keyHandler);
+            }
           }
         };
         document.addEventListener('keydown', closeOnEscape);
