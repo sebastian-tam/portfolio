@@ -520,6 +520,14 @@
                 <div class="preview-caption">AnyMind Hong Kong Team</div>
               </div>
             </div>
+            <div class="photo-thumb case-study-thumbnail" data-case-study="anymind-kol" style="cursor: pointer;">
+              <img src="case-study-anymind-kol.jpg" alt="Social Media Marketing Case Study">
+              <div class="photo-badge">📊 Case Study</div>
+              <div class="photo-preview">
+                <img src="case-study-anymind-kol.jpg" alt="Global Beverage Brand Case Study">
+                <div class="preview-caption">Micro-KOLs Campaign Case Study</div>
+              </div>
+            </div>
           </div>
           <!-- card content -->
           <div class="role-content">
@@ -724,7 +732,8 @@
         }
       };
 
-      document.querySelectorAll('.case-study-trigger').forEach(function(trigger) {
+      // Handle both text triggers and thumbnail triggers
+      document.querySelectorAll('.case-study-trigger, .case-study-thumbnail').forEach(function(trigger) {
         var caseStudyId = trigger.getAttribute('data-case-study');
         var caseStudy = caseStudies[caseStudyId];
 
@@ -732,12 +741,16 @@
 
         trigger.addEventListener('click', function(e) {
           e.preventDefault();
+          e.stopPropagation();
           showCaseStudyPopup(caseStudy, trigger);
         });
 
-        trigger.addEventListener('mouseenter', function() {
-          showCaseStudyPopup(caseStudy, trigger);
-        });
+        // Hover for text trigger only
+        if (trigger.classList.contains('case-study-trigger')) {
+          trigger.addEventListener('mouseenter', function() {
+            showCaseStudyPopup(caseStudy, trigger);
+          });
+        }
       });
 
       function showCaseStudyPopup(caseStudy, triggerEl) {
