@@ -315,7 +315,8 @@
       left: 50%;
       width: 85vw;
       height: 85vh;
-      transform: translate(-50%, -50%);
+      margin-left: -42.5vw;
+      margin-top: -42.5vh;
     }
     .case-study-popup.active {
       display: block;
@@ -331,8 +332,8 @@
       border-radius: 0;
     }
     @keyframes popupFadeIn {
-      from { opacity: 0; transform: translateY(-50%) scale(0.95); }
-      to { opacity: 1; transform: translateY(-50%) scale(1); }
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
     .case-study-popup img {
       width: 100%;
