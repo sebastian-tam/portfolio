@@ -685,15 +685,15 @@
 
         trigger.addEventListener('click', function(e) {
           e.preventDefault();
-          showCaseStudyPopup(caseStudy);
+          showCaseStudyPopup(caseStudy, trigger);
         });
 
         trigger.addEventListener('mouseenter', function() {
-          showCaseStudyPopup(caseStudy);
+          showCaseStudyPopup(caseStudy, trigger);
         });
       });
 
-      function showCaseStudyPopup(caseStudy) {
+      function showCaseStudyPopup(caseStudy, triggerEl) {
         // Remove existing popup
         var existingPopup = document.getElementById('case-study-popup');
         if (existingPopup) {
@@ -707,9 +707,8 @@
         popup.innerHTML = '<button class="case-study-close">×</button><img src="' + caseStudy.image + '" alt="' + caseStudy.title + '">';
         document.body.appendChild(popup);
 
-        // Position popup
-        var trigger = document.querySelector('[data-case-study="' + Object.keys(caseStudies)[Object.values(caseStudies).indexOf(caseStudy)] + '"]');
-        var rect = trigger.getBoundingClientRect();
+        // Position popup next to trigger
+        var rect = triggerEl.getBoundingClientRect();
         var left = rect.right + 20;
         var top = rect.top - 50;
 
@@ -731,16 +730,21 @@
         });
 
         // Close on escape
-        document.addEventListener('keydown', function closeOnEscape(e) {
+        var closeOnEscape = function(e) {
           if (e.key === 'Escape') {
             popup.remove();
             document.removeEventListener('keydown', closeOnEscape);
           }
-        });
+        };
+        document.addEventListener('keydown', closeOnEscape);
       }
     }
 
-    initCaseStudyPopup();
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initCaseStudyPopup);
+    } else {
+      initCaseStudyPopup();
+    }
 
     // Scroll animation observer
     const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
