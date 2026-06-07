@@ -643,6 +643,14 @@
                 <div class="preview-caption">Metaps Greater China</div>
               </div>
             </div>
+            <div class="photo-thumb case-study-thumbnail" data-case-study="metaps-mam" style="cursor: pointer;">
+              <img src="metaps-mam/slide_01.jpg" alt="Mobile App Marketing Success Case">
+              <div class="photo-badge">MAM Success</div>
+              <div class="photo-preview">
+                <img src="metaps-mam/slide_01.jpg" alt="Mobile App Marketing">
+                <div class="preview-caption">Mobile App Marketing Success</div>
+              </div>
+            </div>
           </div>
           <!-- card content -->
           <div class="role-content">
@@ -687,7 +695,7 @@
           </div>
           <div class="role-bullets">
             <ul>
-              <li><span class="sub-label">Mobile App Marketing: </span>Helped hundreds of mobile games/app developers launched mobile app in Asia and global marketing, achieved Average <strong>D7 ROAS of 150%+</strong> and helped dozens of mobile apps reaching <strong>Top 3 Gross App Ranking</strong> in global and regional markets</li>
+              <li><span class="sub-label case-study-trigger" data-case-study="metaps-mam">Mobile App Marketing</span><span class="sub-label">: </span>Helped hundreds of mobile games/app developers launched mobile app in Asia and global marketing, achieved Average <strong>D7 ROAS of 150%+</strong> and helped dozens of mobile apps reaching <strong>Top 3 Gross App Ranking</strong> in global and regional markets</li>
               <li><span class="sub-label">Office Setup &amp; Operation: </span>Responsible for Metaps Greater China office setup and management (3 remote office with 6 persons)</li>
               <li><span class="sub-label">Inbound/Outbound Marketing &amp; CRM: </span>Implement <strong>HubSpot, Hootsuite</strong> marketing Platform for company's marketing &amp; SSM management for regional operation including B2B Marketing content creation, automation, event attendance and collateral materials</li>
               <li><span class="sub-label">Series A to IPO Runway: </span>Achieved revenue growth in Greater China region from zero (3/2012) to <strong>USD 15 Million+ in 3 years</strong> and successfully listed in Tokyo Stock Exchange in 2015</li>
@@ -758,6 +766,16 @@
         });
       }
 
+      // Generate Metaps MAM slides data
+      var metapsMAMSlides = [];
+      for (var i = 1; i <= 5; i++) {
+        metapsMAMSlides.push({
+          image: 'metaps-mam/slide_' + String(i).padStart(2, '0') + '.jpg',
+          title: 'Metaps Mobile App Marketing - Slide ' + i,
+          slideNum: i
+        });
+      }
+
       var caseStudies = {
         'anymind-kol': {
           image: 'case-study-anymind-kol.jpg',
@@ -766,6 +784,11 @@
         'anymind-seo': {
           image: 'anymind-seo/slide_01.jpg',
           title: 'E-Commerce Hyper-Growth: SEO/SEM Success'
+        },
+        'metaps-mam': {
+          slides: metapsMAMSlides,
+          title: 'Metaps Mobile App Marketing Success',
+          isSlideshow: true
         },
         'ai-showcase': {
           slides: aiShowcaseSlides,
