@@ -795,84 +795,60 @@
           overlay.remove();
         };
 
-        // Enlarge/fullscreen toggle
-        var enlargeBtn = popup.querySelector('.case-study-enlarge');
-        var fullscreenOverlay = null;
+        // Store reference for later
+        popup._enlargeHandler = function(e) {
+          console.log('ENLARGE CLICKED');
+          e.preventDefault();
+          e.stopPropagation();
 
-        if (!enlargeBtn) {
-          console.error('Enlarge button not found!');
-          return;
-        }
+          var img = popup.querySelector('img');
+          if (!img) return;
 
-        // Define toggle function with proper closure
-        var makeToggleFullscreen = function(btn, img) {
-          return function(e) {
-            console.log('=== ENLARGE BUTTON CLICKED ===');
-            e.preventDefault();
-            e.stopPropagation();
+          // Create fullscreen overlay
+          var fullscreenOverlay = document.createElement('div');
+          fullscreenOverlay.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 9998; display: flex; align-items: center; justify-content: center;';
 
-            console.log('Creating fullscreen...');
+          // Create fullscreen container
+          var fsContainer = document.createElement('div');
+          fsContainer.style.cssText = 'position: relative; width: 95vw; height: 95vh; background: white; border-radius: 8px; overflow: auto; z-index: 9999;';
 
-            // Create fullscreen overlay
-            fullscreenOverlay = document.createElement('div');
-            fullscreenOverlay.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 9998; display: flex; align-items: center; justify-content: center;';
+          // Clone the image
+          var fsImg = img.cloneNode(true);
+          fsImg.style.cssText = 'width: 100%; height: auto; display: block;';
 
-            // Create fullscreen container
-            var fsContainer = document.createElement('div');
-            fsContainer.style.cssText = 'position: relative; width: 95vw; height: 95vh; background: white; border-radius: 8px; overflow: auto; z-index: 9999;';
+          // Add close button
+          var fsControls = document.createElement('div');
+          fsControls.style.cssText = 'position: absolute; top: 12px; right: 12px; z-index: 10000;';
+          fsControls.innerHTML = '<button id="fs-close" style="background: rgba(0,0,0,0.85); color: white; border: 2px solid rgba(255,255,255,0.4); border-radius: 50%; width: 48px; height: 48px; cursor: pointer; font-size: 22px; padding: 0; line-height: 1;">×</button>';
 
-            // Clone the image
-            var fsImg = img.cloneNode(true);
-            fsImg.style.cssText = 'width: 100%; height: auto; display: block;';
+          fsContainer.appendChild(fsImg);
+          fsContainer.appendChild(fsControls);
+          fullscreenOverlay.appendChild(fsContainer);
+          document.body.appendChild(fullscreenOverlay);
 
-            // Add close button
-            var fsControls = document.createElement('div');
-            fsControls.style.cssText = 'position: absolute; top: 12px; right: 12px; display: flex; gap: 10px; z-index: 10000;';
-            fsControls.innerHTML = '<button id="fs-close" style="background: rgba(0,0,0,0.85); color: white; border: 2px solid rgba(255,255,255,0.4); border-radius: 50%; width: 48px; height: 48px; cursor: pointer; font-size: 22px; padding: 0; line-height: 1;">×</button>';
+          console.log('Fullscreen created');
 
-            fsContainer.appendChild(fsImg);
-            fsContainer.appendChild(fsControls);
-            fullscreenOverlay.appendChild(fsContainer);
-            document.body.appendChild(fullscreenOverlay);
-
-            console.log('Fullscreen overlay created');
-
-            // Close button handler
-            fsControls.querySelector('#fs-close').onclick = function(e2) {
-              e2.stopPropagation();
-              fullscreenOverlay.remove();
-              fullscreenOverlay = null;
-              btn.title = 'Enlarge';
-              console.log('Fullscreen closed');
-            };
-
-            // Close on overlay click
-            fullscreenOverlay.onclick = function(e2) {
-              if (e2.target === fullscreenOverlay) {
-                fullscreenOverlay.remove();
-                fullscreenOverlay = null;
-                btn.title = 'Enlarge';
-              }
-            };
-
-            // Close on ESC
-            var closeFS = function(e2) {
-              if (e2.key === 'Escape' && fullscreenOverlay) {
-                fullscreenOverlay.remove();
-                fullscreenOverlay = null;
-                btn.title = 'Enlarge';
-                document.removeEventListener('keydown', closeFS);
-              }
-            };
-            document.addEventListener('keydown', closeFS);
-
-            btn.title = 'Minimize';
+          // Close handlers
+          var closeFullscreen = function() {
+            fullscreenOverlay.remove();
+            console.log('Fullscreen closed');
           };
+
+          fsControls.querySelector('#fs-close').onclick = closeFullscreen;
+          fullscreenOverlay.onclick = function(e2) {
+            if (e2.target === fullscreenOverlay) closeFullscreen();
+          };
+
+          document.addEventListener('keydown', function(e2) {
+            if (e2.key === 'Escape') closeFullscreen();
+          });
         };
 
-        // Attach the handler
-        var toggleFS = makeToggleFullscreen(enlargeBtn, popup.querySelector('img'));
-        enlargeBtn.onclick = toggleFS;
+        // Attach handler directly
+        var enlargeBtn = popup.querySelector('.case-study-enlarge');
+        if (enlargeBtn) {
+          enlargeBtn.onclick = popup._enlargeHandler;
+        }
 
         // Close button handler
         popup.querySelector('.case-study-close').addEventListener('click', closePopup);
