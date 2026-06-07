@@ -783,6 +783,9 @@
         popup.className = 'case-study-popup active';
         var isFullscreen = false;
 
+        // Store overlay reference on popup for later access
+        popup._overlay = overlay;
+
         popup.innerHTML = '<div class="case-study-controls">' +
           '<button class="case-study-btn case-study-enlarge" title="Enlarge" onclick="return false;">⛶</button>' +
           '<button class="case-study-btn case-study-close" title="Close">×</button>' +
@@ -806,7 +809,7 @@
 
           // Hide original popup and overlay
           popup.style.display = 'none';
-          overlay.style.display = 'none';
+          popup._overlay.style.display = 'none';
 
           // Create fullscreen overlay
           var fullscreenOverlay = document.createElement('div');
@@ -836,7 +839,7 @@
           var closeFullscreen = function() {
             fullscreenOverlay.remove();
             popup.style.display = 'block';
-            overlay.style.display = 'block';
+            popup._overlay.style.display = 'block';
             console.log('Fullscreen closed');
           };
 
