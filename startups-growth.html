@@ -799,7 +799,13 @@
         var enlargeBtn = popup.querySelector('.case-study-enlarge');
         var fullscreenOverlay = null;
 
+        if (!enlargeBtn) {
+          console.error('Enlarge button not found!');
+          return;
+        }
+
         var toggleFullscreen = function(e) {
+          console.log('Toggle fullscreen called!');
           if (e) {
             e.preventDefault();
             e.stopPropagation();
