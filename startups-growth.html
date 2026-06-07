@@ -270,6 +270,56 @@
       text-align: center;
     }
 
+    /* CASE STUDY POPUP */
+    .case-study-trigger {
+      cursor: pointer;
+      text-decoration: underline dotted;
+      transition: all 0.2s;
+    }
+    .case-study-trigger:hover {
+      color: var(--blue);
+      font-weight: 700;
+    }
+    .case-study-popup {
+      position: fixed;
+      z-index: 10000;
+      display: none;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+      max-width: 600px;
+      animation: popupFadeIn 0.3s ease-out forwards;
+    }
+    @keyframes popupFadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .case-study-popup img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .case-study-close {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(0,0,0,0.6);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10001;
+    }
+    .case-study-close:hover {
+      background: rgba(0,0,0,0.8);
+    }
+
   </style>
 </head>
 <body>
@@ -466,7 +516,7 @@
           <div class="role-bullets">
             <ul>
               <li><span class="sub-label">SEO/SEM: </span>Helped a Japanese luggage brand to optimize SEO and SEM campaigns in 10 regional websites with deployment of HubSpot platform, hreflang tag, pillar page, cluster content management and multi-language content management. Achieved <strong>32%+ in organic traffic, 360%+ in conversion and 680%+ in online revenues</strong> in one year</li>
-              <li><span class="sub-label">Social Media Marketing: </span>Helped a global beverage brand launched a Micro-KOLs campaign in 4 Countries (Japan, HK, Taiwan, Vietnam). Utilized thousands of Micro-KOLs in targeted countries to post on FB &amp; IG for photos of featured beverage within campaign period. Achieved <strong>38%+ followers, 95%+ Engagement metrics (CLS), 300%+ forward rate</strong> in 2 weeks campaign period</li>
+              <li><span class="sub-label case-study-trigger" data-case-study="anymind-kol">Social Media Marketing</span><span class="sub-label">: </span>Helped a global beverage brand launched a Micro-KOLs campaign in 4 Countries (Japan, HK, Taiwan, Vietnam). Utilized thousands of Micro-KOLs in targeted countries to post on FB &amp; IG for photos of featured beverage within campaign period. Achieved <strong>38%+ followers, 95%+ Engagement metrics (CLS), 300%+ forward rate</strong> in 2 weeks campaign period</li>
               <li><span class="sub-label">P&amp;L: </span>Responsible for P&amp;L and Business Operation for Anymind. Achieved a <strong>million USD revenue for HK office in 11 months</strong> with over 50 customers in total</li>
             </ul>
           </div>
@@ -617,6 +667,80 @@
     } else {
       initPhotoPreviews();
     }
+
+    // Case study popup
+    function initCaseStudyPopup() {
+      var caseStudies = {
+        'anymind-kol': {
+          image: 'case-study-anymind-kol.jpg',
+          title: 'Global Beverage Brand - Micro-KOL Campaign'
+        }
+      };
+
+      document.querySelectorAll('.case-study-trigger').forEach(function(trigger) {
+        var caseStudyId = trigger.getAttribute('data-case-study');
+        var caseStudy = caseStudies[caseStudyId];
+
+        if (!caseStudy) return;
+
+        trigger.addEventListener('click', function(e) {
+          e.preventDefault();
+          showCaseStudyPopup(caseStudy);
+        });
+
+        trigger.addEventListener('mouseenter', function() {
+          showCaseStudyPopup(caseStudy);
+        });
+      });
+
+      function showCaseStudyPopup(caseStudy) {
+        // Remove existing popup
+        var existingPopup = document.getElementById('case-study-popup');
+        if (existingPopup) {
+          existingPopup.remove();
+        }
+
+        // Create popup
+        var popup = document.createElement('div');
+        popup.id = 'case-study-popup';
+        popup.className = 'case-study-popup';
+        popup.innerHTML = '<button class="case-study-close">×</button><img src="' + caseStudy.image + '" alt="' + caseStudy.title + '">';
+        document.body.appendChild(popup);
+
+        // Position popup
+        var trigger = document.querySelector('[data-case-study="' + Object.keys(caseStudies)[Object.values(caseStudies).indexOf(caseStudy)] + '"]');
+        var rect = trigger.getBoundingClientRect();
+        var left = rect.right + 20;
+        var top = rect.top - 50;
+
+        if (left + 600 > window.innerWidth - 20) {
+          left = rect.left - 620;
+        }
+
+        if (top + 500 > window.innerHeight - 20) {
+          top = window.innerHeight - 520;
+        }
+
+        popup.style.left = left + 'px';
+        popup.style.top = top + 'px';
+        popup.style.display = 'block';
+
+        // Close button
+        popup.querySelector('.case-study-close').addEventListener('click', function() {
+          popup.remove();
+        });
+
+        // Close on escape
+        document.addEventListener('keydown', function closeOnEscape(e) {
+          if (e.key === 'Escape') {
+            popup.remove();
+            document.removeEventListener('keydown', closeOnEscape);
+          }
+        });
+      }
+    }
+
+    initCaseStudyPopup();
 
     // Scroll animation observer
     const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
