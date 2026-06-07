@@ -849,8 +849,9 @@
         var controlsHTML = '<div class="case-study-controls">';
 
         if (isSlideshow) {
+          var totalSlides = caseStudy.slides.length;
           controlsHTML += '<button class="case-study-btn case-study-prev" title="Previous Slide">‹</button>' +
-                          '<button class="case-study-btn case-study-slide-counter" title="Slide Info" style="width:auto;min-width:60px;cursor:default;">1/10</button>' +
+                          '<button class="case-study-btn case-study-slide-counter" title="Slide Info" style="width:auto;min-width:60px;cursor:default;">1/' + totalSlides + '</button>' +
                           '<button class="case-study-btn case-study-next" title="Next Slide">›</button>';
         } else {
           controlsHTML += '<button class="case-study-btn case-study-enlarge" title="Enlarge" onclick="return false;">⛶</button>';
