@@ -986,6 +986,30 @@
       initCaseStudyPopup();
     }
 
+    // Auto-open case study if hash is present
+    function autoOpenCaseStudy() {
+      var hash = window.location.hash.substring(1); // remove #
+      if (hash && (hash === 'ai-showcase' || hash === 'anymind-seo' || hash === 'anymind-kol')) {
+        setTimeout(function() {
+          var trigger = document.querySelector('[data-case-study="' + hash + '"]');
+          if (trigger) {
+            trigger.click();
+            // Scroll to the section
+            var section = trigger.closest('.timeline-item');
+            if (section) {
+              section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+          }
+        }, 300);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', autoOpenCaseStudy);
+    } else {
+      autoOpenCaseStudy();
+    }
+
     // Scroll animation observer
     const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
     const observer = new IntersectionObserver((entries) => {
