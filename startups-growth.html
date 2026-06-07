@@ -794,19 +794,23 @@
 
         // Enlarge/fullscreen toggle
         var enlargeBtn = popup.querySelector('.case-study-enlarge');
-        enlargeBtn.addEventListener('click', function(e) {
+        var toggleFullscreen = function(e) {
+          e.preventDefault();
           e.stopPropagation();
           isFullscreen = !isFullscreen;
+          console.log('Toggling fullscreen:', isFullscreen);
           if (isFullscreen) {
             popup.classList.add('fullscreen');
-            enlargeBtn.textContent = '⛶';
             enlargeBtn.title = 'Minimize';
+            console.log('Added fullscreen class');
           } else {
             popup.classList.remove('fullscreen');
-            enlargeBtn.textContent = '⛶';
             enlargeBtn.title = 'Enlarge';
+            console.log('Removed fullscreen class');
           }
-        });
+        };
+        enlargeBtn.addEventListener('click', toggleFullscreen);
+        enlargeBtn.addEventListener('touchend', toggleFullscreen);
 
         // Close button handler
         popup.querySelector('.case-study-close').addEventListener('click', closePopup);
