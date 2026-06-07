@@ -803,39 +803,23 @@
             e.stopPropagation();
           }
           isFullscreen = !isFullscreen;
-          console.log('Fullscreen toggled:', isFullscreen);
+          console.log('=== FULLSCREEN TOGGLE ===');
+          console.log('Fullscreen:', isFullscreen);
+          console.log('Popup:', popup);
 
           if (isFullscreen) {
-            // Apply fullscreen styles - fill entire viewport
-            popup.style.position = 'fixed';
-            popup.style.top = '0';
-            popup.style.left = '0';
-            popup.style.right = '0';
-            popup.style.bottom = '0';
-            popup.style.width = '100%';
-            popup.style.height = '100%';
-            popup.style.maxWidth = 'none';
-            popup.style.maxHeight = 'none';
-            popup.style.transform = 'none';
-            popup.style.borderRadius = '0';
-            popup.style.overflow = 'auto';
+            console.log('BEFORE fullscreen - top:', popup.style.top, 'width:', popup.style.width);
+            // Apply fullscreen styles with !important
+            popup.setAttribute('style', 'position: fixed !important; inset: 0 !important; width: 100vw !important; height: 100vh !important; max-width: 100vw !important; max-height: 100vh !important; transform: none !important; border-radius: 0 !important; overflow: auto !important; z-index: 10000 !important;');
             enlargeBtn.title = 'Minimize';
+            console.log('AFTER fullscreen - top:', popup.style.top, 'width:', popup.style.width);
             console.log('Fullscreen mode ON');
           } else {
+            console.log('BEFORE normal - top:', popup.style.top, 'right:', popup.style.right);
             // Revert to normal right-side position
-            popup.style.position = 'fixed';
-            popup.style.top = '50%';
-            popup.style.left = 'auto';
-            popup.style.right = '40px';
-            popup.style.bottom = 'auto';
-            popup.style.width = 'auto';
-            popup.style.height = 'auto';
-            popup.style.maxWidth = '60vw';
-            popup.style.maxHeight = '90vh';
-            popup.style.transform = 'translateY(-50%)';
-            popup.style.borderRadius = '12px';
-            popup.style.overflow = 'hidden';
+            popup.setAttribute('style', 'position: fixed; top: 50%; right: 40px; max-width: 60vw; max-height: 90vh; transform: translateY(-50%); border-radius: 12px; overflow: hidden; z-index: 10000; display: block;');
             enlargeBtn.title = 'Enlarge';
+            console.log('AFTER normal - top:', popup.style.top, 'right:', popup.style.right);
             console.log('Fullscreen mode OFF');
           }
         };
