@@ -332,23 +332,29 @@
       display: flex;
       gap: 8px;
       z-index: 10001;
+      flex-direction: row;
     }
     .case-study-btn {
-      background: rgba(0,0,0,0.7);
+      background: rgba(0,0,0,0.8);
       color: white;
-      border: none;
+      border: 2px solid rgba(255,255,255,0.3);
       border-radius: 50%;
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
       cursor: pointer;
-      font-size: 18px;
+      font-size: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background 0.2s;
+      transition: all 0.2s;
+      flex-shrink: 0;
+      padding: 0;
+      line-height: 1;
     }
     .case-study-btn:hover {
-      background: rgba(0,0,0,0.9);
+      background: rgba(0,0,0,0.95);
+      border-color: rgba(255,255,255,0.6);
+      transform: scale(1.05);
     }
     .case-study-popup.fullscreen {
       top: 0;
