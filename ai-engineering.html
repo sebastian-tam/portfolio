@@ -4,6 +4,29 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI & Engineering | Sebastian Tam</title>
+  <script>
+    // Password protection for confidential content
+    (function() {
+      const PASSWORD = "portfolio2024";
+      const SESSION_KEY = "ai_page_auth";
+
+      // Check if already authenticated in this session
+      if (!sessionStorage.getItem(SESSION_KEY)) {
+        // Not authenticated - show password prompt
+        const password = prompt("This page contains confidential company information.\n\nPlease enter the password to access:");
+
+        if (password === PASSWORD) {
+          sessionStorage.setItem(SESSION_KEY, "true");
+        } else if (password !== null) {
+          alert("Incorrect password. Access denied.");
+          window.location.href = "/portfolio/";
+        } else {
+          // User clicked Cancel
+          window.location.href = "/portfolio/";
+        }
+      }
+    })();
+  </script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
