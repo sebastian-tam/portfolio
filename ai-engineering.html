@@ -964,6 +964,13 @@
     function viewAIShowcase() {
       // Generate slide data
       var slides = [];
+      // Add new first slide
+      slides.push({
+        image: 'zippe/slide_00.jpg',
+        title: 'AI Pricing Intelligence Case Study',
+        slideNum: 0
+      });
+      // Add existing slides
       for (var i = 1; i <= 10; i++) {
         slides.push({
           image: 'zippe/slide_' + String(i).padStart(2, '0') + '.jpg',
@@ -985,7 +992,7 @@
 
       var controlsHTML = '<div style="position: absolute; top: 12px; right: 12px; display: flex; gap: 10px; z-index: 10002; flex-direction: row; pointer-events: auto;">' +
         '<button class="ai-showcase-prev" style="background: rgba(0,0,0,0.85); color: white; border: 2px solid rgba(255,255,255,0.4); border-radius: 50%; width: 48px; height: 48px; cursor: pointer; font-size: 22px; display: flex; align-items: center; justify-content: center; padding: 0; line-height: 1; pointer-events: auto;">‹</button>' +
-        '<button class="ai-showcase-counter" style="background: rgba(0,0,0,0.85); color: white; border: 2px solid rgba(255,255,255,0.4); border-radius: 50%; width: auto; min-width: 60px; height: 48px; cursor: default; font-size: 14px; display: flex; align-items: center; justify-content: center; padding: 0 12px; line-height: 1; pointer-events: auto;">1/10</button>' +
+        '<button class="ai-showcase-counter" style="background: rgba(0,0,0,0.85); color: white; border: 2px solid rgba(255,255,255,0.4); border-radius: 50%; width: auto; min-width: 60px; height: 48px; cursor: default; font-size: 14px; display: flex; align-items: center; justify-content: center; padding: 0 12px; line-height: 1; pointer-events: auto;">1/11</button>' +
         '<button class="ai-showcase-next" style="background: rgba(0,0,0,0.85); color: white; border: 2px solid rgba(255,255,255,0.4); border-radius: 50%; width: 48px; height: 48px; cursor: pointer; font-size: 22px; display: flex; align-items: center; justify-content: center; padding: 0; line-height: 1; pointer-events: auto;">›</button>' +
         '<button class="ai-showcase-close" style="background: rgba(0,0,0,0.85); color: white; border: 2px solid rgba(255,255,255,0.4); border-radius: 50%; width: 48px; height: 48px; cursor: pointer; font-size: 22px; display: flex; align-items: center; justify-content: center; padding: 0; line-height: 1; pointer-events: auto;">×</button>' +
         '</div><img src="' + slides[0].image + '" style="width: 100%; height: 100%; object-fit: contain; display: block;">';
@@ -1010,7 +1017,7 @@
         img.alt = slides[index].title;
 
         var counter = popup.querySelector('.ai-showcase-counter');
-        counter.textContent = (index + 1) + '/10';
+        counter.textContent = (index + 1) + '/11';
       };
 
       // Button handlers
