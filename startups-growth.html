@@ -758,20 +758,12 @@
     function initCaseStudyPopup() {
       // Generate AI showcase slides data
       var aiShowcaseSlides = [];
-      // Add new first slide
+      // Add first slide only
       aiShowcaseSlides.push({
         image: 'zippe/slide_00.jpg',
         title: 'AI Pricing Intelligence Case Study',
         slideNum: 0
       });
-      // Add existing slides
-      for (var i = 1; i <= 10; i++) {
-        aiShowcaseSlides.push({
-          image: 'zippe/slide_' + String(i).padStart(2, '0') + '.jpg',
-          title: 'Brand Z Pricing Intelligence - Slide ' + i,
-          slideNum: i
-        });
-      }
 
       // Generate Metaps MAM slides data
       var metapsMAMSlides = [];
