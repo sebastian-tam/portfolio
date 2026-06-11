@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Featured Project | Sebastian Tam</title>
+  <script>
+    // Password protection for confidential content
+    (function() {
+      const PASSWORD = "SebPortfolio2026";
+      const SESSION_KEY = "ai_hidden_auth";
+
+      // Check if already authenticated in this session
+      if (!sessionStorage.getItem(SESSION_KEY)) {
+        // Not authenticated - show password prompt
+        const password = prompt("This page contains confidential company information.\n\nPlease enter the password to access:");
+
+        if (password === PASSWORD) {
+          sessionStorage.setItem(SESSION_KEY, "true");
+        } else if (password !== null) {
+          alert("Incorrect password. Access denied.");
+          window.location.href = "/portfolio/ai-engineering.html";
+        } else {
+          // User clicked Cancel
+          window.location.href = "/portfolio/ai-engineering.html";
+        }
+      }
+    })();
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:   #134D30;
+      --blue:   #F97316;
+      --teal:   #34D399;
+      --bg:     #F5F4F1;
+      --white:  #FFFFFF;
+      --text:   #1E293B;
+      --muted:  #64748B;
+      --border: #E2E8F0;
+      --blue-light: #FFF7ED;
+      --teal-light: #ECFDF5;
+      --green-light: #F0FDF4;
+      --green: #16A34A;
+      --amber: #D97706;
+      --amber-light: #FFFBEB;
+      --purple: #7C3AED;
+      --purple-light: #F5F3FF;
+      --red: #DC2626;
+      --red-light: #FEF2F2;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      animation: fadeIn 0.5s ease-in;
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-on-scroll { opacity: 0; }
+    .animate-on-scroll.in-view { animation: slideInUp 0.6s ease-out forwards; }
+
+    nav {
+      background: var(--white); border-bottom: 1px solid var(--border);
+      padding: 0 40px; display: flex; align-items: center; justify-content: space-between;
+      height: 64px; position: sticky; top: 0; z-index: 100;
+    }
+    .nav-logo { font-weight: 700; font-size: 16px; color: var(--navy); text-decoration: none; }
+    .nav-links { display: flex; gap: 8px; list-style: none; }
+    .nav-links a {
+      text-decoration: none; font-size: 13px; font-weight: 500; color: var(--muted);
+      padding: 6px 12px; border-radius: 6px; transition: all 0.15s;
+    }
+    .nav-links a:hover { background: var(--bg); color: var(--navy); }
+    .nav-links a.active { background: var(--blue-light); color: var(--blue); }
+
+    .page-hero {
+      background: linear-gradient(135deg, #134D30 0%, #1E6040 100%);
+      padding: 64px 40px 56px;
+    }
+    .breadcrumb { font-size: 13px; color: rgba(255,255,255,0.45); margin-bottom: 16px; }
+    .breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
+    .breadcrumb a:hover { color: rgba(255,255,255,0.8); }
+    .page-hero h1 {
+      font-size: clamp(28px, 4vw, 46px); font-weight: 800; color: var(--white);
+      letter-spacing: -1px; line-height: 1.1; margin-bottom: 12px;
+    }
+    .page-hero-sub { font-size: 16px; color: rgba(255,255,255,0.55); max-width: 560px; line-height: 1.6; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 24px; }
+    .tag {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 6px; padding: 4px 12px; font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.7);
+    }
+
+    .content { max-width: 960px; margin: 0 auto; padding: 64px 40px 80px; }
+
+    /* PROJECT CARD */
+    .project-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 40px;
+      transition: all 0.3s ease;
+    }
+    .project-card:hover {
+      box-shadow: 0 12px 32px rgba(15,23,42,0.1);
+      border-color: var(--blue-light);
+    }
+    .project-header {
+      padding: 32px 36px 24px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: flex-start; gap: 20px;
+    }
+    .project-icon {
+      width: 56px; height: 56px; background: var(--blue-light);
+      border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      font-size: 26px; flex-shrink: 0;
+    }
+    .project-tag {
+      display: inline-block; font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--blue); background: var(--blue-light);
+      border-radius: 4px; padding: 3px 8px; margin-bottom: 8px;
+    }
+    .project-meta h2 { font-size: 24px; font-weight: 700; color: var(--navy); letter-spacing: -0.4px; line-height: 1.2; margin-bottom: 4px; }
+    .project-meta p { font-size: 14px; color: var(--muted); line-height: 1.5; }
+    .status-pill {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+      background: var(--green-light); color: var(--green); border: 1px solid #BBF7D0;
+      border-radius: 100px; padding: 3px 10px; margin-top: 8px;
+    }
+    .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    /* BUTTONS */
+    .live-demo-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--blue);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      padding: 12px 22px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 12px rgba(249,115,22,0.25);
+      margin-top: 12px;
+    }
+    .live-demo-btn:hover {
+      background: #E85E0D;
+      box-shadow: 0 8px 24px rgba(249,115,22,0.35);
+      transform: translateY(-2px);
+    }
+    .btn-dot {
+      width: 8px;
+      height: 8px;
+      background: #FEA65D;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    /* QUOTE */
+    .quote-block {
+      margin: 0 36px 28px; padding: 20px 24px;
+      background: var(--blue-light); border-left: 3px solid var(--blue);
+      border-radius: 0 8px 8px 0; font-size: 15px; font-style: italic;
+      color: var(--navy); line-height: 1.65;
+    }
+
+    /* METRIC ROW */
+    .metric-row {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 1px; background: var(--border);
+      margin: 0 36px 28px; border-radius: 10px; overflow: hidden;
+    }
+    .metric-cell { background: var(--white); padding: 18px; text-align: center; }
+    .metric-value { font-size: 26px; font-weight: 800; color: var(--navy); letter-spacing: -0.5px; line-height: 1; }
+    .metric-value.blue  { color: var(--blue); }
+    .metric-value.teal  { color: var(--teal); }
+    .metric-value.green { color: var(--green); }
+    .metric-value.amber { color: var(--amber); }
+    .metric-label { font-size: 11px; color: var(--muted); margin-top: 4px; line-height: 1.3; }
+
+    /* TOGGLES */
+    .toggles { padding: 0 36px 32px; display: flex; flex-direction: column; gap: 8px; }
+    details { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+    details[open] { background: var(--white); }
+    summary {
+      padding: 16px 20px; font-size: 14px; font-weight: 600; color: var(--navy);
+      cursor: pointer; display: flex; align-items: center; gap: 10px;
+      list-style: none; user-select: none; transition: background 0.15s;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary:hover { background: var(--border); }
+    details[open] summary { background: var(--white); border-bottom: 1px solid var(--border); }
+    .summary-icon {
+      width: 22px; height: 22px; background: var(--border); border-radius: 5px;
+      display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0;
+      transition: background 0.15s;
+    }
+    details[open] .summary-icon { background: var(--blue-light); }
+    .chevron { margin-left: auto; width: 16px; height: 16px; color: var(--muted); transition: transform 0.2s; flex-shrink: 0; }
+    details[open] .chevron { transform: rotate(180deg); }
+
+    .toggle-content { padding: 20px; font-size: 14px; color: var(--text); line-height: 1.7; }
+    .toggle-content p { margin-bottom: 12px; }
+    .toggle-content p:last-child { margin-bottom: 0; }
+    .toggle-content ul { padding-left: 20px; }
+    .toggle-content li { margin-bottom: 6px; }
+    .toggle-content strong { color: var(--navy); }
+    .toggle-content code {
+      font-family: 'Courier New', monospace; font-size: 12px;
+      background: var(--border); padding: 2px 6px; border-radius: 4px; color: var(--navy);
+    }
+
+    /* DATA TABLES */
+    .data-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 12px; }
+    .data-table th {
+      background: var(--navy); color: var(--white); padding: 9px 12px;
+      text-align: left; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .data-table th:first-child { border-radius: 6px 0 0 0; }
+    .data-table th:last-child { border-radius: 0 6px 0 0; }
+    .data-table td { padding: 9px 12px; border-bottom: 1px solid var(--border); color: var(--text); }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:hover td { background: var(--bg); }
+    .data-table .best { color: var(--green); font-weight: 700; }
+    .data-table .worst { color: var(--red); font-weight: 600; }
+    .data-table .highlight { background: #F0FDF4; }
+
+    /* ARCHITECTURE PIPELINE */
+    .pipeline {
+      display: flex; flex-direction: column; gap: 2px;
+      background: var(--navy); border-radius: 10px; padding: 16px; margin-top: 12px;
+    }
+    .pipe-row {
+      display: flex; align-items: center; gap: 12px;
+      background: rgba(255,255,255,0.05); border-radius: 6px; padding: 10px 14px;
+    }
+    .pipe-time { font-family: 'Courier New', monospace; font-size: 12px; color: #A7F3D0; font-weight: 700; width: 36px; flex-shrink: 0; }
+    .pipe-script { font-family: 'Courier New', monospace; font-size: 12px; color: #6EE7B7; flex-shrink: 0; width: 190px; }
+    .pipe-desc { font-size: 12px; color: rgba(255,255,255,0.6); }
+
+    /* MODEL GRID */
+    .model-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 12px; }
+    .model-card {
+      background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 16px;
+    }
+    .model-label {
+      display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; border-radius: 4px; padding: 2px 7px; margin-bottom: 6px;
+    }
+    .model-title { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .model-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+    .model-mape { font-size: 12px; font-weight: 600; margin-top: 6px; }
+
+    /* FEATURE IMPORTANCE */
+    .feature-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 0; border-bottom: 1px solid var(--border);
+    }
+    .feature-row:last-child { border-bottom: none; }
+    .feat-rank { font-size: 12px; font-weight: 700; color: var(--muted); width: 24px; flex-shrink: 0; text-align: right; }
+    .feat-name { font-family: 'Courier New', monospace; font-size: 12px; color: var(--navy); flex: 1; }
+    .feat-bar-track { width: 120px; height: 6px; background: var(--border); border-radius: 100px; overflow: hidden; flex-shrink: 0; }
+    .feat-bar-fill { height: 100%; border-radius: 100px; background: var(--blue); }
+    .feat-gain { font-size: 12px; color: var(--muted); width: 40px; text-align: right; flex-shrink: 0; }
+
+    /* SURGE CHART */
+    .surge-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; margin-top: 12px; }
+    .surge-card {
+      border-radius: 8px; padding: 14px; text-align: center;
+    }
+    .surge-hour { font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 4px; }
+    .surge-price { font-size: 20px; font-weight: 800; color: var(--navy); letter-spacing: -0.5px; line-height: 1; margin-bottom: 2px; }
+    .surge-pct { font-size: 12px; font-weight: 600; }
+
+    /* VS COUNCIL TABLE */
+    .vs-bar-row { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+    .vs-bar-row:last-child { border-bottom: none; }
+    .vs-band { font-size: 13px; font-weight: 600; color: var(--navy); width: 70px; flex-shrink: 0; }
+    .vs-prices { font-size: 12px; color: var(--muted); width: 140px; flex-shrink: 0; }
+    .vs-bar-track { flex: 1; height: 20px; background: var(--border); border-radius: 4px; overflow: hidden; position: relative; }
+    .vs-bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; justify-content: flex-end; padding-right: 6px; }
+    .vs-bar-label { font-size: 11px; font-weight: 700; color: var(--white); }
+
+    /* RESULT HIGHLIGHT */
+    .result-highlight { background: var(--green-light); border: 1px solid #BBF7D0; border-radius: 8px; padding: 16px; margin-top: 12px; }
+    .result-title { font-size: 13px; font-weight: 600; color: var(--green); margin-bottom: 6px; }
+    .result-highlight ul { padding-left: 16px; }
+    .result-highlight li { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+
+    /* VPN toast */
+    #vpn-toast {
+      display: none;
+      align-items: flex-start; gap: 12px;
+      margin-top: 12px;
+      padding: 14px 18px;
+      background: #FFF7ED;
+      border: 1px solid #FED7AA;
+      border-left: 4px solid #F97316;
+      border-radius: 8px;
+      font-size: 14px; color: #92400E; line-height: 1.5;
+      max-width: 420px;
+      animation: slideDown 0.25s ease;
+    }
+    #vpn-toast svg { flex-shrink: 0; margin-top: 1px; }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .toggle-content a, .project-meta a.ext-link {
+      color: var(--blue); text-decoration: none;
+    }
+    .toggle-content a:hover, .project-meta a.ext-link:hover { text-decoration: underline; }
+    .project-meta h2 a {
+      color: inherit; text-decoration: none;
+      border-bottom: 2px solid rgba(37,99,235,0.25); transition: border-color 0.15s;
+    }
+    .project-meta h2 a:hover { border-bottom-color: var(--blue); }
+
+    footer {
+      text-align: center;
+      padding: 32px;
+      font-size: 15px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .page-hero { padding: 40px 24px; }
+      .content { padding: 40px 24px; }
+      .project-header { flex-direction: column; gap: 12px; padding: 24px; }
+      .quote-block { margin: 0 20px 20px; }
+      .metric-row { margin: 0 20px 20px; }
+      .toggles { padding: 0 20px 24px; }
+      .model-grid { grid-template-columns: 1fr; }
+      .pipe-script { width: 140px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Sebastian Tam &ndash; Portfolio</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="ai-engineering.html">AI & Engineering</a></li>
+      <li><a href="startups-growth.html">Startups & Growth</a></li>
+      <li><a href="skills-matrix.html">Skills</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero">
+    <div style="max-width:960px;margin:0 auto;">
+      <div class="breadcrumb"><a href="index.html">Home</a> / Featured Project</div>
+      <h1>Dynamic Pricing Intelligence</h1>
+      <p class="page-hero-sub">Reverse-engineered competitor pricing through automated ML pipeline — 4.1M fares, 1,960 routes, 8–10% MAPE.</p>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ============================================================ -->
+    <!-- PROJECT 1 — COMPETITOR PRICING (FEATURED) -->
+    <!-- ============================================================ -->
+    <div class="project-card animate-on-scroll">
+      <div class="project-header">
+        <div class="project-icon"><svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 01-2-2V9l2-5h14l2 5v6a2 2 0 01-2 2h-2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></div>
+        <div class="project-meta">
+          <span class="project-tag">⭐ Featured Project</span>
+          <h2>Zippe's Competitor — Dynamic Pricing Intelligence</h2>
+          <p>Reverse-engineered a key ride-hailing competitor's fare pricing across Bath, UK using a self-hosted ML pipeline — with no public API and zero external dependencies.</p>
+          <div class="status-pill"><span class="status-dot"></span> Active — Continuous collection &amp; model refinement</div>
+          <button onclick="checkDashboard(this)" class="live-demo-btn">
+            <span class="btn-dot"></span>
+            View Live Dashboard
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+          </button>
+          <button onclick="viewAIShowcase()" class="live-demo-btn">
+            <span class="btn-dot"></span>
+            View AI Showcase
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v12a3 3 0 01-3 3H2zM22 3h-6a4 4 0 00-4 4v12a3 3 0 003 3h7z"/></svg>
+          </button>
+          <div id="vpn-toast">
+            <svg width="18" height="18" fill="none" stroke="#F97316" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            <span><strong>VPN needed to connect to Live Dashboard.</strong><br>Please connect to VPN first, then try again.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="quote-block">
+        "Built an automated, self-improving system to understand, model and predict Zippe's competitor's real-time taxi pricing in Bath, UK — scraping live prices hourly across 1,960 routes and 5 vehicle classes, with <strong>4,110,514 fare observations</strong> accumulated in 15 days and XGBoost achieving <strong>8–10% MAPE</strong> at stable state."
+      </div>
+
+      <div class="metric-row">
+        <div class="metric-cell">
+          <div class="metric-value blue">4.11M</div>
+          <div class="metric-label">Fare observations<br>(15 days)</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-value teal">1,960</div>
+          <div class="metric-label">Unique routes<br>100% anchor coverage</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-value green">8–10%</div>
+          <div class="metric-label">XGBoost MAPE<br>(stable retrain)</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-value amber">+21%</div>
+          <div class="metric-label">Afternoon surge peak<br>(15:00 UTC)</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-value" style="color:var(--purple);">24.3%</div>
+          <div class="metric-label">Competitor below council<br>on 20–30mi routes</div>
+        </div>
+      </div>
+
+      <div class="toggles">
+
+        <!-- CHALLENGE -->
+        <details>
+          <summary>
+            <span class="summary-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
+            The Challenge
+            <svg class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="toggle-content">
+            <p>Zippe's competitor — one of the UK's largest ride-hailing networks — publishes no public pricing API and no fare documentation. The goal was to build a system capable of mapping their entire dynamic pricing surface across <strong>1,960 route pairs</strong> and <strong>1,855 Points of Interest</strong> in Bath, exposing surge patterns, route-specific pricing, and the relationship between the competitor's fares and the legally-defined Hackney Carriage council tariff.</p>
+            <p>The core constraint: every fare observation had to be obtained programmatically by authenticating against the competitor's internal mobile API using a captured JWT bearer token (renewed weekly via HTTP Toolkit iOS interception). The system had to handle token expiry, service-area rejections, concurrent database writes, and routing distance calculations — all without any external paid APIs.</p>
+            <p><strong>Research question:</strong> Can we build a predictive model that accurately estimates the competitor's live price for any route, at any time, across any vehicle class — using only historically observed fares?</p>
+          </div>
+        </details>
+
+        <!-- ARCHITECTURE -->
+        <details>
+          <summary>
+            <span class="summary-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></span>
+            The Architecture — 4 Automated Agents
+            <svg class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="toggle-content">
+            <p>Four automated Python scripts run via macOS <code>launchd</code>, coordinated by a file-based IPC mechanism:</p>
+
+            <div class="pipeline">
+              <div class="pipe-row">
+                <div class="pipe-time">:00</div>
+                <div class="pipe-script">competitor_pricer.py</div>
+                <div class="pipe-desc">~2,660 routes/hr; touches <code>fares_done.marker</code> at ~:50 when DB writes complete</div>
+              </div>
+              <div class="pipe-row">
+                <div class="pipe-time">:06</div>
+                <div class="pipe-script">competitor_retrain.py</div>
+                <div class="pipe-desc">Retrains XGBoost ratio model hourly on rolling 24h test window; 24 features</div>
+              </div>
+              <div class="pipe-row">
+                <div class="pipe-time">:10*</div>
+                <div class="pipe-script">competitor_pilot_test.py</div>
+                <div class="pipe-desc">Fires every 3h; polls <code>fares_done.marker</code>; validates all 4 models against 500 live routes</div>
+              </div>
+              <div class="pipe-row">
+                <div class="pipe-time">:57</div>
+                <div class="pipe-script">competitor_analysis.py</div>
+                <div class="pipe-desc">Updates accuracy metrics, trend JSONs, HTML report; proceeds on fresh marker</div>
+              </div>
+              <div class="pipe-row">
+                <div class="pipe-time">:5001</div>
+                <div class="pipe-script">osrm-routed</div>
+                <div class="pipe-desc">Self-hosted OSRM (great-britain.osrm, 7.1GB) — launchd-managed, auto-restart on crash</div>
+              </div>
+            </div>
+
+            <p style="margin-top:14px;"><strong>IPC Coordination:</strong> <code>fares_done.marker</code> decouples the 50-minute fare-write loop from post-processing — pilot polls every 5 min (90-min max wait); analysis proceeds immediately at :57 once marker is fresh. Prevents both agents from reading a partially-written database.</p>
+
+            <p><strong>Storage:</strong> SQLite WAL-mode database with 4 tables: <code>competitor_fares</code> (4,110,514 rows), <code>competitor_pois</code> (1,855 POIs), <code>pilot_results</code> (29,584 live comparisons), <code>run_log</code> (330 runs). ~408k driving distances cached to <code>driving_distances.json</code>.</p>
+
+            <p><strong>Routing:</strong> Fully migrated from Google Maps to self-hosted OSRM (4 Jun 2026). Zero external API calls. Cache → OSRM localhost:5001 → haversine fallback. 320,623 historical distances backfilled via OSRM Table API.</p>
+
+            <div class="tech-stack">
+              <span class="tech-pill">Python 3.x</span>
+              <span class="tech-pill">XGBoost</span>
+              <span class="tech-pill">OSRM (self-hosted)</span>
+              <span class="tech-pill">SQLite WAL</span>
+              <span class="tech-pill">Pandas</span>
+              <span class="tech-pill">FastAPI</span>
+              <span class="tech-pill">launchd</span>
+              <span class="tech-pill">HTTP Toolkit</span>
+            </div>
+          </div>
+        </details>
+
+        <!-- FOUR MODELS -->
+        <details>
+          <summary>
+            <span class="summary-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M12 2v4M15 2v4M9 18v4M12 18v4M15 18v4M2 9h4M2 12h4M2 15h4M18 9h4M18 12h4M18 15h4"/></svg></span>
+            Four Pricing Models — Baseline to ML
+            <svg class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="toggle-content">
+            <div class="model-grid">
+              <div class="model-card">
+                <span class="model-label" style="background:#F1F5F9;color:#475569;">Model A</span>
+                <div class="model-title">Formula v3 — Baseline Linear</div>
+                <div class="model-desc"><code>max(min_fare, base + rate × miles)</code> per-vehicle params fitted from off-peak data. Structurally breaks on short trips (&lt;5mi).</div>
+                <div class="model-mape" style="color:var(--red);">MAPE: 23.9% (excl. &lt;5mi: 68–90%)</div>
+              </div>
+              <div class="model-card">
+                <span class="model-label" style="background:var(--blue-light);color:var(--blue);">Model B</span>
+                <div class="model-title">Route Lookup — Empirical Cache</div>
+                <div class="model-desc">Median observed price per <code>(pickup, dest, day-type)</code> triple. Back-calculates to off-peak base ÷ surge. 100% route anchor coverage.</div>
+                <div class="model-mape" style="color:var(--amber);">MAPE: 9.6–17.5%</div>
+              </div>
+              <div class="model-card">
+                <span class="model-label" style="background:var(--teal-light);color:#047857;">Model C</span>
+                <div class="model-title">Council Ratio — Structural Anchor</div>
+                <div class="model-desc"><code>council_tariff(dist,T1) × ratio × CTR_SURGE[hour]</code>. Ratio interpolated linearly between band midpoints. Generalisable to unseen routes.</div>
+                <div class="model-mape" style="color:var(--amber);">MAPE: 13–18%</div>
+              </div>
+              <div class="model-card" style="border-color:#BBF7D0;background:var(--green-light);">
+                <span class="model-label" style="background:var(--green-light);color:var(--green);">Model D <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:4px;"><polyline points="20 6 9 17 4 12"/></svg> LIVE</span>
+                <div class="model-title">XGBoost Ratio-Target — ML</div>
+                <div class="model-desc">Predicts <code>price / council_ratio_est</code> (clipped 0.3–5.0); 24 features; hourly retrain on rolling 24h window. <strong>Live since 28 May 2026.</strong></div>
+                <div class="model-mape" style="color:var(--green);">Retrain MAPE: 8–10% (stable)</div>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- FEATURE IMPORTANCE -->
+        <details>
+          <summary>
+            <span class="summary-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span>
+            XGBoost Feature Importance (24 Features)
+            <svg class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="toggle-content">
+            <p>Top features by gain — retrain 14:07, 4 June 2026. <strong>Route memory dominates all other signals:</strong> the model learns the competitor's own pricing logic from historical observations.</p>
+
+            <div style="margin-top:12px;">
+              <div class="feature-row">
+                <div class="feat-rank">#1</div>
+                <div class="feat-name">route_hour_est</div>
+                <div class="feat-bar-track"><div class="feat-bar-fill" style="width:100%;background:var(--blue);"></div></div>
+                <div class="feat-gain">1,205</div>
+              </div>
+              <div class="feature-row">
+                <div class="feat-rank">#2</div>
+                <div class="feat-name">lookup_est</div>
+                <div class="feat-bar-track"><div class="feat-bar-fill" style="width:66%;background:var(--blue);"></div></div>
+                <div class="feat-gain">795</div>
+              </div>
+              <div class="feature-row">
+                <div class="feat-rank">#3</div>
+                <div class="feat-name">vehicle_tier</div>
+                <div class="feat-bar-track"><div class="feat-bar-fill" style="width:60%;background:var(--teal);"></div></div>
+                <div class="feat-gain">724</div>
+              </div>
+              <div class="feature-row">
+                <div class="feat-rank">#4</div>
+                <div class="feat-name">dist_band</div>
+                <div class="feat-bar-track"><div class="feat-bar-fill" style="width:54%;background:var(--teal);"></div></div>
+                <div class="feat-gain">649</div>
+              </div>
+              <div class="feature-row">
+                <div class="feat-rank">#5</div>
+                <div class="feat-name">pickup_lat</div>
+                <div class="feat-bar-track"><div class="feat-bar-fill" style="width:30%;background:var(--muted);"></div></div>
+                <div class="feat-gain">367</div>
+              </div>
+              <div class="feature-row">
+                <div class="feat-rank">#6</div>
+                <div class="feat-name">council_ratio_est</div>
+                <div class="feat-bar-track"><div class="feat-bar-fill" style="width:23%;background:var(--muted);"></div></div>
+                <div class="feat-gain">273</div>
+              </div>
+              <div class="feature-row">
+                <div class="feat-rank">#7</div>
+                <div class="feat-name">pickup_dist_from_bath</div>
+                <div class="feat-bar-track"><div class="feat-bar-fill" style="width:21%;background:var(--muted);"></div></div>
+                <div class="feat-gain">249</div>
+              </div>
+              <div class="feature-row">
+                <div class="feat-rank">#8</div>
+                <div class="feat-name">dest_lat</div>
+                <div class="feat-bar-track"><div class="feat-bar-fill" style="width:17%;background:var(--muted);"></div></div>
+                <div class="feat-gain">205</div>
+              </div>
+            </div>
+
+            <p style="margin-top:12px; font-size:13px; color:var(--muted);">
+              <code>route_hour_est</code> = route × time-of-day bucket anchor; 5,769 combos. Displaces raw distance as #1 feature (added 4 Jun 2026).
+              A route's observed price at a specific hour is more predictive than any geographic or structural feature.
+            </p>
+          </div>
+        </details>
+
+        <!-- MAPE BY BAND -->
+        <details>
+          <summary>
+            <span class="summary-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span>
+            Model Accuracy by Distance Band — 29,584 Live Readings
+            <svg class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="toggle-content">
+            <p>All four models validated against <strong>500 live competitor routes every 3 hours</strong> — 29,584 real quotes across 15 days.</p>
+
+            <table class="data-table" style="margin-top:12px;">
+              <thead>
+                <tr>
+                  <th>Distance Band</th>
+                  <th>XGBoost</th>
+                  <th>Formula</th>
+                  <th>Lookup</th>
+                  <th>Council</th>
+                  <th>Winner</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>&lt;5mi</strong></td>
+                  <td class="best">14.7%</td>
+                  <td class="worst">27.6%</td>
+                  <td>13.6%</td>
+                  <td>13.7%</td>
+                  <td>Lookup</td>
+                </tr>
+                <tr>
+                  <td><strong>5–7.5mi</strong></td>
+                  <td class="best">10.0%</td>
+                  <td>10.4%</td>
+                  <td>13.3%</td>
+                  <td>13.2%</td>
+                  <td style="color:var(--green);font-weight:700;">XGBoost ✓</td>
+                </tr>
+                <tr>
+                  <td><strong>7.5–10mi</strong></td>
+                  <td class="best">13.6%</td>
+                  <td>13.8%</td>
+                  <td>15.6%</td>
+                  <td>15.7%</td>
+                  <td style="color:var(--green);font-weight:700;">XGBoost ✓</td>
+                </tr>
+                <tr>
+                  <td><strong>10–20mi</strong></td>
+                  <td class="best">9.6%</td>
+                  <td>14.5%</td>
+                  <td>13.3%</td>
+                  <td>13.4%</td>
+                  <td style="color:var(--green);font-weight:700;">XGBoost ✓</td>
+                </tr>
+                <tr>
+                  <td><strong>20–30mi</strong></td>
+                  <td class="best">15.0%</td>
+                  <td>19.1%</td>
+                  <td>18.0%</td>
+                  <td>18.4%</td>
+                  <td style="color:var(--green);font-weight:700;">XGBoost ✓</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p style="margin-top:10px; font-size:13px; color:var(--muted);">XGBoost beats or matches Formula on every distance band. Most significant advantage on <strong>10–20mi routes (9.6% vs 14.5%)</strong> — a 34% improvement. Formula is structurally broken for &lt;5mi trips (27.6% MAPE).</p>
+          </div>
+        </details>
+
+        <!-- SURGE PATTERN -->
+        <details>
+          <summary>
+            <span class="summary-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
+            Demand Surge Pattern — 1,156,521 Observations
+            <svg class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="toggle-content">
+            <p>Calibrated from <strong>15 days of data, 1,156,521 fare observations</strong> on 5–30mi routes. Surge multipliers (<code>WD_SURGE</code>) normalised to the 09–11 off-peak baseline.</p>
+
+            <div class="surge-grid">
+              <div class="surge-card" style="background:var(--bg);border:1px solid var(--border);">
+                <div class="surge-hour">06:00 UTC</div>
+                <div class="surge-price">£60.35</div>
+                <div class="surge-pct" style="color:var(--amber);">+9% (pre-rush)</div>
+              </div>
+              <div class="surge-card" style="background:var(--bg);border:1px solid var(--border);">
+                <div class="surge-hour">07:00 UTC</div>
+                <div class="surge-price">£60.68</div>
+                <div class="surge-pct" style="color:var(--amber);">+10% (morning peak)</div>
+              </div>
+              <div class="surge-card" style="background:var(--blue-light);border:1px solid #BFDBFE;">
+                <div class="surge-hour">09–10 UTC</div>
+                <div class="surge-price">£55.34</div>
+                <div class="surge-pct" style="color:var(--muted);">baseline</div>
+              </div>
+              <div class="surge-card" style="background:var(--amber-light);border:1px solid #FDE68A;">
+                <div class="surge-hour">14:00 UTC</div>
+                <div class="surge-price">£66.06</div>
+                <div class="surge-pct" style="color:var(--amber);">+19% · 1.178×</div>
+              </div>
+              <div class="surge-card" style="background:#FFF0E6;border:1px solid #FDBA74;">
+                <div class="surge-hour">15:00 UTC</div>
+                <div class="surge-price">£66.79</div>
+                <div class="surge-pct" style="color:var(--red);">+21% PEAK · 1.218×</div>
+              </div>
+              <div class="surge-card" style="background:var(--bg);border:1px solid var(--border);">
+                <div class="surge-hour">16:00 UTC</div>
+                <div class="surge-price">~£65</div>
+                <div class="surge-pct" style="color:var(--amber);">+18% · 1.204×</div>
+              </div>
+            </div>
+
+            <p style="margin-top:12px; font-size:13px; color:var(--muted);">Hour 11 → 1.127×, Hour 14 → 1.178×, Hour 15 → 1.218× (peak), Hour 16 → 1.204×. Surge is quantified to the hour across the full dataset.</p>
+          </div>
+        </details>
+
+        <!-- COMPETITOR VS COUNCIL -->
+        <details>
+          <summary>
+            <span class="summary-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 8l9-5 9 5M5 11l-2 6h4l-2-6zM19 11l-2 6h4l-2-6z"/></svg></span>
+            Competitor vs Bath Council Tariff — Off-Peak Price Comparison
+            <svg class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="toggle-content">
+            <p>Off-peak (09–10 UTC) average competitor price vs Bath &amp; NE Somerset <strong>Hackney Carriage T1 tariff</strong> (the legally-defined maximum fare, Mon–Sat 06:00–20:00). Computed at distance band midpoints via <code>council_tariff()</code>.</p>
+
+            <div style="margin-top:14px;">
+              <div class="vs-bar-row">
+                <div class="vs-band">&lt;5mi</div>
+                <div class="vs-prices">£9.71 vs £8.60</div>
+                <div class="vs-bar-track">
+                  <div class="vs-bar-fill" style="width:52%;background:var(--red);border-radius:4px;">
+                    <span class="vs-bar-label">+12.9% above council</span>
+                  </div>
+                </div>
+              </div>
+              <div class="vs-bar-row">
+                <div class="vs-band">5–7.5mi</div>
+                <div class="vs-prices">£19.65 vs £18.50</div>
+                <div class="vs-bar-track">
+                  <div class="vs-bar-fill" style="width:35%;background:#F97316;border-radius:4px;">
+                    <span class="vs-bar-label">+6.2% above</span>
+                  </div>
+                </div>
+              </div>
+              <div class="vs-bar-row">
+                <div class="vs-band">7.5–10mi</div>
+                <div class="vs-prices">£24.57 vs £24.00</div>
+                <div class="vs-bar-track">
+                  <div class="vs-bar-fill" style="width:20%;background:#FCD34D;border-radius:4px;">
+                    <span class="vs-bar-label" style="color:var(--navy);">+2.4%</span>
+                  </div>
+                </div>
+              </div>
+              <div class="vs-bar-row">
+                <div class="vs-band">10–20mi</div>
+                <div class="vs-prices">£34.63 vs £42.00</div>
+                <div class="vs-bar-track">
+                  <div class="vs-bar-fill" style="width:60%;background:var(--teal);border-radius:4px;">
+                    <span class="vs-bar-label">−17.5% below council</span>
+                  </div>
+                </div>
+              </div>
+              <div class="vs-bar-row">
+                <div class="vs-band">20–30mi</div>
+                <div class="vs-prices">£62.11 vs £82.00</div>
+                <div class="vs-bar-track">
+                  <div class="vs-bar-fill" style="width:80%;background:var(--green);border-radius:4px;">
+                    <span class="vs-bar-label">−24.3% below council</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <p style="margin-top:12px; font-size:13px; color:var(--muted);">
+              <strong>Key insight:</strong> The competitor charges a small premium on short trips (&lt;7.5mi) but undercuts the legally-capped council tariff significantly on longer routes —
+              by <strong>17.5% on 10–20mi</strong> and <strong>24.3% on 20–30mi</strong> trips.
+              This reveals a deliberate strategic pricing decision: compete aggressively on distance to capture medium/long-haul demand while maintaining local fare margins.
+            </p>
+          </div>
+        </details>
+
+        <!-- RESULTS -->
+        <details open>
+          <summary>
+            <span class="summary-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></span>
+            Key Results & System Milestones
+            <svg class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="toggle-content">
+            <div class="result-highlight">
+              <div class="result-title"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Key Findings (as of 4 June 2026)</div>
+              <ul>
+                <li>Accumulated <strong>4,110,514 fare observations</strong> across 1,960 routes and 1,855 POIs in 15 days of continuous operation</li>
+                <li>XGBoost ratio-target model achieves <strong>8–10% MAPE</strong> at stable retrain state — competitive across all time slots and distance bands</li>
+                <li>Afternoon surge peak quantified: <strong>+21% at 15:00 UTC</strong> (1.218× multiplier), morning peak <strong>+10% at 07:00</strong></li>
+                <li>The competitor undercuts council tariff by <strong>24.3% on 20–30mi</strong> and 17.5% on 10–20mi routes</li>
+                <li>The competitor charges a <strong>premium over council</strong> on short trips: +12.9% on &lt;5mi, +6.2% on 5–7.5mi</li>
+                <li><code>route_hour_est</code> (route × time-of-day bucket) is the <strong>#1 XGBoost feature</strong> (gain: 1,205) — surpassing raw distance; 5,769 combos and growing</li>
+                <li>100% route anchor coverage: <strong>1,960/1,960 routes</strong> have ≥3 scrapes for empirical price lookup</li>
+                <li>Zero external API dependencies: self-hosted OSRM, Google Maps fully removed, JWT token renewed weekly via HTTP Toolkit iOS interception</li>
+              </ul>
+            </div>
+          </div>
+        </details>
+
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    © 2026 Sebastian Tam &nbsp;·&nbsp; Growth Leader &amp; AI Architect &nbsp;·&nbsp; Berkshire, United Kingdom &nbsp;·&nbsp; <a href="ai-engineering.html" style="color:var(--blue);text-decoration:none;">Back to AI & Engineering</a>
+  </footer>
+
+  <script>
+    const DASHBOARD_URL = 'http://192.168.1.211:8502/';
+
+    async function checkDashboard(btn) {
+      btn.classList.add('checking');
+      btn.querySelector('span.btn-dot').style.background = '#FCD34D';
+
+      const toast = document.getElementById('vpn-toast');
+      toast.style.display = 'none';
+
+      try {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), 3000);
+        await fetch(DASHBOARD_URL, { mode: 'no-cors', signal: controller.signal });
+        clearTimeout(timer);
+        window.open(DASHBOARD_URL, '_blank');
+      } catch (err) {
+        toast.style.display = 'flex';
+        clearTimeout(toast._hideTimer);
+        toast._hideTimer = setTimeout(() => { toast.style.display = 'none'; }, 8000);
+      } finally {
+        btn.classList.remove('checking');
+        btn.querySelector('span.btn-dot').style.background = '#4ADE80';
+      }
+    }
+
+    function viewAIShowcase() {
+      var slides = [];
+      slides.push({
+        image: 'zippe/slide_00.jpg',
+        title: 'AI Pricing Intelligence Case Study',
+        slideNum: 0
+      });
+      for (var i = 1; i <= 10; i++) {
+        slides.push({
+          image: 'zippe/slide_' + String(i).padStart(2, '0') + '.jpg',
+          title: 'Brand Z Pricing Intelligence - Slide ' + i,
+          slideNum: i
+        });
+      }
+
+      var overlay = document.createElement('div');
+      overlay.id = 'ai-showcase-overlay';
+      overlay.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 9999; display: block;';
+      document.body.appendChild(overlay);
+
+      var popup = document.createElement('div');
+      popup.id = 'ai-showcase-popup';
+      popup.style.cssText = 'position: fixed; z-index: 10000; display: block; border-radius: 12px; overflow: auto; box-shadow: 0 25px 60px rgba(0,0,0,0.5); width: 85vw; height: 85vh; top: calc(50% - 42.5vh); left: calc(50% - 42.5vw); background: white;';
+
+      var controlsHTML = '<div style="position: absolute; top: 12px; right: 12px; display: flex; gap: 10px; z-index: 10002; flex-direction: row; pointer-events: auto;">' +
+        '<button class="ai-showcase-prev" style="background: rgba(0,0,0,0.85); color: white; border: 2px solid rgba(255,255,255,0.4); border-radius: 50%; width: 48px; height: 48px; cursor: pointer; font-size: 22px; display: flex; align-items: center; justify-content: center; padding: 0; line-height: 1; pointer-events: auto;">‹</button>' +
+        '<button class="ai-showcase-counter" style="background: rgba(0,0,0,0.85); color: white; border: 2px solid rgba(255,255,255,0.4); border-radius: 50%; width: auto; min-width: 60px; height: 48px; cursor: default; font-size: 14px; display: flex; align-items: center; justify-content: center; padding: 0 12px; line-height: 1; pointer-events: auto;">1/11</button>' +
+        '<button class="ai-showcase-next" style="background: rgba(0,0,0,0.85); color: white; border: 2px solid rgba(255,255,255,0.4); border-radius: 50%; width: 48px; height: 48px; cursor: pointer; font-size: 22px; display: flex; align-items: center; justify-content: center; padding: 0; line-height: 1; pointer-events: auto;">›</button>' +
+        '<button class="ai-showcase-close" style="background: rgba(0,0,0,0.85); color: white; border: 2px solid rgba(255,255,255,0.4); border-radius: 50%; width: 48px; height: 48px; cursor: pointer; font-size: 22px; display: flex; align-items: center; justify-content: center; padding: 0; line-height: 1; pointer-events: auto;">×</button>' +
+        '</div><img src="' + slides[0].image + '" style="width: 100%; height: 100%; object-fit: contain; display: block;">';
+
+      popup.innerHTML = controlsHTML;
+      document.body.appendChild(popup);
+
+      var currentIndex = 0;
+      var updateSlide = function(index) {
+        if (index < 0) index = slides.length - 1;
+        if (index >= slides.length) index = 0;
+        currentIndex = index;
+
+        var img = popup.querySelector('img');
+        img.src = slides[index].image;
+        img.alt = slides[index].title;
+
+        var counter = popup.querySelector('.ai-showcase-counter');
+        counter.textContent = (index + 1) + '/11';
+      };
+
+      popup.querySelector('.ai-showcase-prev').onclick = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        updateSlide(currentIndex - 1);
+      };
+
+      popup.querySelector('.ai-showcase-next').onclick = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        updateSlide(currentIndex + 1);
+      };
+
+      var closePopup = function() {
+        popup.remove();
+        overlay.remove();
+      };
+
+      popup.querySelector('.ai-showcase-close').onclick = closePopup;
+      overlay.onclick = closePopup;
+
+      var keyHandler = function(e) {
+        if (!document.getElementById('ai-showcase-popup')) return;
+        if (e.key === 'ArrowLeft') {
+          updateSlide(currentIndex - 1);
+          e.preventDefault();
+        } else if (e.key === 'ArrowRight') {
+          updateSlide(currentIndex + 1);
+          e.preventDefault();
+        } else if (e.key === 'Escape') {
+          closePopup();
+          document.removeEventListener('keydown', keyHandler);
+        }
+      };
+      document.addEventListener('keydown', keyHandler);
+    }
+
+    const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+    document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
