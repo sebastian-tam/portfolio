@@ -34,6 +34,45 @@
     .animate-on-scroll { opacity: 0; }
     .animate-on-scroll.in-view { animation: slideInUp 0.6s ease-out forwards; }
 
+    /* FAQ SECTION */
+    .faq-section {
+      max-width: 900px;
+      margin: 80px auto 0;
+      padding: 80px 40px 80px;
+      background: var(--white);
+      border-top: 1px solid var(--border);
+    }
+    .faq-section h2 {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 48px;
+      letter-spacing: -0.5px;
+    }
+    .faq-item {
+      margin-bottom: 32px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .faq-item h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+    .faq-item p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0;
+    }
+
     /* NAV */
     nav {
       background: var(--white);
@@ -528,59 +567,45 @@
     © 2026 Sebastian Tam &nbsp;·&nbsp; Growth Leader &amp; AI Architect &nbsp;·&nbsp; Berkshire, United Kingdom
   </footer>
 
-  <!-- AEO: Article + FAQ Schema Markup -->
-  <div style="display: none;" itemscope itemtype="https://schema.org/Article">
-    <meta itemprop="headline" content="Sebastian Tam | Growth Leader & AI Architect">
-    <meta itemprop="description" content="Sebastian Tam is a Growth Leader and AI Architect specializing in building scalable marketing systems and AI-driven solutions.">
-    <meta itemprop="datePublished" content="2024-01-15">
-    <meta itemprop="dateModified" content="2026-06-16">
-    <div itemprop="author" itemscope itemtype="https://schema.org/Person">
-      <meta itemprop="name" content="Sebastian Tam">
-      <meta itemprop="url" content="https://sebastian-tam.github.io/portfolio/">
-    </div>
-    <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
-      <meta itemprop="name" content="Sebastian Tam">
-      <meta itemprop="url" content="https://sebastian-tam.github.io/portfolio/">
-    </div>
-  </div>
+  <!-- FAQ Section with Schema.org Markup -->
+  <section class="faq-section" itemscope itemtype="https://schema.org/FAQPage">
+    <h2>Frequently Asked Questions</h2>
 
-  <!-- FAQ Schema Markup for AEO -->
-  <div style="display: none;" itemscope itemtype="https://schema.org/FAQPage">
-    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
       <h3 itemprop="name">Who is Sebastian Tam?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
         <p itemprop="text">Sebastian Tam is a Growth Leader and AI Architect based in Berkshire, UK. With expertise in building scalable marketing systems and AI-driven solutions, he helps startups and enterprises accelerate growth through intelligent technology and strategic implementation.</p>
       </div>
     </div>
 
-    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
       <h3 itemprop="name">What does Sebastian Tam specialise in?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
         <p itemprop="text">Sebastian Tam specialises in AI architecture, growth marketing, marketing automation, and B2B SaaS. He designs and builds AI-powered marketing systems, develops scaling strategies for startups, and creates intelligent automation workflows that drive measurable business results.</p>
       </div>
     </div>
 
-    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
       <h3 itemprop="name">Where is Sebastian Tam based?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
         <p itemprop="text">Sebastian Tam is based in Berkshire, United Kingdom. He works with clients globally, providing strategic consulting and implementation services for growth-focused organizations across multiple industries and geographies.</p>
       </div>
     </div>
 
-    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
       <h3 itemprop="name">What companies has Sebastian Tam worked with?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
         <p itemprop="text">Sebastian Tam has worked with notable companies including AnyMind Group (leading Korean influencer marketing platform), Metaps (mobile marketing infrastructure), and various B2B SaaS companies. He brings experience from high-growth startups and enterprise-scale organizations across Asia and Europe.</p>
       </div>
     </div>
 
-    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
       <h3 itemprop="name">How can I hire Sebastian Tam?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
         <p itemprop="text">You can connect with Sebastian Tam on LinkedIn at linkedin.com/in/sebastiantam or reach out through his portfolio website. He offers consulting services, strategic advisory, and implementation projects for organizations looking to accelerate growth through AI and marketing technology.</p>
       </div>
     </div>
-  </div>
+  </section>
 
   <script>
     // Scroll animation observer

@@ -38,6 +38,45 @@
     .animate-on-scroll { opacity: 0; }
     .animate-on-scroll.in-view { animation: slideInUp 0.6s ease-out forwards; }
 
+    /* FAQ SECTION */
+    .faq-section {
+      max-width: 900px;
+      margin: 80px auto 0;
+      padding: 80px 40px 80px;
+      background: var(--white);
+      border-top: 1px solid var(--border);
+    }
+    .faq-section h2 {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 48px;
+      letter-spacing: -0.5px;
+    }
+    .faq-item {
+      margin-bottom: 32px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .faq-item h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+    .faq-item p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0;
+    }
+
     nav {
       background: var(--white); border-bottom: 1px solid var(--border);
       padding: 0 40px; display: flex; align-items: center; justify-content: space-between;
@@ -523,45 +562,31 @@
     document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
   </script>
 
-  <!-- AEO: Article + FAQ Schema Markup -->
-  <div style="display: none;" itemscope itemtype="https://schema.org/Article">
-    <meta itemprop="headline" content="AI & Engineering | Sebastian Tam">
-    <meta itemprop="description" content="Sebastian Tam's AI marketing systems, machine learning models, and AI architecture approach for scaling businesses.">
-    <meta itemprop="datePublished" content="2024-02-20">
-    <meta itemprop="dateModified" content="2026-06-16">
-    <div itemprop="author" itemscope itemtype="https://schema.org/Person">
-      <meta itemprop="name" content="Sebastian Tam">
-      <meta itemprop="url" content="https://sebastian-tam.github.io/portfolio/ai-engineering.html">
-    </div>
-    <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
-      <meta itemprop="name" content="Sebastian Tam">
-      <meta itemprop="url" content="https://sebastian-tam.github.io/portfolio/">
-    </div>
-  </div>
+  <!-- FAQ Section with Schema.org Markup -->
+  <section class="faq-section" itemscope itemtype="https://schema.org/FAQPage">
+    <h2>Frequently Asked Questions</h2>
 
-  <!-- FAQ Schema Markup for AEO -->
-  <div style="display: none;" itemscope itemtype="https://schema.org/FAQPage">
-    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
       <h3 itemprop="name">What AI marketing systems has Sebastian Tam built?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
         <p itemprop="text">Sebastian Tam has architected and built AI-powered marketing systems including automated customer segmentation platforms, predictive lead scoring engines, dynamic content personalization systems, and intelligent email marketing workflows. His systems process millions of data points to deliver real-time marketing optimization across multiple channels.</p>
       </div>
     </div>
 
-    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
       <h3 itemprop="name">How does Sebastian Tam use AI in marketing?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
         <p itemprop="text">Sebastian Tam applies AI in marketing through machine learning models for predictive analytics, natural language processing for content optimization, computer vision for asset management, and reinforcement learning for campaign optimization. He creates automated workflows that enhance targeting, personalization, and ROI measurement across B2B and performance marketing contexts.</p>
       </div>
     </div>
 
-    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
       <h3 itemprop="name">What is Sebastian Tam's approach to AI architecture?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
         <p itemprop="text">Sebastian Tam's AI architecture approach emphasizes scalability, data governance, and business alignment. He designs systems with proper data pipelines, model versioning, monitoring frameworks, and governance controls. His methodology focuses on translating business requirements into ML architectures that are maintainable, auditable, and deliver measurable ROI while maintaining data privacy and regulatory compliance.</p>
       </div>
     </div>
-  </div>
+  </section>
 
 </body>
 </html>
