@@ -1,0 +1,58 @@
+# Sebastian Tam — Portfolio
+
+> Growth Leader and AI Architect based in Berkshire, UK
+
+Sebastian Tam specialises in AI-driven marketing systems, B2B SaaS growth strategy, and performance marketing across APAC and Europe.
+
+## Experience
+
+- **Zippe Group**: Head of Growth and Performance Marketing - Developed RAG-based AI systems for market pricing research, marketing creatives management, and CRM compliance
+- **AnyMind Group**: Head of Digital Marketing - Led performance marketing across 13 markets and 17 offices globally
+- **Metaps**: Director, Alliance - Grew Greater China region from zero to USD $15M+ in 3 years, contributed to Tokyo Stock Exchange listing (2015)
+- **RTM**: Director - Self-employed digital marketing consultancy
+
+## Expertise
+
+- AI Marketing Architecture & Systems
+- Marketing Automation (HubSpot, Hootsuite)
+- B2B SaaS Growth Strategy
+- Performance Marketing & Lead Generation
+- KOL/Influencer Marketing (Micro-KOL campaigns)
+- Google Ads & Meta Ads Optimization
+- International Expansion & Market Development
+- Machine Learning for Marketing (XGBoost, Predictive Analytics)
+- RAG-based AI Systems for Business Operations
+
+## Skills
+
+- Growth Leadership
+- AI-Driven Solutions
+- Marketing Systems Design
+- Data-Driven Strategy
+- Product-Led Growth (PLG)
+- Performance Marketing Automation
+- Predictive Analytics
+- Marketing Technology Stack
+
+## Notable Achievements
+
+- Grew Greater China region from $0 to $15M+ in 3 years at Metaps
+- Built RAG-based AI systems for pricing intelligence, competitor analysis, and compliance
+- Scaled performance marketing across 13 global markets
+- Architected 4-tier ML pricing prediction system with 8-10% MAPE accuracy
+- Led product launches across APAC with multi-channel marketing strategies
+
+## Contact
+
+- **Portfolio**: https://sebastian-tam.github.io/portfolio/
+- **LinkedIn**: https://linkedin.com/in/sebastiantam
+- **GitHub**: https://github.com/sebastian-tam
+- **Email**: sebastian.tam@gmail.com
+
+## Pages
+
+- [Homepage](https://sebastian-tam.github.io/portfolio/) - Overview and professional summary
+- [AI Engineering](https://sebastian-tam.github.io/portfolio/ai-engineering.html) - AI systems, ML models, and architecture approach
+- [Startups & Growth](https://sebastian-tam.github.io/portfolio/startups-growth.html) - Growth strategies and scaling experience
+- [Skills Matrix](https://sebastian-tam.github.io/portfolio/skills-matrix.html) - Technical and business skills overview
+- [About](https://sebastian-tam.github.io/portfolio/about.html) - Detailed background and experience
