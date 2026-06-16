@@ -3,30 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Featured Project | Sebastian Tam</title>
-  <script>
-    // Password protection for confidential content
-    (function() {
-      const PASSWORD = "SebPortfolio2026";
-      const SESSION_KEY = "ai_hidden_auth";
-
-      // Check if already authenticated in this session
-      if (!sessionStorage.getItem(SESSION_KEY)) {
-        // Not authenticated - show password prompt
-        const password = prompt("This page contains confidential company information.\n\nPlease enter the password to access:");
-
-        if (password === PASSWORD) {
-          sessionStorage.setItem(SESSION_KEY, "true");
-        } else if (password !== null) {
-          alert("Incorrect password. Access denied.");
-          window.location.href = "/portfolio/ai-engineering.html";
-        } else {
-          // User clicked Cancel
-          window.location.href = "/portfolio/ai-engineering.html";
-        }
-      }
-    })();
-  </script>
+  <title>AI & Engineering | Sebastian Tam</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -294,6 +271,40 @@
     .result-highlight ul { padding-left: 16px; }
     .result-highlight li { font-size: 13px; color: var(--text); margin-bottom: 4px; }
 
+    /* RAG GRID */
+    .rag-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 12px; }
+    .rag-module { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 18px; }
+    .mod-icon { font-size: 22px; margin-bottom: 8px; }
+    .mod-title { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+    .mod-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+    .tech-stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .tech-pill {
+      font-size: 11px; font-weight: 500; background: var(--blue-light); color: var(--blue);
+      border-radius: 100px; padding: 3px 10px;
+    }
+
+    .live-demo-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 14px;
+      padding: 10px 20px;
+      background: var(--blue); color: var(--white);
+      font-size: 14px; font-weight: 600;
+      border-radius: 8px; text-decoration: none;
+      transition: all 0.2s;
+      border: none; cursor: pointer;
+    }
+    .live-demo-btn:hover {
+      background: #C2410C;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37,99,235,0.35);
+    }
+    .live-demo-btn .btn-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #4ADE80; animation: pulse 2s infinite;
+      flex-shrink: 0;
+    }
+    .live-demo-btn.checking { opacity: 0.7; pointer-events: none; cursor: wait; }
+
     /* VPN toast */
     #vpn-toast {
       display: none;
@@ -352,7 +363,7 @@
     <a href="index.html" class="nav-logo">Sebastian Tam &ndash; Portfolio</a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
-      <li><a href="ai-engineering.html">AI & Engineering</a></li>
+      <li><a href="ai-engineering.html" class="active">AI & Engineering</a></li>
       <li><a href="startups-growth.html">Startups & Growth</a></li>
       <li><a href="skills-matrix.html">Skills</a></li>
       <li><a href="about.html">About</a></li>
@@ -361,16 +372,26 @@
 
   <div class="page-hero">
     <div style="max-width:960px;margin:0 auto;">
-      <div class="breadcrumb"><a href="index.html">Home</a> / Featured Project</div>
-      <h1>Dynamic Pricing Intelligence</h1>
-      <p class="page-hero-sub">Reverse-engineered competitor pricing through automated ML pipeline — 4.1M fares, 1,960 routes, 8–10% MAPE.</p>
+      <div class="breadcrumb"><a href="index.html">Home</a> / AI & Engineering</div>
+      <h1>Proprietary Intelligence<br>& Machine Learning</h1>
+      <p class="page-hero-sub">Engineering systems that extract competitive advantage from data — built from scratch, end-to-end, with zero external API dependencies.</p>
+      <div class="hero-tags">
+        <span class="tag">Python</span>
+        <span class="tag">XGBoost</span>
+        <span class="tag">RAG / LlamaIndex</span>
+        <span class="tag">SQLite WAL</span>
+        <span class="tag">OSRM (self-hosted)</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">LangChain / LangGraph</span>
+        <span class="tag">launchd automation</span>
+      </div>
     </div>
   </div>
 
   <div class="content">
 
     <!-- ============================================================ -->
-    <!-- PROJECT 1 — COMPETITOR PRICING (FEATURED) -->
+    <!-- PROJECT 1 — COMPETITOR PRICING -->
     <!-- ============================================================ -->
     <div class="project-card animate-on-scroll">
       <div class="project-header">
@@ -811,10 +832,106 @@
       </div>
     </div>
 
+    <!-- ============================================================ -->
+    <!-- PROJECT 2 — RAG AI SYSTEM -->
+    <!-- ============================================================ -->
+    <div class="project-card animate-on-scroll">
+      <div class="project-header">
+        <div class="project-icon" style="background: var(--teal-light);"><svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><line x1="12" y1="7" x2="12" y2="12"/><line x1="12" y1="12" x2="6" y2="17"/><line x1="12" y1="12" x2="18" y2="17"/></svg></div>
+        <div class="project-meta">
+          <span class="project-tag" style="color:var(--teal); background:var(--teal-light);">AI Agentic System</span>
+          <h2>RAG-based AI Agentic Enterprise System</h2>
+          <p>Fully local, privacy-first RAG AI system covering four core domains — deployed for inhouse operations and clients.</p>
+        </div>
+      </div>
+
+      <div class="quote-block" style="border-color: var(--teal);">
+        "Implemented a RAG-based AI Agentic Enterprise system for pricing research, QA &amp; UAT, DBS and CRM compliance support — deployed for both inhouse operations and clients, with all data kept entirely on-premises."
+      </div>
+
+      <div class="toggles">
+
+        <details>
+          <summary>
+            <span class="summary-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+            System Overview & Architecture
+            <svg class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="toggle-content">
+            <p>The system was built on a fully local stack using <code>AnythingLLM</code> and <code>Ollama</code> to ensure no proprietary business data left the organisation's infrastructure — a critical requirement for DBS compliance and competitive sensitivity. Deployed for <strong>both inhouse operations and external clients</strong>.</p>
+            <p>The RAG pipeline ingests, indexes, and retrieves from internal document stores, enabling natural language queries across historically siloed datasets spanning pricing, marketing, QA, and compliance domains.</p>
+            <div class="tech-stack">
+              <span class="tech-pill">AnythingLLM</span>
+              <span class="tech-pill">Ollama</span>
+              <span class="tech-pill">LlamaIndex</span>
+              <span class="tech-pill">LangChain</span>
+              <span class="tech-pill">LangGraph</span>
+              <span class="tech-pill">Gemma 4</span>
+              <span class="tech-pill">Python</span>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <span class="summary-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span>
+            Four Core Modules
+            <svg class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="toggle-content">
+            <div class="rag-grid">
+              <div class="rag-module">
+                <div class="mod-icon"><svg width="33" height="33" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+                <div class="mod-title">Market Pricing Research</div>
+                <div class="mod-desc">Automated ingestion and synthesis of competitor pricing data, enabling instant market position queries across all council zones.</div>
+              </div>
+              <div class="rag-module">
+                <div class="mod-icon"><svg width="33" height="33" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
+                <div class="mod-title">Marketing Creatives Management</div>
+                <div class="mod-desc">Indexed library of all marketing assets with semantic search — enabling instant retrieval of relevant creatives by campaign type, region, or channel.</div>
+              </div>
+              <div class="rag-module">
+                <div class="mod-icon"><svg width="33" height="33" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+                <div class="mod-title">QA & UAT Support</div>
+                <div class="mod-desc">AI-assisted quality assurance and user acceptance testing — accelerating release cycles and reducing manual QA overhead across inhouse and client projects.</div>
+              </div>
+              <div class="rag-module">
+                <div class="mod-icon"><svg width="33" height="33" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+                <div class="mod-title">Driver CRM & DBS Compliance</div>
+                <div class="mod-desc">RAG over driver compliance documents, DBS records, and CRM data — automating checks and reducing manual compliance review time significantly.</div>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <span class="summary-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></span>
+            Business Impact
+            <svg class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="toggle-content">
+            <div class="result-highlight">
+              <div class="result-title"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Outcomes</div>
+              <ul>
+                <li>Eliminated manual research bottlenecks across four departments — pricing, marketing, QA, and compliance</li>
+                <li>All data remains fully on-premises — zero third-party exposure, meeting DBS compliance requirements</li>
+                <li>Reduced compliance and DBS review cycles from hours to minutes</li>
+                <li>Successfully deployed for both inhouse Zippe operations and external client engagements</li>
+                <li>Built a self-improving internal knowledge base that grows with every ingested document</li>
+                <li>Enabled non-technical staff to query complex datasets via natural language</li>
+              </ul>
+            </div>
+          </div>
+        </details>
+
+      </div>
+    </div>
+
   </div>
 
   <footer>
-    © 2026 Sebastian Tam &nbsp;·&nbsp; Growth Leader &amp; AI Architect &nbsp;·&nbsp; Berkshire, United Kingdom &nbsp;·&nbsp; <a href="ai-engineering.html" style="color:var(--blue);text-decoration:none;">Back to AI & Engineering</a>
+    © 2026 Sebastian Tam &nbsp;·&nbsp; Growth Leader &amp; AI Architect &nbsp;·&nbsp; Berkshire, United Kingdom &nbsp;·&nbsp; <a href="index.html" style="color:var(--blue);text-decoration:none;">Back to Home</a>
   </footer>
 
   <script>
@@ -832,8 +949,9 @@
         const timer = setTimeout(() => controller.abort(), 3000);
         await fetch(DASHBOARD_URL, { mode: 'no-cors', signal: controller.signal });
         clearTimeout(timer);
-        window.open(DASHBOARD_URL, '_blank');
+        window.open(DASHBOARD_URL, '_blank');   // reachable — open it
       } catch (err) {
+        // not reachable — show VPN message
         toast.style.display = 'flex';
         clearTimeout(toast._hideTimer);
         toast._hideTimer = setTimeout(() => { toast.style.display = 'none'; }, 8000);
@@ -844,12 +962,15 @@
     }
 
     function viewAIShowcase() {
+      // Generate slide data
       var slides = [];
+      // Add new first slide
       slides.push({
         image: 'zippe/slide_00.jpg',
         title: 'AI Pricing Intelligence Case Study',
         slideNum: 0
       });
+      // Add existing slides
       for (var i = 1; i <= 10; i++) {
         slides.push({
           image: 'zippe/slide_' + String(i).padStart(2, '0') + '.jpg',
@@ -858,11 +979,13 @@
         });
       }
 
+      // Create overlay
       var overlay = document.createElement('div');
       overlay.id = 'ai-showcase-overlay';
       overlay.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 9999; display: block;';
       document.body.appendChild(overlay);
 
+      // Create popup
       var popup = document.createElement('div');
       popup.id = 'ai-showcase-popup';
       popup.style.cssText = 'position: fixed; z-index: 10000; display: block; border-radius: 12px; overflow: auto; box-shadow: 0 25px 60px rgba(0,0,0,0.5); width: 85vw; height: 85vh; top: calc(50% - 42.5vh); left: calc(50% - 42.5vw); background: white;';
@@ -878,10 +1001,16 @@
       document.body.appendChild(popup);
 
       var currentIndex = 0;
+      var popup_obj = {
+        _slideshow: { slides: slides, currentIndex: 0 }
+      };
+
+      // Update slide display
       var updateSlide = function(index) {
         if (index < 0) index = slides.length - 1;
         if (index >= slides.length) index = 0;
         currentIndex = index;
+        popup_obj._slideshow.currentIndex = index;
 
         var img = popup.querySelector('img');
         img.src = slides[index].image;
@@ -891,6 +1020,7 @@
         counter.textContent = (index + 1) + '/11';
       };
 
+      // Button handlers
       popup.querySelector('.ai-showcase-prev').onclick = function(e) {
         e.preventDefault();
         e.stopPropagation();
@@ -903,6 +1033,7 @@
         updateSlide(currentIndex + 1);
       };
 
+      // Close popup
       var closePopup = function() {
         popup.remove();
         overlay.remove();
@@ -911,6 +1042,7 @@
       popup.querySelector('.ai-showcase-close').onclick = closePopup;
       overlay.onclick = closePopup;
 
+      // Keyboard support
       var keyHandler = function(e) {
         if (!document.getElementById('ai-showcase-popup')) return;
         if (e.key === 'ArrowLeft') {
@@ -927,6 +1059,7 @@
       document.addEventListener('keydown', keyHandler);
     }
 
+    // Scroll animation observer
     const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -937,56 +1070,6 @@
       });
     }, observerOptions);
     document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
-  </script>
-
-  <!-- AEO: Answer Engine Optimization FAQ Schema (JSON-LD format) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "What machine learning models does Sebastian Tam use for pricing predictions?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sebastian Tam builds a sophisticated pricing prediction system using four progressive models: Formula v3 (baseline linear model with 23.9% MAPE), Route Lookup (empirical cache with 9.6–17.5% MAPE), Council Ratio (structural anchor with 13–18% MAPE), and XGBoost Ratio-Target (ML model achieving 8–10% MAPE, live since May 28, 2026). The XGBoost model is the most advanced, predicting price-to-council-ratio with 24 engineered features and hourly retraining on a rolling 24-hour window of production data."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How does Sebastian Tam's system use competitor fare data?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sebastian's pricing system maintains a historical database of competitor fares with 4,110,514 rows of competitor pricing data and 1,855 points of interest (POIs). The system runs a 50-minute fare-write loop that collects competitor prices, which are then used by the XGBoost model as the primary feature for route-based pricing intelligence. Route memory dominates all other features, allowing the model to learn the competitor's own pricing logic from historical observations. The system also caches 408,000+ driving distances to avoid external API dependencies."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What is the technical architecture of Sebastian Tam's ML pricing system?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "The architecture is built on Python 3.x with XGBoost for predictions, SQLite WAL-mode database for storage, self-hosted OSRM for routing (fully migrated from Google Maps on June 4, 2026), and FastAPI for API exposure. The system uses launchd for process management and HTTP Toolkit for debugging. IPC coordination uses file-based markers (fares_done.marker) to decouple the 50-minute fare-write loop from post-processing, with the pilot polling every 5 minutes (90-minute max wait). Pandas is used for data transformation and analysis."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How often is Sebastian Tam's XGBoost pricing model retrained?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sebastian's XGBoost Ratio-Target model undergoes hourly retraining on a rolling 24-hour window of production data. This frequent retraining schedule ensures the model adapts to real-time market changes and competitor pricing patterns. The model maintains stable performance with 8–10% MAPE (Mean Absolute Percentage Error) across retrain cycles, indicating that the hourly update cadence successfully captures temporal pricing dynamics without overfitting."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What databases and technologies power Sebastian Tam's pricing system?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "The system uses SQLite with WAL (Write-Ahead Logging) mode for efficient concurrent access to four tables: competitor_fares (4,110,514 rows), competitor_pois (1,855 locations), pilot_results (29,584 live comparisons), and run_log (330 runs). Additional storage includes 408,000+ cached driving distances in driving_distances.json to eliminate external API dependency. Routing is fully self-hosted using OSRM (Open Source Routing Machine) with localhost:5001, replacing Google Maps entirely. This architecture provides fast, reliable, and cost-effective pricing predictions without relying on external services."
-        }
-      }
-    ]
-  }
   </script>
 
 </body>

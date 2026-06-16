@@ -1,0 +1,21 @@
+=== AI Show Case Feature Backup ===
+Date: 2026-06-07 10:58 GMT
+Location: /Users/sebastiantam/portfolio/backup/2026-06-07_AI-ShowCase/
+
+Contents:
+- startups-growth.html (Main HTML with feature implementation)
+- create_ppt.py (PowerPoint generation script - 7-slide version)
+- zippe/ directory (All 10 JPEG slides at 2667x1500, 150 DPI)
+
+Feature Summary:
+- AI Show Case thumbnail in Zippe section
+- 85vw x 85vh centered popup viewer
+- Forward/backward navigation buttons
+- Slide counter display
+- Keyboard support (arrow keys)
+- All 10 Brand Z pricing intelligence slides
+
+Git Commit: f55d8c2 (Use calc() for precise popup centering)
+Status: PRODUCTION READY
+
+Total Size: ~3.5 MB

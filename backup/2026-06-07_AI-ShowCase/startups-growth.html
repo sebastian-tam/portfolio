@@ -275,11 +275,6 @@
       text-align: center;
     }
 
-    /* Hide preview for AI showcase */
-    .photo-thumb[data-case-study="ai-showcase"] .photo-preview {
-      display: none !important;
-    }
-
     /* CASE STUDY POPUP */
     .case-study-trigger {
       cursor: pointer;
@@ -424,6 +419,14 @@
           <div class="photo-lane">
             <img class="lane-logo" src="logo-zippe.png" alt="Zippe"
                  onerror="this.style.display='none'">
+            <div class="photo-thumb case-study-thumbnail" data-case-study="ai-showcase" style="cursor: pointer;">
+              <img src="zippe/slide_01.jpg" alt="AI Showcase - Brand Z Pricing Intelligence">
+              <div class="photo-badge">AI Show Case</div>
+              <div class="photo-preview">
+                <img src="zippe/slide_01.jpg" alt="AI Showcase">
+                <div class="preview-caption">AI Show Case: Brand Z Pricing Intelligence</div>
+              </div>
+            </div>
           </div>
           <div class="role-content">
           <div class="role-header">
@@ -533,19 +536,11 @@
               </div>
             </div>
             <div class="photo-thumb case-study-thumbnail" data-case-study="anymind-kol" style="cursor: pointer;">
-              <img src="anymind-kol-case-study.jpg" alt="Micro-Influencer Campaign Case Study">
+              <img src="case-study-anymind-kol.jpg" alt="Social Media Marketing Case Study">
               <div class="photo-badge">Success Case</div>
               <div class="photo-preview">
-                <img src="anymind-kol-case-study.jpg" alt="Global Beverage Brand Micro-KOL Success">
+                <img src="case-study-anymind-kol.jpg" alt="Global Beverage Brand Case Study">
                 <div class="preview-caption">Micro-KOLs Campaign Case Study</div>
-              </div>
-            </div>
-            <div class="photo-thumb case-study-thumbnail" data-case-study="anymind-seo" style="cursor: pointer;">
-              <img src="anymind-seo/case-study-main.jpg" alt="E-Commerce Hyper-Growth Case Study">
-              <div class="photo-badge">Success Case</div>
-              <div class="photo-preview">
-                <img src="anymind-seo/case-study-main.jpg" alt="Japanese Luggage Brand E-Commerce Success">
-                <div class="preview-caption">E-Commerce Hyper-Growth Case Study</div>
               </div>
             </div>
           </div>
@@ -590,7 +585,7 @@
           </div>
           <div class="role-bullets">
             <ul>
-              <li><span class="sub-label case-study-trigger" data-case-study="anymind-seo">SEO/SEM</span><span class="sub-label">: </span>Helped a Japanese luggage brand to optimize SEO and SEM campaigns in 10 regional websites with deployment of HubSpot platform, hreflang tag, pillar page, cluster content management and multi-language content management. Achieved <strong>32%+ in organic traffic, 360%+ in conversion and 680%+ in online revenues</strong> in one year</li>
+              <li><span class="sub-label">SEO/SEM: </span>Helped a Japanese luggage brand to optimize SEO and SEM campaigns in 10 regional websites with deployment of HubSpot platform, hreflang tag, pillar page, cluster content management and multi-language content management. Achieved <strong>32%+ in organic traffic, 360%+ in conversion and 680%+ in online revenues</strong> in one year</li>
               <li><span class="sub-label case-study-trigger" data-case-study="anymind-kol">Social Media Marketing</span><span class="sub-label">: </span>Helped a global beverage brand launched a Micro-KOLs campaign in 4 Countries (Japan, HK, Taiwan, Vietnam). Utilized thousands of Micro-KOLs in targeted countries to post on FB &amp; IG for photos of featured beverage within campaign period. Achieved <strong>38%+ followers, 95%+ Engagement metrics (CLS), 300%+ forward rate</strong> in 2 weeks campaign period</li>
               <li><span class="sub-label">P&amp;L: </span>Responsible for P&amp;L and Business Operation for Anymind. Achieved a <strong>million USD revenue for HK office in 11 months</strong> with over 50 customers in total</li>
             </ul>
@@ -640,14 +635,6 @@
                 <div class="preview-caption">Metaps Greater China</div>
               </div>
             </div>
-            <div class="photo-thumb case-study-thumbnail" data-case-study="metaps-mam" style="cursor: pointer;">
-              <img src="metaps-mam/slide_01.jpg" alt="Mobile App Marketing Success Case">
-              <div class="photo-badge">Mobile App</div>
-              <div class="photo-preview">
-                <img src="metaps-mam/slide_01.jpg" alt="Mobile App Marketing">
-                <div class="preview-caption">Mobile App Marketing Success</div>
-              </div>
-            </div>
           </div>
           <!-- card content -->
           <div class="role-content">
@@ -692,7 +679,7 @@
           </div>
           <div class="role-bullets">
             <ul>
-              <li><span class="sub-label case-study-trigger" data-case-study="metaps-mam">Mobile App Marketing</span><span class="sub-label">: </span>Helped hundreds of mobile games/app developers launched mobile app in Asia and global marketing, achieved Average <strong>D7 ROAS of 150%+</strong> and helped dozens of mobile apps reaching <strong>Top 3 Gross App Ranking</strong> in global and regional markets</li>
+              <li><span class="sub-label">Mobile App Marketing: </span>Helped hundreds of mobile games/app developers launched mobile app in Asia and global marketing, achieved Average <strong>D7 ROAS of 150%+</strong> and helped dozens of mobile apps reaching <strong>Top 3 Gross App Ranking</strong> in global and regional markets</li>
               <li><span class="sub-label">Office Setup &amp; Operation: </span>Responsible for Metaps Greater China office setup and management (3 remote office with 6 persons)</li>
               <li><span class="sub-label">Inbound/Outbound Marketing &amp; CRM: </span>Implement <strong>HubSpot, Hootsuite</strong> marketing Platform for company's marketing &amp; SSM management for regional operation including B2B Marketing content creation, automation, event attendance and collateral materials</li>
               <li><span class="sub-label">Series A to IPO Runway: </span>Achieved revenue growth in Greater China region from zero (3/2012) to <strong>USD 15 Million+ in 3 years</strong> and successfully listed in Tokyo Stock Exchange in 2015</li>
@@ -755,36 +742,18 @@
     function initCaseStudyPopup() {
       // Generate AI showcase slides data
       var aiShowcaseSlides = [];
-      // Add first slide only
-      aiShowcaseSlides.push({
-        image: 'zippe/slide_00.jpg',
-        title: 'AI Pricing Intelligence Case Study',
-        slideNum: 0
-      });
-
-      // Generate Metaps MAM slides data
-      var metapsMAMSlides = [];
-      for (var i = 1; i <= 5; i++) {
-        metapsMAMSlides.push({
-          image: 'metaps-mam/slide_' + String(i).padStart(2, '0') + '.jpg',
-          title: 'Metaps Mobile App Marketing - Slide ' + i,
+      for (var i = 1; i <= 10; i++) {
+        aiShowcaseSlides.push({
+          image: 'zippe/slide_' + String(i).padStart(2, '0') + '.jpg',
+          title: 'Brand Z Pricing Intelligence - Slide ' + i,
           slideNum: i
         });
       }
 
       var caseStudies = {
         'anymind-kol': {
-          image: 'anymind-kol-case-study.jpg',
-          title: 'Global Beverage Brand - 2-Week Micro-Influencer Blitz'
-        },
-        'anymind-seo': {
-          image: 'anymind-seo/case-study-main.jpg',
-          title: 'E-Commerce Hyper-Growth: Japanese Luggage Brand'
-        },
-        'metaps-mam': {
-          slides: metapsMAMSlides,
-          title: 'Metaps Mobile App Marketing Success',
-          isSlideshow: true
+          image: 'case-study-anymind-kol.jpg',
+          title: 'Global Beverage Brand - Micro-KOL Campaign'
         },
         'ai-showcase': {
           slides: aiShowcaseSlides,
@@ -845,12 +814,9 @@
         var controlsHTML = '<div class="case-study-controls">';
 
         if (isSlideshow) {
-          var totalSlides = caseStudy.slides.length;
-          if (totalSlides > 1) {
-            controlsHTML += '<button class="case-study-btn case-study-prev" title="Previous Slide">‹</button>' +
-                            '<button class="case-study-btn case-study-slide-counter" title="Slide Info" style="width:auto;min-width:60px;cursor:default;">1/' + totalSlides + '</button>' +
-                            '<button class="case-study-btn case-study-next" title="Next Slide">›</button>';
-          }
+          controlsHTML += '<button class="case-study-btn case-study-prev" title="Previous Slide">‹</button>' +
+                          '<button class="case-study-btn case-study-slide-counter" title="Slide Info" style="width:auto;min-width:60px;cursor:default;">1/10</button>' +
+                          '<button class="case-study-btn case-study-next" title="Next Slide">›</button>';
         } else {
           controlsHTML += '<button class="case-study-btn case-study-enlarge" title="Enlarge" onclick="return false;">⛶</button>';
         }
@@ -1008,30 +974,6 @@
       initCaseStudyPopup();
     }
 
-    // Auto-open case study if hash is present
-    function autoOpenCaseStudy() {
-      var hash = window.location.hash.substring(1); // remove #
-      if (hash && (hash === 'ai-showcase' || hash === 'anymind-seo' || hash === 'anymind-kol')) {
-        setTimeout(function() {
-          var trigger = document.querySelector('[data-case-study="' + hash + '"]');
-          if (trigger) {
-            trigger.click();
-            // Scroll to the section
-            var section = trigger.closest('.timeline-item');
-            if (section) {
-              section.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-          }
-        }, 300);
-      }
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', autoOpenCaseStudy);
-    } else {
-      autoOpenCaseStudy();
-    }
-
     // Scroll animation observer
     const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
     const observer = new IntersectionObserver((entries) => {
@@ -1043,56 +985,6 @@
       });
     }, observerOptions);
     document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
-  </script>
-
-  <!-- AEO: Answer Engine Optimization FAQ Schema (JSON-LD format) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "What startup growth strategies does Sebastian Tam use?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sebastian Tam employs data-driven growth strategies combining performance marketing, product-led growth (PLG), international expansion, and AI-powered systems. His approach focuses on measurable KPIs, scaling repeatable channels, and implementing marketing automation platforms like HubSpot and Hootsuite. He specializes in translating business vision into executable growth roadmaps that balance rapid scaling with sustainable unit economics."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Which startups and companies has Sebastian Tam worked with?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sebastian Tam has led growth initiatives at multiple high-growth companies: Zippe Group (RAG-based AI systems for pricing and compliance), RTM (Director role), AnyMind Group (global platform in 13 markets and 17 offices), and Metaps (B2B SaaS mobile app marketing, Tokyo Stock Exchange listed). His experience spans early-stage startups through publicly-listed companies across APAC regions and international markets."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How has Sebastian Tam scaled startups internationally?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sebastian Tam has successfully scaled businesses across multiple geographies and markets. At Metaps, he grew the Greater China region from zero to USD $15M+ in just 3 years, directly contributing to the company's Tokyo Stock Exchange listing in 2015. His international scaling experience includes launching operations in multiple APAC markets, establishing regional teams, localizing go-to-market strategies, and building partnerships across different regions to drive accelerated growth."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What is Sebastian Tam's approach to performance marketing?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sebastian Tam's performance marketing approach is grounded in data, automation, and continuous optimization. He implements enterprise-grade marketing platforms (HubSpot, Hootsuite) for campaign management, lead nurturing, and attribution. His methodology includes B2B marketing content strategy, event marketing, personalized outreach, and inbound/outbound marketing workflows. He focuses on measurable ROI, customer acquisition cost optimization, and sales enablement through marketing automation."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How does Sebastian Tam implement AI systems for startup growth?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sebastian Tam develops RAG (Retrieval-Augmented Generation) based AI systems tailored to startup operational challenges. At Zippe Group, he architected an AI system covering Market Pricing Research, Marketing Creatives Management, and CRM compliance support. His approach integrates AI into core business processes—automating research, enabling data-driven decision-making, and building intelligence layers that improve operational efficiency and competitive advantage. These systems scale with the startup as it grows."
-        }
-      }
-    ]
-  }
   </script>
 
 </body>

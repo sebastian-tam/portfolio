@@ -229,11 +229,6 @@
       border-radius: 6px; display: block;
       border: 2px solid transparent;
       transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
-      background: #f0f0f0;
-    }
-    .photo-thumb.case-study-thumbnail > img {
-      object-fit: contain;
-      background: #f5f5f5;
     }
     .photo-thumb:hover > img {
       border-color: #166534;
@@ -273,110 +268,6 @@
       color: white;
       background: #134D30;
       text-align: center;
-    }
-
-    /* Hide preview for AI showcase */
-    .photo-thumb[data-case-study="ai-showcase"] .photo-preview {
-      display: none !important;
-    }
-
-    /* CASE STUDY POPUP */
-    .case-study-trigger {
-      cursor: pointer;
-      text-decoration: underline dotted;
-      transition: all 0.2s;
-    }
-    .case-study-trigger:hover {
-      color: var(--blue);
-      font-weight: 700;
-    }
-    .case-study-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0,0,0,0.5);
-      z-index: 9999;
-      display: none;
-      animation: fadeIn 0.25s ease-out forwards;
-    }
-    .case-study-overlay.active {
-      display: block;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    .case-study-popup {
-      position: fixed;
-      z-index: 10000;
-      display: none;
-      border-radius: 12px;
-      overflow: auto;
-      box-shadow: 0 25px 60px rgba(0,0,0,0.5);
-      animation: popupFadeIn 0.3s ease-out forwards;
-      width: 85vw;
-      height: 85vh;
-      top: calc(50% - 42.5vh);
-      left: calc(50% - 42.5vw);
-    }
-    .case-study-popup.active {
-      display: block;
-    }
-    .case-study-popup.fullscreen {
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      width: 100%;
-      height: 100%;
-      transform: none;
-      border-radius: 0;
-    }
-    @keyframes popupFadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    .case-study-popup img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
-    }
-    .case-study-controls {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      display: flex;
-      gap: 10px;
-      z-index: 10002;
-      flex-direction: row;
-      pointer-events: auto;
-    }
-    .case-study-btn {
-      background: rgba(0,0,0,0.85);
-      color: white;
-      border: 2px solid rgba(255,255,255,0.4);
-      border-radius: 50%;
-      width: 48px;
-      height: 48px;
-      cursor: pointer;
-      font-size: 22px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-      flex-shrink: 0;
-      padding: 0;
-      line-height: 1;
-      pointer-events: auto;
-      z-index: 10003;
-    }
-    .case-study-btn:hover {
-      background: rgba(0,0,0,0.95);
-      border-color: rgba(255,255,255,0.7);
-      transform: scale(1.08);
     }
 
   </style>
@@ -532,22 +423,6 @@
                 <div class="preview-caption">AnyMind Hong Kong Team</div>
               </div>
             </div>
-            <div class="photo-thumb case-study-thumbnail" data-case-study="anymind-kol" style="cursor: pointer;">
-              <img src="anymind-kol-case-study.jpg" alt="Micro-Influencer Campaign Case Study">
-              <div class="photo-badge">Success Case</div>
-              <div class="photo-preview">
-                <img src="anymind-kol-case-study.jpg" alt="Global Beverage Brand Micro-KOL Success">
-                <div class="preview-caption">Micro-KOLs Campaign Case Study</div>
-              </div>
-            </div>
-            <div class="photo-thumb case-study-thumbnail" data-case-study="anymind-seo" style="cursor: pointer;">
-              <img src="anymind-seo/case-study-main.jpg" alt="E-Commerce Hyper-Growth Case Study">
-              <div class="photo-badge">Success Case</div>
-              <div class="photo-preview">
-                <img src="anymind-seo/case-study-main.jpg" alt="Japanese Luggage Brand E-Commerce Success">
-                <div class="preview-caption">E-Commerce Hyper-Growth Case Study</div>
-              </div>
-            </div>
           </div>
           <!-- card content -->
           <div class="role-content">
@@ -590,8 +465,8 @@
           </div>
           <div class="role-bullets">
             <ul>
-              <li><span class="sub-label case-study-trigger" data-case-study="anymind-seo">SEO/SEM</span><span class="sub-label">: </span>Helped a Japanese luggage brand to optimize SEO and SEM campaigns in 10 regional websites with deployment of HubSpot platform, hreflang tag, pillar page, cluster content management and multi-language content management. Achieved <strong>32%+ in organic traffic, 360%+ in conversion and 680%+ in online revenues</strong> in one year</li>
-              <li><span class="sub-label case-study-trigger" data-case-study="anymind-kol">Social Media Marketing</span><span class="sub-label">: </span>Helped a global beverage brand launched a Micro-KOLs campaign in 4 Countries (Japan, HK, Taiwan, Vietnam). Utilized thousands of Micro-KOLs in targeted countries to post on FB &amp; IG for photos of featured beverage within campaign period. Achieved <strong>38%+ followers, 95%+ Engagement metrics (CLS), 300%+ forward rate</strong> in 2 weeks campaign period</li>
+              <li><span class="sub-label">SEO/SEM: </span>Helped a Japanese luggage brand to optimize SEO and SEM campaigns in 10 regional websites with deployment of HubSpot platform, hreflang tag, pillar page, cluster content management and multi-language content management. Achieved <strong>32%+ in organic traffic, 360%+ in conversion and 680%+ in online revenues</strong> in one year</li>
+              <li><span class="sub-label">Social Media Marketing: </span>Helped a global beverage brand launched a Micro-KOLs campaign in 4 Countries (Japan, HK, Taiwan, Vietnam). Utilized thousands of Micro-KOLs in targeted countries to post on FB &amp; IG for photos of featured beverage within campaign period. Achieved <strong>38%+ followers, 95%+ Engagement metrics (CLS), 300%+ forward rate</strong> in 2 weeks campaign period</li>
               <li><span class="sub-label">P&amp;L: </span>Responsible for P&amp;L and Business Operation for Anymind. Achieved a <strong>million USD revenue for HK office in 11 months</strong> with over 50 customers in total</li>
             </ul>
           </div>
@@ -640,14 +515,6 @@
                 <div class="preview-caption">Metaps Greater China</div>
               </div>
             </div>
-            <div class="photo-thumb case-study-thumbnail" data-case-study="metaps-mam" style="cursor: pointer;">
-              <img src="metaps-mam/slide_01.jpg" alt="Mobile App Marketing Success Case">
-              <div class="photo-badge">Mobile App</div>
-              <div class="photo-preview">
-                <img src="metaps-mam/slide_01.jpg" alt="Mobile App Marketing">
-                <div class="preview-caption">Mobile App Marketing Success</div>
-              </div>
-            </div>
           </div>
           <!-- card content -->
           <div class="role-content">
@@ -692,7 +559,7 @@
           </div>
           <div class="role-bullets">
             <ul>
-              <li><span class="sub-label case-study-trigger" data-case-study="metaps-mam">Mobile App Marketing</span><span class="sub-label">: </span>Helped hundreds of mobile games/app developers launched mobile app in Asia and global marketing, achieved Average <strong>D7 ROAS of 150%+</strong> and helped dozens of mobile apps reaching <strong>Top 3 Gross App Ranking</strong> in global and regional markets</li>
+              <li><span class="sub-label">Mobile App Marketing: </span>Helped hundreds of mobile games/app developers launched mobile app in Asia and global marketing, achieved Average <strong>D7 ROAS of 150%+</strong> and helped dozens of mobile apps reaching <strong>Top 3 Gross App Ranking</strong> in global and regional markets</li>
               <li><span class="sub-label">Office Setup &amp; Operation: </span>Responsible for Metaps Greater China office setup and management (3 remote office with 6 persons)</li>
               <li><span class="sub-label">Inbound/Outbound Marketing &amp; CRM: </span>Implement <strong>HubSpot, Hootsuite</strong> marketing Platform for company's marketing &amp; SSM management for regional operation including B2B Marketing content creation, automation, event attendance and collateral materials</li>
               <li><span class="sub-label">Series A to IPO Runway: </span>Achieved revenue growth in Greater China region from zero (3/2012) to <strong>USD 15 Million+ in 3 years</strong> and successfully listed in Tokyo Stock Exchange in 2015</li>
@@ -751,287 +618,6 @@
       initPhotoPreviews();
     }
 
-    // Case study popup
-    function initCaseStudyPopup() {
-      // Generate AI showcase slides data
-      var aiShowcaseSlides = [];
-      // Add first slide only
-      aiShowcaseSlides.push({
-        image: 'zippe/slide_00.jpg',
-        title: 'AI Pricing Intelligence Case Study',
-        slideNum: 0
-      });
-
-      // Generate Metaps MAM slides data
-      var metapsMAMSlides = [];
-      for (var i = 1; i <= 5; i++) {
-        metapsMAMSlides.push({
-          image: 'metaps-mam/slide_' + String(i).padStart(2, '0') + '.jpg',
-          title: 'Metaps Mobile App Marketing - Slide ' + i,
-          slideNum: i
-        });
-      }
-
-      var caseStudies = {
-        'anymind-kol': {
-          image: 'anymind-kol-case-study.jpg',
-          title: 'Global Beverage Brand - 2-Week Micro-Influencer Blitz'
-        },
-        'anymind-seo': {
-          image: 'anymind-seo/case-study-main.jpg',
-          title: 'E-Commerce Hyper-Growth: Japanese Luggage Brand'
-        },
-        'metaps-mam': {
-          slides: metapsMAMSlides,
-          title: 'Metaps Mobile App Marketing Success',
-          isSlideshow: true
-        },
-        'ai-showcase': {
-          slides: aiShowcaseSlides,
-          title: 'AI Show Case: Brand Z Pricing Intelligence',
-          isSlideshow: true
-        }
-      };
-
-      // Handle both text triggers and thumbnail triggers
-      document.querySelectorAll('.case-study-trigger, .case-study-thumbnail').forEach(function(trigger) {
-        var caseStudyId = trigger.getAttribute('data-case-study');
-        var caseStudy = caseStudies[caseStudyId];
-
-        if (!caseStudy) return;
-
-        trigger.addEventListener('click', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          showCaseStudyPopup(caseStudy, trigger);
-        });
-
-        // Hover for text trigger only
-        if (trigger.classList.contains('case-study-trigger')) {
-          trigger.addEventListener('mouseenter', function() {
-            showCaseStudyPopup(caseStudy, trigger);
-          });
-        }
-      });
-
-      function showCaseStudyPopup(caseStudy, triggerEl) {
-        // Remove existing popup and overlay
-        var existingPopup = document.getElementById('case-study-popup');
-        var existingOverlay = document.getElementById('case-study-overlay');
-        if (existingPopup) existingPopup.remove();
-        if (existingOverlay) existingOverlay.remove();
-
-        // Create overlay
-        var overlay = document.createElement('div');
-        overlay.id = 'case-study-overlay';
-        overlay.className = 'case-study-overlay active';
-        document.body.appendChild(overlay);
-
-        // Create popup
-        var popup = document.createElement('div');
-        popup.id = 'case-study-popup';
-        popup.className = 'case-study-popup active';
-        var isFullscreen = false;
-
-        // Store overlay reference on popup for later access
-        popup._overlay = overlay;
-
-        // Determine if this is a slideshow
-        var isSlideshow = caseStudy.isSlideshow;
-        var currentSlideIndex = 0;
-
-        // Build popup content
-        var img = isSlideshow ? caseStudy.slides[0].image : caseStudy.image;
-        var controlsHTML = '<div class="case-study-controls">';
-
-        if (isSlideshow) {
-          var totalSlides = caseStudy.slides.length;
-          if (totalSlides > 1) {
-            controlsHTML += '<button class="case-study-btn case-study-prev" title="Previous Slide">‹</button>' +
-                            '<button class="case-study-btn case-study-slide-counter" title="Slide Info" style="width:auto;min-width:60px;cursor:default;">1/' + totalSlides + '</button>' +
-                            '<button class="case-study-btn case-study-next" title="Next Slide">›</button>';
-          }
-        } else {
-          controlsHTML += '<button class="case-study-btn case-study-enlarge" title="Enlarge" onclick="return false;">⛶</button>';
-        }
-
-        controlsHTML += '<button class="case-study-btn case-study-close" title="Close">×</button></div>';
-
-        popup.innerHTML = controlsHTML + '<img src="' + img + '" alt="' + caseStudy.title + '">';
-        document.body.appendChild(popup);
-
-        // Store slideshow state
-        if (isSlideshow) {
-          popup._slideshow = {
-            slides: caseStudy.slides,
-            currentIndex: 0
-          };
-        }
-
-        // Close popup function
-        var closePopup = function() {
-          popup.remove();
-          overlay.remove();
-        };
-
-        // Update slide display function
-        var updateSlideDisplay = function(index) {
-          if (!isSlideshow || !popup._slideshow) return;
-
-          var slides = popup._slideshow.slides;
-          if (index < 0) index = slides.length - 1;
-          if (index >= slides.length) index = 0;
-
-          popup._slideshow.currentIndex = index;
-
-          var img = popup.querySelector('img');
-          img.src = slides[index].image;
-          img.alt = slides[index].title;
-
-          var counter = popup.querySelector('.case-study-slide-counter');
-          if (counter) {
-            counter.textContent = (index + 1) + '/' + slides.length;
-          }
-        };
-
-        if (isSlideshow) {
-          // Slideshow navigation
-          var prevBtn = popup.querySelector('.case-study-prev');
-          var nextBtn = popup.querySelector('.case-study-next');
-
-          if (prevBtn) {
-            prevBtn.onclick = function(e) {
-              e.preventDefault();
-              e.stopPropagation();
-              updateSlideDisplay(popup._slideshow.currentIndex - 1);
-            };
-          }
-
-          if (nextBtn) {
-            nextBtn.onclick = function(e) {
-              e.preventDefault();
-              e.stopPropagation();
-              updateSlideDisplay(popup._slideshow.currentIndex + 1);
-            };
-          }
-
-          // Keyboard navigation
-          var keyHandler = function(e) {
-            if (document.getElementById('case-study-popup') !== popup) return;
-            if (e.key === 'ArrowLeft') {
-              updateSlideDisplay(popup._slideshow.currentIndex - 1);
-              e.preventDefault();
-            } else if (e.key === 'ArrowRight') {
-              updateSlideDisplay(popup._slideshow.currentIndex + 1);
-              e.preventDefault();
-            }
-          };
-          document.addEventListener('keydown', keyHandler);
-          popup._keyHandler = keyHandler;
-        } else {
-          // Enlarge button for single case study
-          popup._enlargeHandler = function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            var img = popup.querySelector('img');
-            if (!img) return;
-
-            popup.style.display = 'none';
-            popup._overlay.style.display = 'none';
-
-            var fullscreenOverlay = document.createElement('div');
-            fullscreenOverlay.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 9998; display: flex; align-items: center; justify-content: center;';
-
-            var fsContainer = document.createElement('div');
-            fsContainer.style.cssText = 'position: relative; width: 95vw; height: 95vh; background: white; border-radius: 8px; overflow: auto; z-index: 9999;';
-
-            var fsImg = img.cloneNode(true);
-            fsImg.style.cssText = 'width: 100%; height: auto; display: block;';
-
-            var fsControls = document.createElement('div');
-            fsControls.style.cssText = 'position: absolute; top: 12px; right: 12px; z-index: 10000;';
-            fsControls.innerHTML = '<button id="fs-close" style="background: rgba(0,0,0,0.85); color: white; border: 2px solid rgba(255,255,255,0.4); border-radius: 50%; width: 48px; height: 48px; cursor: pointer; font-size: 22px; padding: 0; line-height: 1;">×</button>';
-
-            fsContainer.appendChild(fsImg);
-            fsContainer.appendChild(fsControls);
-            fullscreenOverlay.appendChild(fsContainer);
-            document.body.appendChild(fullscreenOverlay);
-
-            var closeFullscreen = function() {
-              fullscreenOverlay.remove();
-              popup.style.display = 'block';
-              popup._overlay.style.display = 'block';
-            };
-
-            fsControls.querySelector('#fs-close').onclick = closeFullscreen;
-            fullscreenOverlay.onclick = function(e2) {
-              if (e2.target === fullscreenOverlay) closeFullscreen();
-            };
-
-            var escapeHandler = function(e2) {
-              if (e2.key === 'Escape') {
-                closeFullscreen();
-                document.removeEventListener('keydown', escapeHandler);
-              }
-            };
-            document.addEventListener('keydown', escapeHandler);
-          };
-
-          var enlargeBtn = popup.querySelector('.case-study-enlarge');
-          if (enlargeBtn) {
-            enlargeBtn.onclick = popup._enlargeHandler;
-          }
-        }
-
-        // Close button handler
-        popup.querySelector('.case-study-close').addEventListener('click', closePopup);
-        overlay.addEventListener('click', closePopup);
-
-        // Close on escape
-        var closeOnEscape = function(e) {
-          if (e.key === 'Escape') {
-            closePopup();
-            document.removeEventListener('keydown', closeOnEscape);
-            if (popup._keyHandler) {
-              document.removeEventListener('keydown', popup._keyHandler);
-            }
-          }
-        };
-        document.addEventListener('keydown', closeOnEscape);
-      }
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initCaseStudyPopup);
-    } else {
-      initCaseStudyPopup();
-    }
-
-    // Auto-open case study if hash is present
-    function autoOpenCaseStudy() {
-      var hash = window.location.hash.substring(1); // remove #
-      if (hash && (hash === 'ai-showcase' || hash === 'anymind-seo' || hash === 'anymind-kol')) {
-        setTimeout(function() {
-          var trigger = document.querySelector('[data-case-study="' + hash + '"]');
-          if (trigger) {
-            trigger.click();
-            // Scroll to the section
-            var section = trigger.closest('.timeline-item');
-            if (section) {
-              section.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-          }
-        }, 300);
-      }
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', autoOpenCaseStudy);
-    } else {
-      autoOpenCaseStudy();
-    }
-
     // Scroll animation observer
     const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
     const observer = new IntersectionObserver((entries) => {
@@ -1043,56 +629,6 @@
       });
     }, observerOptions);
     document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
-  </script>
-
-  <!-- AEO: Answer Engine Optimization FAQ Schema (JSON-LD format) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "What startup growth strategies does Sebastian Tam use?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sebastian Tam employs data-driven growth strategies combining performance marketing, product-led growth (PLG), international expansion, and AI-powered systems. His approach focuses on measurable KPIs, scaling repeatable channels, and implementing marketing automation platforms like HubSpot and Hootsuite. He specializes in translating business vision into executable growth roadmaps that balance rapid scaling with sustainable unit economics."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Which startups and companies has Sebastian Tam worked with?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sebastian Tam has led growth initiatives at multiple high-growth companies: Zippe Group (RAG-based AI systems for pricing and compliance), RTM (Director role), AnyMind Group (global platform in 13 markets and 17 offices), and Metaps (B2B SaaS mobile app marketing, Tokyo Stock Exchange listed). His experience spans early-stage startups through publicly-listed companies across APAC regions and international markets."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How has Sebastian Tam scaled startups internationally?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sebastian Tam has successfully scaled businesses across multiple geographies and markets. At Metaps, he grew the Greater China region from zero to USD $15M+ in just 3 years, directly contributing to the company's Tokyo Stock Exchange listing in 2015. His international scaling experience includes launching operations in multiple APAC markets, establishing regional teams, localizing go-to-market strategies, and building partnerships across different regions to drive accelerated growth."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What is Sebastian Tam's approach to performance marketing?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sebastian Tam's performance marketing approach is grounded in data, automation, and continuous optimization. He implements enterprise-grade marketing platforms (HubSpot, Hootsuite) for campaign management, lead nurturing, and attribution. His methodology includes B2B marketing content strategy, event marketing, personalized outreach, and inbound/outbound marketing workflows. He focuses on measurable ROI, customer acquisition cost optimization, and sales enablement through marketing automation."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How does Sebastian Tam implement AI systems for startup growth?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sebastian Tam develops RAG (Retrieval-Augmented Generation) based AI systems tailored to startup operational challenges. At Zippe Group, he architected an AI system covering Market Pricing Research, Marketing Creatives Management, and CRM compliance support. His approach integrates AI into core business processes—automating research, enabling data-driven decision-making, and building intelligence layers that improve operational efficiency and competitive advantage. These systems scale with the startup as it grows."
-        }
-      }
-    ]
-  }
   </script>
 
 </body>
