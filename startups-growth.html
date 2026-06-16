@@ -1159,8 +1159,17 @@
 
   <script>
     function promptPassword() {
+      // Check if password was already entered and saved
+      const savedPassword = localStorage.getItem("portfolio_access_token");
+      if (savedPassword === "SebPortfolio2026") {
+        window.open("http://localhost:5173", "_blank");
+        return;
+      }
+
+      // Ask for password if not saved
       const password = prompt("Enter password to access Marketing Creatives Management Dashboard:", "");
       if (password === "SebPortfolio2026") {
+        localStorage.setItem("portfolio_access_token", "SebPortfolio2026");
         window.open("http://localhost:5173", "_blank");
       } else if (password !== null) {
         alert("❌ Incorrect password. Access denied.");
