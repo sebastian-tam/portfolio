@@ -917,11 +917,25 @@
     }
 
     function viewAIShowcase() {
+      // Check if already authenticated in this session
+      if (sessionStorage.getItem("ai_showcase_auth") === "true") {
+        openShowcase();
+        return;
+      }
+
+      // Ask for password only if not authenticated
       const password = prompt("Enter password to view AI Showcase:", "");
       if (password !== "SebPortfolio2026") {
         alert("❌ Incorrect password. Access denied.");
         return;
       }
+
+      // Remember authentication for this session
+      sessionStorage.setItem("ai_showcase_auth", "true");
+      openShowcase();
+    }
+
+    function openShowcase() {
 
       var slides = [];
       slides.push({
@@ -997,6 +1011,8 @@
         }
       };
       document.addEventListener('keydown', keyHandler);
+    }
+
     }
 
     const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
