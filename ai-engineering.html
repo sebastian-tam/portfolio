@@ -580,6 +580,15 @@
 
   <script>
     function openFeaturedProject() {
+      // Check if already authenticated in this session
+      if (sessionStorage.getItem("ai_featured_auth") !== "true") {
+        const password = prompt("Enter password to view Featured Project:", "");
+        if (password !== "SebPortfolio2026") {
+          alert("❌ Incorrect password. Access denied.");
+          return;
+        }
+        sessionStorage.setItem("ai_featured_auth", "true");
+      }
       window.open('ai-engineering-hidden.html', '_blank');
     }
 
